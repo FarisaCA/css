@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="style-register.css">
+        <script>
+            function validate() {
+            var email = document.querySelector('input[name="email"]').value;
+            var password = document.querySelector('input[name="pword"]').value;
+            var confirmPassword = document.querySelector('input[name="cpword"]').value;
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email pattern
+            
+            //validate email format
+            if(!emailPattern.test(email))
+            {
+                alert("Please enter a valid address. ");
+                return false;
+            }
+            
+            //check if passwords match
+            if(password !== confirmPassword){
+                alert("passwords do not match.");
+                return false;
+            }
+            
+            //if all validations pass
+            return true;
+            }
+        </script>
+    </head>
+    <body>
+        <form action="register.php" onsubmit="return validate()" method="post">
+            <h3><img src="./logo.png"></h3>
+            <input type="text" name="name" placeholder="Enter your name" required><br>
+            <input type="email" name="email" placeholder="Enter your email" required><br>
+            <input type="password" name="pword" placeholder="Enter password" required><br>
+            <input type="password" name="cpword" placeholder="Confirm your password" required><br>
+            <input type="text" name="gender" placeholder="F/M" required><br>
+            <input type="number" name="phone" placeholder="Enter your contact number" required><br>
+            <input type="text" name="city" placeholder="Enter your city" required><br>
+        <button type="submit" name="REGISTER" >REGISTER</button>
+        </form>
+    </body>
+</html>

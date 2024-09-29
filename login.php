@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="" method="post">
+        <h1>LOGIN</h1>
+        <label>Email:</label><br>
+        <input type="email" name=email placeholder="Enter your email" required><br>
+        <label>password: </label><br>
+        <input type="password" name="psword" placeholder="Enter your password" required ><br>
+        <button type="submit" name="submit">LOGIN</button> 
+        <p>Not Registered Yet? <a href="register.html">Register</a><p><br>
+</form>
+</body>
+</html>
+<?php
+require_once("connect.php");
+session_start();
+
+if(isset($_POST['submit'])) {
+$email=$_POST['email'];
+$password=$_POST['email'];
+$sql="SELECT * FROM user WHERE email='$email' AND password='$password'";
+$data=mysqli_query($conn,$sql);
+
+if(!$data) {
+echo "no data!";
+}
+else
+{
+    $users=[];
+    while ($row = mysqli_fetch_array($data)) {
+        if(($email == $row['email']) && ($password == $row['password']))
+        {
+            $users= $row;
+        }
+    }
+
+    if (!$users)
+    {
+        echo "<script>alert('Invalid user. Check the email and password you entered. If you are not registered, please register.')</script>";
+    }
+    else
+    {
+      $userid=$user['user_id'];
+      $_SESSION['user_id']= $userid;
+      $firstlogin =$user['first_login'];
+      
+    }
+
+}
+}
+?>
