@@ -15,7 +15,6 @@ if(isset($_POST['REGISTER']))
         $data=mysqli_query($conn,$sql);
         $sql=$sql = "INSERT INTO `user` (`user_id`, `uname`, `uemail`, `password`, `gender`, `uphone`, `ucity`, `first_login`) VALUES ('$user_id', '$name', '$email', '$pword', '$gender', '$phone', '$city', '$first_login')";
         $data=mysqli_query($conn,$sql);
-        //hello
         if(!$data)
         {
             echo"error inserting values";
