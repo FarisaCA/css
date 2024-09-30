@@ -23,8 +23,8 @@ session_start();
 
 if(isset($_POST['submit'])) {
 $email=$_POST['email'];
-$password=$_POST['email'];
-$sql="SELECT * FROM user WHERE email='$email' AND password='$password'";
+$password=$_POST['password'];
+$sql="SELECT * FROM user WHERE email = '$email' AND  password = '$password' ";
 $data=mysqli_query($conn,$sql);
 
 if(!$data) {
