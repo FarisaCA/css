@@ -21,10 +21,11 @@
 require_once("connect.php");
 session_start();
 
-if(isset($_POST['submit'])) {
+if(isset($_POST['submit'])) 
+{
 $email=$_POST['email'];
-$password=$_POST['pword'];/
-$sql="SELECT * FROM user WHERE email = '$email' AND  password = '$password' ";
+$password=$_POST['pword'];
+$sql="SELECT * FROM user WHERE uemail = '$email' AND  `password` = '$password' ";
 $data=mysqli_query($conn,$sql);
 
 if(!$data) {
@@ -32,15 +33,15 @@ echo "no data!";
 }
 else
 {
-    $users=[];
+    $user=[];
     while ($row = mysqli_fetch_array($data)) {
-        if(($email == $row['email']) && ($password == $row['pword']))/
+        if(($email == $row['uemail']) && ($password == $row['password']))
         {
-            $users= $row;
+            $user= $row;
         }
     }
 
-    if (!$users)
+    if (!$user)
     {
         echo "<script>alert('Invalid user. Check the email and password you entered. If you are not registered, please register.')</script>";
     }
