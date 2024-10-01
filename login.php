@@ -11,7 +11,7 @@
         <label>Email:</label><br>
         <input type="email" name=email placeholder="Enter your email" required><br>
         <label>password: </label><br>
-        <input type="password" name="psword" placeholder="Enter your password" required ><br>
+        <input type="password" name="pword" placeholder="Enter your password" required ><br>
         <button type="submit" name="submit">LOGIN</button> 
         <p>Not Registered Yet? <a href="register.html">Register</a><p><br>
 </form>
@@ -23,7 +23,7 @@ session_start();
 
 if(isset($_POST['submit'])) {
 $email=$_POST['email'];
-$password=$_POST['password'];
+$password=$_POST['pword'];/
 $sql="SELECT * FROM user WHERE email = '$email' AND  password = '$password' ";
 $data=mysqli_query($conn,$sql);
 
@@ -34,7 +34,7 @@ else
 {
     $users=[];
     while ($row = mysqli_fetch_array($data)) {
-        if(($email == $row['email']) && ($password == $row['password']))
+        if(($email == $row['email']) && ($password == $row['pword']))/
         {
             $users= $row;
         }
