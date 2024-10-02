@@ -25,8 +25,8 @@ $sql="CREATE TABLE IF NOT EXISTS user(
       password VARCHAR(20) NOT NULL,
       gender VARCHAR(20) NOT NULL,
       uphone VARCHAR(10) NOT NULL,
-      ucity VARCHAR(100) NOT NULL,
-      first_login BOOLEAN DEFAULT true
+      ucity VARCHAR(100) NOT NULL
+      /*first_login BOOLEAN DEFAULT true*/
 )";
 
 if($conn->query($sql) === FALSE){

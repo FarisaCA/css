@@ -25,12 +25,12 @@
         <input type="email" name=email placeholder="Enter your email" required><br>
         <label>password: </label><br>
         <input type="password" name="pword" placeholder="Enter your password" required ><br>
-        <button type="submit" name="submit">LOGIN</button> 
+        <button type="button" onclick=document.location ="dashboard_user.html">LOGIN</button>
         <p>Not Registered Yet? <a href="register.html">Register</a><p><br>
 </form>
     </div>
-</body>
-</html>
+    </body>
+</html
 <?php
 require_once("connect.php");
 session_start();
@@ -63,10 +63,8 @@ else
     {
       $userid=$user['user_id'];
       $_SESSION['user_id']= $userid;
-      $firstlogin =$user['first_login'];
-      
+      /*$firstlogin =$user['first_login'];*/
     }
-
 }
 }
 ?>

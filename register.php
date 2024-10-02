@@ -13,7 +13,7 @@ if(isset($_POST['REGISTER']))
         $data=mysqli_query($conn,$sql);
         $data=mysqli_query($conn,$sql);
         $data=mysqli_query($conn,$sql);
-        $sql=$sql = "INSERT INTO `user` (`user_id`, `uname`, `uemail`, `password`, `gender`, `uphone`, `ucity`, `first_login`) VALUES ('$user_id', '$name', '$email', '$pword', '$gender', '$phone', '$city', '$first_login')";
+        $sql=$sql = "INSERT INTO `user` (`user_id`, `uname`, `uemail`, `password`, `gender`, `uphone`, `ucity`) VALUES ('$user_id', '$name', '$email', '$pword', '$gender', '$phone', '$city')";
         $data=mysqli_query($conn,$sql);
         if(!$data)
         {
