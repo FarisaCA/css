@@ -4,8 +4,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body{
+        background-image:url("./air.jpeg");
+        background-size: cover;
+        }
+      .left 
+      { 
+        position: absolute;
+        left: 50px;
+        padding: 10px;
+     }
+    </style>
 </head>
 <body>
+    <div class="left">
     <form action="" method="post">
         <h1>LOGIN</h1>
         <label>Email:</label><br>
@@ -15,6 +28,7 @@
         <button type="submit" name="submit">LOGIN</button> 
         <p>Not Registered Yet? <a href="register.html">Register</a><p><br>
 </form>
+    </div>
 </body>
 </html>
 <?php
