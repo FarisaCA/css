@@ -13,7 +13,6 @@ if($conn->connect_error){
 
 $sql="CREATE DATABASE IF NOT EXISTS $dbname";
 $con_res=$conn->query($sql);
-
 if(!$con_res){
     echo"error creating database: ";
 }

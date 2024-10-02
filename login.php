@@ -30,25 +30,30 @@
 </form>
     </div>
     </body>
-</html
+</html>
 <?php
 require_once("connect.php");
 session_start();
-
 if(isset($_POST['submit'])) 
 {
 $email=$_POST['email'];
 $password=$_POST['pword'];
-$sql="SELECT * FROM user WHERE uemail = '$email' AND  `password` = '$password' ";
-$data=mysqli_query($conn,$sql);
-
-if(!$data) {
-echo "no data!";
+$sql="SELECT * FROM `user` WHERE uemail = '$email' AND  `password` = '$password' ";
+$res=$con->query($sql);
+$data=mysqli_fetch_array($res);
+$_SESSION['user_id']= $data['userid'];
+if(res->row>0) 
+{
+echo "<script>alert(login successfull');</script>";
+header("Location: dashboard_user.html");
 }
 else
 {
+   echo"<script>alert('unsuccessfull login');</script>";
+   header("Location: login.php");
+   /*
     $user=[];
-    while ($row = mysqli_fetch_array($data)) {
+    while ($row == mysqli_fetch_array($data)) {
         if(($email == $row['uemail']) && ($password == $row['password']))
         {
             $user= $row;
@@ -62,9 +67,10 @@ else
     else
     {
       $userid=$user['user_id'];
-      $_SESSION['user_id']= $userid;
-      /*$firstlogin =$user['first_login'];*/
+     
+      $firstlogin =$user['first_login'];
     }
+    */
 }
 }
 ?>
