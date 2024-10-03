@@ -25,8 +25,7 @@ $sql="CREATE TABLE IF NOT EXISTS user(
       gender VARCHAR(20) NOT NULL,
       uphone VARCHAR(10) NOT NULL,
       ucity VARCHAR(100) NOT NULL
-      /*first_login BOOLEAN DEFAULT true*/
-)";
+     )";
 
 if($conn->query($sql) === FALSE){
     die("error creating table: ".$conn->error);
@@ -35,4 +34,10 @@ $sql="ALTER TABLE user AUTO_INCREMENT = 100";
 if($conn->query($sql) === FALSE){
     die("error running the query: ".$conn->error);
 }
+$sql="CREATE TABLE IF NOT EXISTS user(
+       flight_id INT(5) PRIMARY KEY 
+       from_port VARCHAR(50) NOT NULL,
+       to_port VARCHAR(50) NOT NULL,
+                                                                                        
+        "
 ?>
