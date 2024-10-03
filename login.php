@@ -25,7 +25,7 @@
         <input type="email" name=email placeholder="Enter your email" required><br>
         <label>password: </label><br>
         <input type="password" name="pword" placeholder="Enter your password" required ><br>
-        <button type="button" onclick=document.location ="dashboard_user.html">LOGIN</button>
+        <button type="submit" name="submit">LOGIN</button>
         <p>Not Registered Yet? <a href="register.html">Register</a><p><br>
 </form>
     </div>
@@ -39,38 +39,30 @@ if(isset($_POST['submit']))
 $email=$_POST['email'];
 $password=$_POST['pword'];
 $sql="SELECT * FROM `user` WHERE uemail = '$email' AND  `password` = '$password' ";
-$res=$con->query($sql);
-$data=mysqli_fetch_array($res);
-$_SESSION['user_id']= $data['userid'];
-if(res->row>0) 
+$data=mysqli_query($conn,$sql);
+if(!$data)
 {
-echo "<script>alert(login successfull');</script>";
-header("Location: dashboard_user.html");
+    echo "no data";
 }
-else
-{
-   echo"<script>alert('unsuccessfull login');</script>";
-   header("Location: login.php");
-   /*
-    $user=[];
-    while ($row == mysqli_fetch_array($data)) {
-        if(($email == $row['uemail']) && ($password == $row['password']))
+else{
+    $users=[];
+    while($row=mysqli_fetch_array($data))
+    {
+        if(($email==$row['uemail'])&&($password==$row['password']))
         {
-            $user= $row;
+            $users=$row;
         }
     }
-
-    if (!$user)
+    if(!$users)
     {
-        echo "<script>alert('Invalid user. Check the email and password you entered. If you are not registered, please register.')</script>";
+        echo "<script>alert('invalid user.check the email and password you entered .if you are not registered,please register.')</script>";
     }
     else
     {
-      $userid=$user['user_id'];
-     
-      $firstlogin =$user['first_login'];
+        $user_id=$users['user_id'];
+        $_SESSION['user_id']=$user_id;
+        header('Location:dashboard_user.html');
     }
-    */
 }
-}
+ }                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 ?>
