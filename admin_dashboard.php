@@ -95,7 +95,7 @@ $sql="SELECT * FROM `admins`";
     </main>
 
     <footer>
-        <p>&copy; 2024 SkyHigh Airlines. All rights reserved.</p>
+        <p>visit again ! explore world</p>
     </footer>
 </body>
 </html>

@@ -41,7 +41,6 @@ function loadUsers() {
         echo "<tr><td colspan='4'>No users found</td></tr>";
     }
 }
-header('Location:home.php');
 // Function to load bookings
 /*
 require_once('connect.php');
