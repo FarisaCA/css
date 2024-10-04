@@ -1,13 +1,14 @@
 
 <?php 
 // Start session
+require_once('connect.php');
 session_start();
-
+$sql="SELECT * FROM `admins`";
 // Check if user is logged in (this is just an example check)
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: login.php"); // Redirect to login page
+/*if (!isset($_SESSION['admin_logged_in'])) {
+    header("Location: admin_dashboard.php"); // Redirect to login page
     exit();
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +27,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
                 <li><a href="#users">Manage Users</a></li>
                 <li><a href="#bookings">Manage Bookings</a></li>
                 <li><a href="logout.php" class="logout-button">Logout</a></li>
+                
             </ul>
         </nav>
     </header>
@@ -45,10 +47,10 @@ if (!isset($_SESSION['admin_logged_in'])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php/*
+                    <?php
                     // Include database connection
                     include 'admin_script.php';
-                    loadFlights();*/
+                    loadFlights();
                     ?>
                 </tbody>
             </table>
@@ -80,11 +82,13 @@ if (!isset($_SESSION['admin_logged_in'])) {
                         <th>User ID</th>
                         <th>Flight Number</th>
                         <th>Date</th>
+                        <th>Status</th>
+                        <th>Total Price</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php loadBookings(); ?>
+                    <!--?php loadBookings(); ?-->
                 </tbody>
             </table>
         </section>

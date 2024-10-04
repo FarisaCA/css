@@ -50,15 +50,17 @@ $sql="CREATE TABLE IF NOT EXISTS flight(
         email VARCHAR(100) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
         phone_number VARCHAR(20),
-        role VARCHAR DEFAULT='Admin'
+        role VARCHAR(50) DEFAULT 'Admin'
         )";
         if (!$conn->query($sql)) {
            $error = $conn->error;
                     echo "Error creating table: $error";
             }
        $sql="INSERT INTO admins (Name, email, password,phone_number,role)
-       VALUES('Farisa','farisaca123@gmail.com','683547','8129853093','Admin');
-       if (!$conn->query($sql)) {
+       VALUES('Farisa','farisaca123@gmail.com','683547','8129853093','Admin')";
+       /*if (!$conn->query($sql)) 
+       {
             $error = $conn->error;
-            echo "Error running the query:$error";
+            echo "Error running the query: $error";
+        }*/
 ?>
