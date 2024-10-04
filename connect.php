@@ -45,7 +45,7 @@ $sql="CREATE TABLE IF NOT EXISTS flight(
             die("error creating table: ".$conn->error);
         }
         $sql= "CREATE TABLE IF NOT EXISTS admins(
-        admin_id INT(5) AUTO_INCREMENT PRIMARY KEY,
+        admin_id INT(3) AUTO_INCREMENT PRIMARY KEY,
         Name VARCHAR(50) NOT NULL,
         email VARCHAR(100) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
@@ -56,11 +56,11 @@ $sql="CREATE TABLE IF NOT EXISTS flight(
            $error = $conn->error;
                     echo "Error creating table: $error";
             }
-       $sql="INSERT INTO admins (Name, email, password,phone_number,role)
-       VALUES('Farisa','farisaca123@gmail.com','683547','8129853093','Admin')";
-       /*if (!$conn->query($sql)) 
+       /*$sql="INSERT INTO `admins` (`Name`, `email`, `password`,`phone_number`,`role`)
+       VALUES('Fairoosa','fairoosa123@gmail.com','683547','8129853093','Admin')";*/
+       if (!$conn->query($sql)) 
        {
             $error = $conn->error;
             echo "Error running the query: $error";
-        }*/
+        }
 ?>
