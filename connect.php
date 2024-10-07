@@ -44,14 +44,14 @@ $sql="CREATE TABLE IF NOT EXISTS flight(
         {
             die("error creating table: ".$conn->error);
         }
-        $sql= "CREATE TABLE IF NOT EXISTS admins(
+        /*$sql= "CREATE TABLE IF NOT EXISTS admins(
         admin_id INT(3) AUTO_INCREMENT PRIMARY KEY,
         Name VARCHAR(50) NOT NULL,
         email VARCHAR(100) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
         phone_number VARCHAR(20),
         role VARCHAR(50) DEFAULT 'Admin'
-        )";
+        )";*/
         if (!$conn->query($sql)) {
            $error = $conn->error;
                     echo "Error creating table: $error";
