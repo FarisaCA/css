@@ -41,7 +41,8 @@ $password=$_POST['pword'];
 if($email=="farisa123@gmail.com" && $password == "683547"){
     header('Location:admin_dashboard.php');
     exit();
-}else{
+}
+else{
 $sql="SELECT * FROM `user` WHERE uemail = '$email' AND  `password` = '$password' ";
 $data=mysqli_query($conn,$sql);
     $users=[];

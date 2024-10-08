@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Seat Reservation</title>
+    <link rel="stylesheet" href="seat-style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Flight Seat Reservation</h1>
+        <div class="flight-info">
+            <h2>Flight Number: ABC123</h2>
+            <h3>Available Seats:</h3>
+            <div id="seat-map" class="seat-map">
+                <!-- Seats will be generated dynamically here -->
+            </div>
+        </div>
+        <form id="reservation-form" class="reservation-form" style="display: none;">
+            <h3>Passenger Information</h3>
+            <input type="text" id="passenger-name" placeholder="Your Name" required>
+            <input type="email" id="passenger-email" placeholder="Your Email" required>
+            <input type="hidden" id="selected-seat-id">
+            <button type="submit">Reserve Seat</button>
+        </form>
+    </div>
+    <!--script src="script.js"></script-->
+</body>
+</html>
