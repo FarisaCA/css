@@ -37,19 +37,23 @@ nav ul li a {
 
 .search-container {
     background-color: #007bc7;
-    color: white;
     padding: 30px;
     text-align: center;
 }
 
 .search-form {
     display: flex;
+    background-color: #ffffff;
     flex-wrap: wrap;
     justify-content: center;
+    border-radius: 8px;
+
+
 }
 
 .form-group {
     margin: 10px;
+    color:   #0358a8; 
 }
 
 .form-group input[type="text"], .form-group input[type="date"] {

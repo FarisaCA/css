@@ -26,7 +26,39 @@
         <div class="search-container">
             <h1>Search, Compare Flights & Save</h1>
              <!-- Traveler Selection -->
-             
+    </div>
+
+    <div class="options-container">
+        <form class="flight-options-form">
+            <!-- Round Trip Selection -->
+            <div class="option">
+                <label for="trip-type">Round Trip</label>
+                <select id="trip-type" name="trip-type">
+                    <option value="round-trip">Round Trip</option>
+                    <option value="one-way">One Way</option>
+                    <option value="multi-city">Multi-City</option>
+                </select>
+            </div>
+
+    <div class="option">
+        <label for="travelers">Traveler</label>
+        <select id="travelers" name="travelers">
+            <option value="1">1 Traveler</option>
+            <option value="2">2 Travelers</option>
+            <option value="3">3 Travelers</option>
+            <option value="4">4 Travelers</option>
+        </select>
+    </div>
+
+    <!-- Class Type Selection -->
+    <div class="option">
+        <label for="class-type">Economy</label>
+        <select id="class-type" name="class-type">
+            <option value="economy">Economy</option>
+            <option value="business">Business</option>
+            <option value="first-class">First Class</option>
+        </select>
+    </div>
         </form>
     </div>
             <form class="search-form">
@@ -47,6 +79,9 @@
                     <input type="date" id="return-date" value="2024-12-18">
                 </div>
 
+                <button type="submit" class="btn">Find Flights</button>
+            </form>
+
                 <!--div class="form-group checkbox-group">
                     <input type="checkbox" id="compare-hotels">
                     <label for="compare-hotels">Hotels.com Results</label>
@@ -59,43 +94,9 @@
                     <label for="alert-price">Alert me when prices change</label>
                 </div-->
 
-                <div class="options-container">
-                    <form class="flight-options-form">
-                        <!-- Round Trip Selection -->
-                        <div class="option">
-                            <label for="trip-type">Round Trip</label>
-                            <select id="trip-type" name="trip-type">
-                                <option value="round-trip">Round Trip</option>
-                                <option value="one-way">One Way</option>
-                                <option value="multi-city">Multi-City</option>
-                            </select>
-                        </div>
+            
 
-                <div class="option">
-                    <label for="travelers">1 Traveler</label>
-                    <select id="travelers" name="travelers">
-                        <option value="1">1 Traveler</option>
-                        <option value="2">2 Travelers</option>
-                        <option value="3">3 Travelers</option>
-                        <option value="4">4 Travelers</option>
-                    </select>
-                </div>
-        
-                <!-- Class Type Selection -->
-                <div class="option">
-                    <label for="class-type">Economy</label>
-                    <select id="class-type" name="class-type">
-                        <option value="economy">Economy</option>
-                        <option value="business">Business</option>
-                        <option value="first-class">First Class</option>
-                    </select>
-                </div>
-            </div>
                 
-
-                <button type="submit" class="btn">Find Flights</button>
-            </form>
-        </div>
 
         <!--section class="promo-section">
             <h3>Cheapest days to fly in 2024</h3>
