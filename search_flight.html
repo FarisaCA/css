@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .search-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-section input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-section button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-section button:hover {
+            background-color: #218838;
+        }
+
+        .flights-section {
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+        }
+
+        .flight-box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .flight-details {
+            flex-grow: 1;
+        }
+
+        .flight-details h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        .flight-details p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .view-details-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            align-self: center;
+        }
+
+        .view-details-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Flight Booking</h1>
+    
+    <div class="search-section">
+        <input type="text" id="search-input" placeholder="Enter destination or flight number">
+        <button id="search-btn">Search Flights</button>
+    </div>
+
+    <div class="flights-section" id="flights-section">
+        <div class="flight-box">
+            <div class="flight-details">
+                <h2>Flight AA123</h2>
+                <p>Departure: New York (JFK) - 10:00 AM</p>
+                <p>Arrival: Los Angeles (LAX) - 1:00 PM</p>
+                <p>Price: $300</p>
+            </div>
+            <button class="view-details-button">View Details</button>
+        </div>
+
+        <div class="flight-box">
+            <div class="flight-details">
+                <h2>Flight BB456</h2>
+                <p>Departure: Chicago (ORD) - 2:00 PM</p>
+                <p>Arrival: Miami (MIA) - 5:00 PM</p>
+                <p>Price: $250</p>
+            </div>
+            <button class="view-details-button">View Details</button>
+        </div>
+
+        <div class="flight-box">
+            <div class="flight-details">
+                <h2>Flight CC789</h2>
+                <p>Departure: San Francisco (SFO) - 8:00 AM</p>
+                <p>Arrival: Seattle (SEA) - 10:30 AM</p>
+                <p>Price: $180</p>
+            </div>
+            <button class="view-details-button">View Details</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('search-btn').addEventListener('click', function() {
+        // When the search button is clicked, show available flights
+        document.getElementById('flights-section').style.display = 'block';
+    });
+</script>
+
+</body>
+</html>
