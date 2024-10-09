@@ -3,8 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIFA AIRLINES</title>
-    <link rel="stylesheet" href="helo-style.css">
+    <title>Airline Reservation System</title>
+    <link rel="stylesheet" href="style-helo.css"> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            max-width: 200px; /* Adjust logo size */
+            margin-bottom: 20px; /* Space below logo */
+        }
+
+        h1 {
+            margin: 10px 0; /* Space above and below heading */
+        }
+
+        .login-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        p {
+            color: #555; /* Darker text for paragraph */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -50,55 +97,5 @@
         </select>
     </div>
 
-    <!-- Class Type Selection -->
-    <div class="option">
-        <label for="class-type">Economy</label>
-        <select id="class-type" name="class-type">
-            <option value="economy">Economy</option>
-            <option value="business">Business</option>
-            <option value="first-class">First Class</option>
-        </select>
-    </div>
-        </form>
-    </div>
-            <form class="search-form">
-                <div class="form-group">
-                    <label for="departure">Depart From</label>
-                    <select id="departure" name="departure">
-                        <option value="kochi"></option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="destination">Your Destination</label>
-                    <input type="text" id="destination" value="Kozhikode, IN">
-                </div>
-                <div class="form-group">
-                    <label for="depart-date">Depart Date</label>
-                    <input type="date" id="depart-date" value="2024-10-17">
-                </div>
-                <div class="form-group">
-                    <label for="return-date">Return Date</label>
-                    <input type="date" id="return-date" value="2024-12-18">
-                </div>
-
-                <button type="submit" class="btn">Find Flights</button>
-            </form>
-
-                <!--div class="form-group checkbox-group">
-                    <input type="checkbox" id="compare-hotels">
-                    <label for="compare-hotels">Hotels.com Results</label>
-                    <input type="checkbox" id="compare-expedia">
-                    <label for="compare-expedia">Expedia</label>
-                </div-->
-
-                <!--div class="form-group">
-                    <input type="checkbox" id="alert-price">
-                    <label for="alert-price">Alert me when prices change</label>
-                </div-->
-             <!--section class="promo-section">
-            <h3>Cheapest days to fly in 2024</h3>
-            <img src="airdash.jpg" alt="Plane Wing">
-        </section-->
-    </main>
 </body>
 </html>

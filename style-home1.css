@@ -1,4 +1,3 @@
-/* Reset default browser styles */
 * {
     margin: 0;
     padding: 0;
@@ -7,76 +6,140 @@
 
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
     background-color: #f4f4f4;
-    background-image: url('./flight.jpg');
-    background-size: cover;
-    color: #333;
 }
 
-.header {
-    margin-top: -190px;
-    background-color:#ffffff;
-    color: rgb(0, 89, 255);
-    padding: 7px;
+.header-container {
+    background-color: #005eb8;
+    color: white;
+    padding: 20px;
     text-align: center;
+    text-decoration: dotted;
 }
 
-.logo {
-    max-width: 150px; /* Adjust logo size */
-    height: auto;
+.header-container h1 {
+    margin-bottom: 10px;
 }
 
-.navbar {
-    margin-top: 10px;
+nav ul {
+    list-style-type: none;
 }
 
-.navbar ul {
-    list-style: none;
-}
-
-.navbar li {
+nav ul li {
     display: inline;
     margin: 0 15px;
 }
 
-.navbar a {
+nav ul li a {
     color: white;
     text-decoration: none;
-    transition: color 0.3s;
 }
 
-.navbar a:hover {
-    color: #ccc; /* Lighten link color on hover */
-}
-
-.main-content {
-    padding: 40px 20px;
+.search-container {
+    background-color: #007bc7;
+    padding: 30px;
     text-align: center;
 }
 
-.login-button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
+.search-form {
+    display: flex;
+    background-color: #ffffff;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 8px;
+
+
+}
+
+.form-group {
+    margin: 10px;
+    color:   #0358a8; 
+}
+
+.form-group input[type="text"], .form-group input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.checkbox-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-group input {
+    margin-right: 5px;
+}
+
+.btn {
+    background-color: #d9534f;
     color: white;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
+    cursor: pointer;
 }
 
-.login-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+.promo-section {
+    background-color: white;
+    padding: 30px;
+    text-align: center;
 }
 
-.footer {
-    background-color: #333;
+.promo-section img {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+footer {
+    background-color: #003b73;
     color: white;
     text-align: center;
-    padding: 10px 0;
-    position: relative;
-    bottom: 0;
+    padding: 10px;
+    position: fixed;
     width: 100%;
+    bottom: 0;
 }
+
+.options-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.flight-options-form {
+    display: flex;
+    gap: 20px;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.option label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #005bac;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    width: 150px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
