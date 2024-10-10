@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #fff;
 }
 
 .header-container {
@@ -107,23 +107,38 @@ footer {
 .options-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 0px;
+    padding: 15px;
     background-color: #ffffff;
     border-radius: 8px;
+}
+.option1-container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px; 
 }
 
 .flight-options-form {
     display: flex;
     gap: 20px;
 }
-
+.option1-form{
+    display: flex;
+    gap: 30px; 
+}
 .option {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
+.option1{
+    display:flex;
+    flex-direction: column;
+    align align-items: center;
+}
 .option label {
     font-size: 16px;
     margin-bottom: 8px;
