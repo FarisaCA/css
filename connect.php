@@ -37,9 +37,13 @@ if($conn->query($sql) === FALSE){
 $sql="CREATE TABLE IF NOT EXISTS flight(
        flight_no VARCHAR(6) PRIMARY KEY, 
        departure VARCHAR(50) NOT NULL,
-       destination VARCHAR(50) NOT NULL,
-       depar_date DATE NOT NULL                                                                                
-        )";
+       d_date DATE,
+       d_time TIME,
+       arrival VARCHAR(50) NOT NULL,
+       a_date DATE,
+       a_time TIME,
+       price INT NOT NULL                                                                               
+    )";
         if($conn->query($sql) === FALSE)
         {
             die("error creating table: ".$conn->error);
@@ -56,8 +60,6 @@ $sql="CREATE TABLE IF NOT EXISTS flight(
            $error = $conn->error;
                     echo "Error creating table: $error";
             }
-       /*$sql="INSERT INTO `admins` (`Name`, `email`, `password`,`phone_number`,`role`)
-       VALUES('Fairoosa','fairoosa123@gmail.com','683547','8129853093','Admin')";*/
        if (!$conn->query($sql)) 
        {
             $error = $conn->error;
