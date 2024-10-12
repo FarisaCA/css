@@ -37,11 +37,11 @@ if($conn->query($sql) === FALSE){
 $sql="CREATE TABLE IF NOT EXISTS flight(
        flight_no VARCHAR(6) PRIMARY KEY, 
        departure VARCHAR(50) NOT NULL,
-       d_date DATE,
-       d_time TIME,
+       d_date DATE NOT NULL,
+       d_time TIME NOT NULL,
        arrival VARCHAR(50) NOT NULL,
-       a_date DATE,
-       a_time TIME,
+       a_date DATE NOT NULL,
+       a_time TIME NOT NULL ,
        price INT NOT NULL                                                                               
     )";
         if($conn->query($sql) === FALSE)

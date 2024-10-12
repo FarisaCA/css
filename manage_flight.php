@@ -9,7 +9,7 @@
         <div class="navbar">
             <a href="#">AIRLINE RESERVATION SYSTEM</a>
             <div class="link">
-                <a href="admin_dashboard.php">Home</a>
+                <a href="">Home</a>
             </div>
         </div>
     </nav>
@@ -29,7 +29,6 @@
         </form>
 
         <?php
-        
         require_once('connect.php');
         // Handle form submission
         if (isset($_POST['submit'])) { 
@@ -37,13 +36,12 @@
             $from = $_POST['from'];
             $d_date = $_POST['d_date'];
             $d_time = $_POST['d_time'];
-            $to=$_POST['to'];
+            $to = $_POST['to'];
             $a_date=$_POST['a_date'];
             $a_time=$_POST['a_time'];
-            $price=$_POST['price']
-
-                $sql = "INSERT INTO flight (flight_no, departure, d_date, d_time, arrival, a_date, a_time, price) 
-                VALUES ('$f_no', '$from',' $d_date', '$d_time', '$to', '$a_date', '$a_time', '$price')";
+            $price=$_POST['price'];
+                $sql = "INSERT INTO `flight` (`flight_no`, `departure`, `d_date`, `d_time`, `arrival`, `a_date`, `a_time`, `price`) 
+                VALUES ('$f_no', '$from', '$d_date', '$d_time', '$to', '$a_date', '$a_time', '$price')";        
                 $data = mysqli_query($conn, $sql);
                 if ($data) {
                     echo "<script>alert('Record added');</script>";
@@ -58,31 +56,31 @@
         if (mysqli_num_rows($data) > 0) {  
             echo "<table border='1'>";
             echo "<tr>";
-            echo "<th>Flight_no</th>";
-            echo "<th>departure</th>";
-            echo "<th>d_date</th>";
-            echo "<th>d_time</th>";
+            echo "<th>Flight No</th>";
+            echo "<th>Departure</th>";
+            echo "<th>Date</th>";
+            echo "<th>Time</th>";
             echo "<th>Arrival</th>";
-            echo "<th>a_date</th>";
-            echo "<th>a_time</th>";
-            echo "<th>price</th>";
+            echo "<th>Date</th>";
+            echo "<th>Time</th>";
+            echo "<th>Price</th>";
             echo "</tr>";
             while ($row = mysqli_fetch_assoc($data)) {
-                $id = $row['book_id'];
-                $photoPath = $row['photo'];
+                /*$id = $row['flight_no'];*/
                 echo "<tr>";
-                echo "<td><img src='$photoPath' alt='Book Photo' style='width:100px;height:auto;'></td>";
-                echo "<td>" . $row['title'] . "</td>";
-                echo "<td>" . $row['author'] . "</td>";
-                echo "<td>" . $row['published_year'] . "</td>";
-                echo "<td>" . $row['genre'] . "</td>";
-                echo "<td>" . $row['book_id'] . "</td>";
-                echo "<td>
-                    <form method='POST' style='display:inline;'>
-                        <button value='$id' name='userdel' type='submit'>Delete</button>
+                echo "<td>" . $row['flight_no'] . "</td>";
+                echo "<td>" . $row['departure'] . "</td>";
+                echo "<td>" . $row['d_date'] . "</td>";
+                echo "<td>" . $row['d_time'] . "</td>";
+                echo "<td>" . $row['arrival'] . "</td>";
+                echo "<td>" . $row['a_date'] . "</td>";
+                echo "<td>" .$row['a_time'] . "</td>";
+                echo "<td>" . $row['price'] . "</td>";
+                echo "<td> <form method='POST' style='display:inline;'>
+                        <button value='' name='fno' type='submit'>Delete</button>
                     </form>
-               <form method='post' action='editbooks.php'>
-    <button name='bookedit' value='$id' class='deluser' type='submit'>EDIT</button>
+               <form method='post' action='editflight.php'>
+    <button name='edit' value='' class='deluser' type='submit'>EDIT</button>
 </form>
 </td>";
                 
@@ -96,9 +94,9 @@
             <?php
             
             if (isset($_POST['userdel'])) {
-                $book_id = $_POST['userdel'];
+                $f_no = $_POST['userdel'];
                 if (!empty($book_id)) {
-                    $sql = "DELETE FROM books WHERE book_id = $book_id";
+                    $sql = "DELETE FROM flight WHERE flight_no = $f_no";
                     $data = mysqli_query($conn, $sql);
                     echo "<script>window.location.replace('./managebooks.php');</script>";
                 }
