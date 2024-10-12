@@ -9,7 +9,7 @@
         <div class="navbar">
             <a href="#">AIRLINE RESERVATION SYSTEM</a>
             <div class="link">
-                <a href="">Home</a>
+                <a href="admin_dashboard.php">Home</a>
             </div>
         </div>
     </nav>
