@@ -16,7 +16,7 @@
                     <li><a href="#"></a></li>
                     <li><a href="#"></a></li>
                     <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
+                    <li><a href="login.php">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -37,6 +37,15 @@
                 <select id="trip-type" name="trip-type">
                     <option value="round-trip">Round Trip</option>
                     <option value="one-way">One Way</option>
+                </select>
+            </div>
+
+            <div class="option">
+                <label for="class-type">Class</label>
+                <select id="class-type" name="class-type">
+                    <option value="economy">Economy</option>
+                    <option value="business">Business</option>
+                    <option value="first-class">First Class</option>
                 </select>
             </div>
 
@@ -86,8 +95,8 @@
               <label for="arrival">Arrival</label>
               <input type="date" name="date">
             </div>
-         
-     </div>
+        </div>
+        <button>Search Flight</button>
     </main>
 </body>
 </html>

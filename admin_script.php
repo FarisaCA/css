@@ -1,7 +1,7 @@
 <?php
 require_once("connect.php");
 // Function to load flights
-function loadFlights() {
+/*function loadFlights() {
     global $conn;
     $sql = "SELECT * FROM flight";
     $result = $conn->query($sql);
@@ -20,7 +20,7 @@ function loadFlights() {
         echo "<tr><td colspan='5'>No flights found</td></tr>";
     }
 }
-
+*/
 // Function to load users
 require_once("connect.php");
 function loadUsers() {

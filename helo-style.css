@@ -73,15 +73,6 @@ nav ul li a {
     margin-right: 5px;
 }
 
-.btn {
-    background-color: #d9534f;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 .promo-section {
     background-color: white;
     padding: 30px;
@@ -128,7 +119,7 @@ footer {
 .option1-form{
     display: flex;
     gap: 30px; 
-}
+    }
 .option {
     display: flex;
     flex-direction: column;
@@ -143,6 +134,12 @@ footer {
     font-size: 16px;
     margin-bottom: 8px;
     color: #005bac;
+}
+
+.option1 label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #00196d;
 }
 
 select {
