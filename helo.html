@@ -4,54 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airline Reservation System</title>
-    <link rel="stylesheet" href="helo-style.css"> 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .logo {
-            max-width: 200px; /* Adjust logo size */
-            margin-bottom: 20px; /* Space below logo */
-        }
-
-        h1 {
-            margin: 10px 0; /* Space above and below heading */
-        }
-
-        .login-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-
-        .login-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-
-        p {
-            color: #555; /* Darker text for paragraph */
-        }
-    </style>
+    <link rel="stylesheet" href="./helo-style.css"> 
 </head>
 <body>
     <header>
@@ -63,7 +16,7 @@
                     <li><a href="#"></a></li>
                     <li><a href="#"></a></li>
                     <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
+                    <li><a href="login.php">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -73,10 +26,11 @@
         <div class="search-container">
             <h1>Search, Compare Flights & Save</h1>
              <!-- Traveler Selection -->
-    </div>
+        </div>
 
     <div class="options-container">
-        <form class="flight-options-form">
+       <form class="flight-options-form">
+
             <!-- Round Trip Selection -->
             <div class="option">
                 <label for="trip-type">Round Trip</label>
@@ -86,16 +40,59 @@
                     <option value="multi-city">Multi-City</option>
                 </select>
             </div>
-        </form>
-     <div class="option">
-        <label for="travelers">Traveler</label>
-        <select id="travelers" name="travelers">
-            <option value="1">1 Traveler</option>
-            <option value="2">2 Travelers</option>
-            <option value="3">3 Travelers</option>
-            <option value="4">4 Travelers</option>
+
+            <div class="option">
+                <label for="class-type">Class</label>
+                <select id="class-type" name="class-type">
+                    <option value="economy">Economy</option>
+                    <option value="business">Business</option>
+                    <option value="first-class">First Class</option>
+                </select>
+            </div>
+
+             <div class="option">
+               <label for="travelers">Traveler</label>
+               <select id="travelers" name="travelers">
+                <option value="1">1 Traveler</option>
+                <option value="2">2 Travelers</option>
+                <option value="3">3 Travelers</option>
+                <option value="4">4 Travelers</option>
+               </select>
+             </div>
+    </form>
+    </div>
+     <div class="option1-container">
+
+        <form class="option1-form">
+
+        <div class="option1">
+        <label for="from">From</label>
+        <select id="from" name="from">
+            <option value="agra">Agra civil Airport ,IAF Arjun Nagar Gate,kheria</option>
+            <option value="Ahmedabad">Ahmedabad ,Sardar vallabhai patel International Airport</option>
+            <option value="bahrain" >Bahrain Airport</option>
+            <option value="mumbai">Mumbai chhatrapati shivaji Maharaj International Airport</option>
         </select>
-     </div>
+        </div>
+
+             <div class="option1">
+             <label for="to">To</label>
+             <select id="to" name="to">
+                <option value="cochin">Cochin International Airport</option>
+             </select>
+            </div>
+            
+            <div class="option1">
+              <label for="departure">Departure</label>
+              <input type="date" name="date">
+            </div>
+
+            <div class="option1">
+              <label for="arrival">Arrival</label>
+              <input type="date" name="date">
+            </div>
+        </div>
+        <button>Search Flight</button>
     </main>
 </body>
 </html>

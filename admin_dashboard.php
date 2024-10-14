@@ -23,7 +23,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
         <h1>Admin Dashboard</h1>
         <nav>
             <ul>
-                <li><a href="#flights">Manage Flights</a></li>
+                <li><a href="manage_flight.php">Manage Flights</a></li>
                 <li><a href="#users">Manage Users</a></li>
                 <li><a href="#bookings">Manage Bookings</a></li>
                 <li><a href="logout.php" class="logout-button">Logout</a></li>
@@ -33,7 +33,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
     </header>
 
     <main>
-        <section id="flights">
+        <!--section id="flights">
             <h2>Manage Flights</h2>
             <button onclick="addFlight()">Add New Flight</button>
             <table>
@@ -45,13 +45,13 @@ if (!isset($_SESSION['admin_logged_in'])) {
                         <th>Date</th>
                         <th>Actions</th>
                     </tr>
-                </thead>
+                </thead-->
                 <tbody>
-                    <?php
+                    <!--?php
                     // Include database connection
                     include 'admin_script.php';
                     loadFlights();
-                    ?>
+                    ?-->
                 </tbody>
             </table>
         </section>
@@ -93,9 +93,5 @@ if (!isset($_SESSION['admin_logged_in'])) {
             </table>
         </section>
     </main>
-
-    <footer>
-        <p>visit again ! explore world</p>
-    </footer>
 </body>
 </html>

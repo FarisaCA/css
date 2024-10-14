@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #fff;
 }
 
 .header-container {
@@ -73,15 +73,6 @@ nav ul li a {
     margin-right: 5px;
 }
 
-.btn {
-    background-color: #d9534f;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 .promo-section {
     background-color: white;
     padding: 30px;
@@ -107,27 +98,49 @@ footer {
 .options-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 0px;
+    padding: 15px;
     background-color: #ffffff;
     border-radius: 8px;
+}
+.option1-container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px; 
 }
 
 .flight-options-form {
     display: flex;
     gap: 20px;
 }
-
+.option1-form{
+    display: flex;
+    gap: 30px; 
+    }
 .option {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
+.option1{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
 .option label {
     font-size: 16px;
     margin-bottom: 8px;
     color: #005bac;
+}
+
+.option1 label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #00196d;
 }
 
 select {
@@ -142,4 +155,27 @@ select {
 select:hover {
     cursor: pointer;
 }
+input{
+    padding: 10px;
+    font-size: 16px;
+    width: 150px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+button{
+    margin-left: 999px;
+    background-color:rgb(214, 139, 0) ;
+    font-size: 16px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width:125px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #e9bd6d;
+}
+{
 
+}
