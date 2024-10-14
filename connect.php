@@ -55,14 +55,11 @@ $sql="CREATE TABLE IF NOT EXISTS flight(
         password VARCHAR(255) NOT NULL,
         phone_number VARCHAR(20),
         role VARCHAR(50) DEFAULT 'Admin'
-        )";*/
+        )";
         if (!$conn->query($sql)) {
            $error = $conn->error;
                     echo "Error creating table: $error";
-            }
-       if (!$conn->query($sql)) 
-       {
-            $error = $conn->error;
-            echo "Error running the query: $error";
-        }
+            }*/
+       
+            
 ?>
