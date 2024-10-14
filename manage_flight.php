@@ -3,6 +3,7 @@
 <head>  
     <link rel="stylesheet" href="manageflight.css">
     <title>Manage Flight</title>
+    
 </head>
 <body>
     <nav class="navbar">
@@ -19,11 +20,11 @@
         <form class="form1" action="" method="post" enctype="multipart/form-data">
             <input class="input1" type="text" name="fno" placeholder="Flight No" required>
             <input class="input1" type="text" name="from" placeholder="From" required>
-            <input class="input1" type="d_date" name="d_date" placeholder="Departure Date" required>
-            <input class="input1" type="d_time" name="d_time" placeholder="Departure time" required>
+            <input class="input1" type="date" name="d_date" placeholder="Departure Date" required>
+            <input class="input1" type="time" name="d_time" placeholder="Departure time" required>
             <input class="input1" type="text" name="to" placeholder="To" required>
-            <input class="input1" type="a_date" name="a_date" placeholder="Arrival Date"required>
-            <input class="input1" type="a_time" name="a_time" placeholder="Arrival Time" required>
+            <input class="input1" type="date" name="a_date" placeholder="Arrival Date"required>
+            <input class="input1" type="time" name="a_time" placeholder="Arrival Time" required>
             <input class="input1" type="number" name="price" placeholder="Price" required>
             <input class="sub2" type="submit" name="submit" value="Submit">
         </form>
@@ -33,6 +34,7 @@
         // Handle form submission
         if (isset($_POST['submit'])) { 
             $f_no = $_POST['fno'];
+            echo"$f_no";
             $from = $_POST['from'];
             $d_date = $_POST['d_date'];
             $d_time = $_POST['d_time'];
@@ -40,6 +42,7 @@
             $a_date=$_POST['a_date'];
             $a_time=$_POST['a_time'];
             $price=$_POST['price'];
+
                 $sql = "INSERT INTO `flight` (`flight_no`, `departure`, `d_date`, `d_time`, `arrival`, `a_date`, `a_time`, `price`) 
                 VALUES ('$f_no', '$from', '$d_date', '$d_time', '$to', '$a_date', '$a_time', '$price')";        
                 $data = mysqli_query($conn, $sql);
@@ -51,7 +54,7 @@
             }
 
         // Fetch and display books
-        $sql = "SELECT * FROM flight";
+        $sql = "SELECT * FROM flight ";
         $data = mysqli_query($conn, $sql);
         if (mysqli_num_rows($data) > 0) {  
             echo "<table border='1'>";
