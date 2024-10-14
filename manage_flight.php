@@ -66,8 +66,8 @@
             echo "<th>Price</th>";
             echo "</tr>";
             while ($row = mysqli_fetch_assoc($data)) {
-                /*$id = $row['flight_no'];*/
-                echo "<tr>";
+                $f_no = $row['flight_no'];
+                echo "<tr id='row_$f_no'>";
                 echo "<td>" . $row['flight_no'] . "</td>";
                 echo "<td>" . $row['departure'] . "</td>";
                 echo "<td>" . $row['d_date'] . "</td>";
@@ -76,34 +76,32 @@
                 echo "<td>" . $row['a_date'] . "</td>";
                 echo "<td>" .$row['a_time'] . "</td>";
                 echo "<td>" . $row['price'] . "</td>";
-                echo "<td> <form method='POST' style='display:inline;'>
-                        <button value='' name='fno' type='submit'>Delete</button>
-                    </form>
-               <form method='post' action='editflight.php'>
-    <button name='edit' value='' class='deluser' type='submit'>EDIT</button>
-</form>
-</td>";
-                
+                echo "<td> 
+                    <button onclick='deleteRow(\"$f_no\")' class='delete-btn'>Delete</button>
+                        <form method='post' action='editflight.php' style='display:inline;'>
+                            <button name='edit' value='$f_no' class='edit-btn' type='submit'>Edit</button>
+                        </form>
+                      </td>";
                 echo "</tr>";
             }
             echo "</table>";
         }
         ?>
 
-        <div class="ViewCandidatesBodyContainer">
-            <?php
-            
-            if (isset($_POST['userdel'])) {
-                $f_no = $_POST['userdel'];
-                if (!empty($book_id)) {
-                    $sql = "DELETE FROM flight WHERE flight_no = $f_no";
-                    $data = mysqli_query($conn, $sql);
-                    echo "<script>window.location.replace('./managebooks.php');</script>";
+      <!-- Add JavaScript to handle row deletion from the page -->
+      <script>
+            function deleteRow($flight_no) {
+                // Confirm before deleting the row
+                if (confirm("Are you sure you want to remove this flight from the table?")) {
+                    // Remove the row from the DOM
+                    var row = document.getElementById('row_'+flight_no);
+                    if (row) {
+                        row.remove();
+                    }
                 }
             }
-            mysqli_close($conn);
-            ?>
-        </div>
+        </script>      
     </div>
+</script>
 </body>
 </html>
