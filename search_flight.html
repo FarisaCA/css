@@ -7,145 +7,127 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
         }
-
         .container {
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 0 auto;
             padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
         }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .search-section {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .search-section input[type="text"] {
-            padding: 10px;
-            width: 300px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .search-section button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .search-section button:hover {
-            background-color: #218838;
-        }
-
-        .flights-section {
-            display: none; /* Initially hidden */
-            margin-top: 20px;
-        }
-
-        .flight-box {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .header {
             display: flex;
             justify-content: space-between;
-        }
-
-        .flight-details {
-            flex-grow: 1;
-        }
-
-        .flight-details h2 {
-            margin: 0;
-            color: #333;
-        }
-
-        .flight-details p {
-            margin: 5px 0;
-            color: #666;
-        }
-
-        .view-details-button {
-            padding: 10px 20px;
-            background-color: #007bff;
+            align-items: center;
+            padding: 10px;
+            background-color: #2d4f91;
             color: white;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .flight-info {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .recommendations {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        .card {
+            background-color: #eef3fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 30%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            margin: 10px 0;
+        }
+        .card p {
+            color: #555;
+        }
+        .select-button {
+            background-color: #002f87;
+            color: white;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            align-self: center;
         }
-
-        .view-details-button:hover {
-            background-color: #0056b3;
+        .selected {
+            background-color: #2aad6f;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #eef3fa;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 18px;
+        }
+        .next-button {
+            background-color: #2aad6f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>IndiGo</h1>
+            <div>Delhi - Kozhikode | 11th Oct | 1 Passenger</div>
+        </div>
+        
+        <!-- Flight Info -->
+        <div class="flight-info">
+            <h2>Recommendations</h2>
+        </div>
 
-<div class="container">
-    <h1>Flight Booking</h1>
-    
-    <form>
-    <div class="search-section">
-        <input type="text" id="search-input" placeholder="Enter destination or flight number">
-        <button id="search-btn">Search Flights</button>
+        <!-- Recommendations -->
+        <div class="recommendations">
+            <div class="card">
+                <h2>Highest IndiGo BluChips</h2>
+                <p>15:30 (DEL T1) ➜ 21:00 (CCJ)</p>
+                <p>05h 30m | 1 Stop</p>
+                <p><strong>₹14,943</strong> + Earn 1645 IndiGo BluChips</p>
+                <button class="select-button">Select</button>
+            </div>
+
+            <div class="card">
+                <h2>Best Value</h2>
+                <p>06:00 (DEL T2) ➜ 17:05 (CCJ)</p>
+                <p>11h 05m | 1 Stop</p>
+                <p><strong>₹7,660</strong> + Earn 813 IndiGo BluChips</p>
+                <button class="select-button">Select</button>
+            </div>
+
+            <div class="card selected">
+                <h2>Fastest</h2>
+                <p>19:10 (DEL T3) ➜ 22:05 (CCJ)</p>
+                <p>02h 55m | Non-stop</p>
+                <p><strong>₹11,202</strong> + Earn 1224 IndiGo BluChips</p>
+                <button class="select-button selected">Selected</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Total Fare: ₹11,202</p>
+            <button class="next-button">Next</button>
+        </div>
     </div>
-
-    <div class="flights-section" id="flights-section">
-        <div class="flight-box">
-            <div class="flight-details">
-                <h2>Flight AA123</h2>
-                <p>Departure: New York (JFK) - 10:00 AM</p>
-                <p>Arrival: Los Angeles (LAX) - 1:00 PM</p>
-                <p>Price: $300</p>
-            </div>
-            <button class="view-details-button">View Details</button>
-        </div>
-
-        <div class="flight-box">
-            <div class="flight-details">
-                <h2>Flight BB456</h2>
-                <p>Departure: Chicago (ORD) - 2:00 PM</p>
-                <p>Arrival: Miami (MIA) - 5:00 PM</p>
-                <p>Price: $250</p>
-            </div>
-            <button class="view-details-button">View Details</button>
-        </div>
-
-        <div class="flight-box">
-            <div class="flight-details">
-                <h2>Flight CC789</h2>
-                <p>Departure: San Francisco (SFO) - 8:00 AM</p>
-                <p>Arrival: Seattle (SEA) - 10:30 AM</p>
-                <p>Price: $180</p>
-            </div>
-            <button class="view-details-button">View Details</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    document.getElementById('search-btn').addEventListener('click', function() {
-        // When the search button is clicked, show available flights
-        document.getElementById('flights-section').style.display = 'block';
-    });
-</script>
-
 </body>
 </html>

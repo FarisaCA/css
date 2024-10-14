@@ -137,7 +137,7 @@ footer {
 .option1{
     display:flex;
     flex-direction: column;
-    align align-items: center;
+    align-items: center;
 }
 .option label {
     font-size: 16px;
@@ -158,3 +158,12 @@ select:hover {
     cursor: pointer;
 }
 
+input{
+    padding: 9px;
+    padding: 10px;
+    font-size: 16px;
+    width: 150px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
