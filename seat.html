@@ -1,29 +1,193 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Seat Reservation</title>
-    <link rel="stylesheet" href="seat-style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Flight Seat Reservation</h1>
-        <div class="flight-info">
-            <h2>Flight Number: ABC123</h2>
-            <h3>Available Seats:</h3>
-            <div id="seat-map" class="seat-map">
-                <!-- Seats will be generated dynamically here -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SELECT YOUR SEAT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #127bb8;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+            text-align: center;
+            padding: 50px;
+        }
+        .content h2 {
+            color: #333;
+        }
+        .content p {
+            color: #555;
+            font-size: 18px;
+        }
+        img { 
+           width: 70%;
+           height: auto;
+          position: right;
+          margin: -100px auto;
+          padding: 200px;
+        }
+        body {
+                    font-family: Arial, sans-serif;
+                }
+                .navbar {
+                    background-color: #2d4f9c;
+                    padding: 10px;
+                }
+                .navbar a {
+                    color: white;
+                    margin: 0 15px;
+                    text-decoration: none;
+                    font-size: 18px;
+                }
+                .navbar a:hover {
+                    text-decoration: underline;
+                }
+                .content {
+                    display: none;
+                    margin: 20px;
+                    padding: 20px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+                h2 {
+                    color: #4bc9e9;
+                }
+                .features, .seating-plan {
+                    margin-top: 15px;
+                }
+                .seating-plan img {
+                    width: 100%;
+                    max-width: 500px;
+                }
+                .active {
+                    display: block;
+                }
+    </style>
+     <header>
+        <h1>FIFA AIRLINES</h1>
+        <h2>SELECT YOUR SEAT</h2>
+    </header>
+    <img src="./airplane-flight.png" width="900" height="200">
+    </head>
+        <body>
+          
+            <!-- Navbar -->
+            <div class="navbar">
+                <a href="#" onclick="showContent('atr')">ATR</a>
+                <a href="#" onclick="showContent('a320')">A320</a>
+                <a href="#" onclick="showContent('a321')">A321</a>
             </div>
-        </div>
-        <form id="reservation-form" class="reservation-form" style="display: none;">
-            <h3>Passenger Information</h3>
-            <input type="text" id="passenger-name" placeholder="Your Name" required>
-            <input type="email" id="passenger-email" placeholder="Your Email" required>
-            <input type="hidden" id="selected-seat-id">
-            <button type="submit">Reserve Seat</button>
-        </form>
-    </div>
-    <!--script src="script.js"></script-->
-</body>
-</html>
+        
+            <!-- ATR Section -->
+            <div class="content" id="atr">
+                <h2>ATR</h2>
+                <p>Total Passengers: 140</p>
+        
+                <div class="features">
+                    <p><strong>Aircraft Features:</strong></p>
+                    <ul>
+                        <li>Emergency Exit</li>
+                        <li>Lavatories</li>
+                        <li>Galley</li>
+                        <li>Non-reclining Seat</li>
+                        <li>Emergency Exit & Non-reclining Seat with Extra Legroom</li>
+                    </ul>
+                </div>
+        
+                <div class="seating-plan">
+                    <p><strong>Seating Plan:</strong></p>
+                    <img src="./atr_seating_plan.png.html" alt="ATR Seating Plan">
+                    <p>This aircraft has 78 seats in an all-economy class configuration. Rows 1 and 2 are extra legroom seats. The emergency exits are located next to rows 1 and 2.</p>
+                </div>
+            </div>
+        
+            <!-- A320 Section -->
+            <div class="content" id="a320">
+                <h2>A320</h2>
+                <p>Number of Fleet: 100</p>
+                <p>Total Passengers: 180</p>
+        
+                <div class="features">
+                    <p><strong>Aircraft Features:</strong></p>
+                    <ul>
+                        <li>Multiple Emergency Exits</li>
+                        <li>Lavatories in front and rear</li>
+                        <li>Galley</li>
+                        <li>Reclining Seats</li>
+                        <li>Extra Legroom Seats in Rows 1 and 2</li>
+                    </ul>
+                </div>
+        
+                <div class="seating-plan">
+                    <p><strong>Seating Plan:</strong></p>
+                    <img src="a320_seating_plan.png" alt="A320 Seating Plan">
+                    <p>This aircraft has 180 seats in an all-economy class configuration. Emergency exits are located at the wings and next to row 1.</p>
+                </div>
+            </div>
+        
+            <!-- A321 Section -->
+            <div class="content" id="a321">
+                <h2>A321</h2>
+                <p>Number of Fleet: 50</p>
+                <p>Total Passengers: 220</p>
+        
+                <div class="features">
+                    <p><strong>Aircraft Features:</strong></p>
+                    <ul>
+                        <li>Multiple Emergency Exits</li>
+                        <li>Lavatories in front and rear</li>
+                        <li>Galley</li>
+                        <li>Reclining Seats</li>
+                        <li>Extra Legroom Seats in Rows 1, 2, and near the emergency exits</li>
+                    </ul>
+                </div>
+        
+                <div class="seating-plan">
+                    <p><strong>Seating Plan:</strong></p>
+                    <img src="a321_seating_plan.png" alt="A321 Seating Plan">
+                    <p>This aircraft has 220 seats in an all-economy class configuration. Emergency exits are located at the wings and front and rear of the aircraft.</p>
+                </div>
+            </div>
+        
+            <script>
+                function showContent(id) {
+                    // Hide all content
+                    var contents = document.getElementsByClassName('content');
+                    for (var i = 0; i < contents.length; i++) {
+                        contents[i].style.display = 'none';
+                    }
+        
+                    // Show the clicked content
+                    document.getElementById(id).style.display = 'block';
+                }
+        
+                // Show ATR section by default when the page loads
+                window.onload = function() {
+                    showContent('atr');
+                };
+            </script>
+        
+        </body>
+        </html>
+        
+    
