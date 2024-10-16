@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>  
-    <link rel="stylesheet" href="manageflight.css">
+    <link rel="stylesheet" href="./manageflight.css">
     <title>Manage Flight</title>
     
 </head>
