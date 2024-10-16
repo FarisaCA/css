@@ -34,7 +34,6 @@
         // Handle form submission
         if (isset($_POST['submit'])) { 
             $f_no = $_POST['fno'];
-            echo"$f_no";
             $from = $_POST['from'];
             $d_date = $_POST['d_date'];
             $d_time = $_POST['d_time'];
@@ -54,57 +53,68 @@
             }
 
         // Fetch and display books
-        $sql = "SELECT * FROM flight ";
+        $sql = "SELECT * FROM flight where `status`=true ";
         $data = mysqli_query($conn, $sql);
         if (mysqli_num_rows($data) > 0) {  
-            echo "<table border='1'>";
+            echo "<table border='5'>";
             echo "<tr>";
             echo "<th>Flight No</th>";
             echo "<th>Departure</th>";
-            echo "<th>Date</th>";
-            echo "<th>Time</th>";
+            echo "<th>Departure Date</th>";
+            echo "<th>Departure Time</th>";
             echo "<th>Arrival</th>";
-            echo "<th>Date</th>";
-            echo "<th>Time</th>";
+            echo "<th>Arrival Date</th>";
+            echo "<th>Arrival Time</th>";
             echo "<th>Price</th>";
             echo "</tr>";
             while ($row = mysqli_fetch_assoc($data)) {
-                $f_no = $row['flight_no'];
-                echo "<tr id='row_$f_no'>";
-                echo "<td>" . $row['flight_no'] . "</td>";
-                echo "<td>" . $row['departure'] . "</td>";
-                echo "<td>" . $row['d_date'] . "</td>";
-                echo "<td>" . $row['d_time'] . "</td>";
-                echo "<td>" . $row['arrival'] . "</td>";
-                echo "<td>" . $row['a_date'] . "</td>";
-                echo "<td>" .$row['a_time'] . "</td>";
-                echo "<td>" . $row['price'] . "</td>";
-                echo "<td> 
-                    <button onclick='deleteRow(\"$f_no\")' class='delete-btn'>Delete</button>
-                        <form method='post' action='editflight.php' style='display:inline;'>
-                            <button name='edit' value='$f_no' class='edit-btn' type='submit'>Edit</button>
-                        </form>
-                      </td>";
+                echo "<form action='' method='post'>";
+                echo "<tr>";
+                echo "<td><input class='input2' type='text' name='fno' value=" . $row['flight_no'] ." readonly required></td>";
+                echo "<td><input class='input2' type='text' name='from'value=". $row['departure'] ." required></td>";
+                echo "<td><input class='input2' type='date' name='d_date' value=" . $row['d_date'] . " required></td>";
+                echo "<td><input class='input2' type='time' name='d_time' value=".$row['d_time'] ." required></td>";
+                echo "<td><input class='input2' type='text' name='to' value=". $row['arrival'] . " required></td>";
+                echo "<td><input class='input2' type='date' name='a_date' value=" . $row['a_date'] . " required></td>";
+                echo "<td><input class='input2' type='time' name='a_time' value=" .$row['a_time'] ." required></td>";
+                echo "<td><input class='input2' type='number' name='price'  value=". $row['price'] ." required></td>";
+                echo "<td><button type=submit name=update>UPDATE</button></td>"; 
+                echo "<td><button type=submit name=delete>DELETE</button></td>"; 
                 echo "</tr>";
+                echo"</form>";
             }
             echo "</table>";
         }
-        ?>
-
-      <!-- Add JavaScript to handle row deletion from the page -->
-      <script>
-            function deleteRow($flight_no) {
-                // Confirm before deleting the row
-                if (confirm("Are you sure you want to remove this flight from the table?")) {
-                    // Remove the row from the DOM
-                    var row = document.getElementById('row_'+flight_no);
-                    if (row) {
-                        row.remove();
-                    }
-                }
+        if (isset($_POST['update'])) 
+        { 
+            $f_no = $_POST['fno'];
+            $from = $_POST['from'];
+            $d_date = $_POST['d_date'];
+            $d_time = $_POST['d_time'];
+            $to = $_POST['to'];
+            $a_date=$_POST['a_date'];
+            $a_time=$_POST['a_time'];
+            $price=$_POST['price'];
+            $sql="UPDATE `flight` SET `departure`='$from',
+            `d_date`='$d_date',`d_time`='$d_time',`arrival`='$to',`a_date`='$a_date'
+            ,`a_time`='$a_time',`price`='$price' WHERE  `flight_no`='$f_no'";
+            
+              if($conn->query($sql)==FALSE){
+                die("error updating value:".$conn->error);
+              }
             }
-        </script>      
+    if (isset($_POST['delete']))
+    {
+        $f_no = $_POST['fno'];
+        $sql="UPDATE `flight` SET `status`=false WHERE `flight_no`='$f_no'";
+        if($conn->query($sql)==FALSE){
+            die("error updating value:".$conn->error);
+          }else{
+            echo "<script>alert('flight details removed successfully')</script>";
+          }
+    }
+
+        ?>
     </div>
-</script>
 </body>
 </html>

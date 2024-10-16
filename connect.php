@@ -42,7 +42,8 @@ $sql="CREATE TABLE IF NOT EXISTS flight(
        arrival VARCHAR(50) NOT NULL,
        a_date DATE NOT NULL,
        a_time TIME NOT NULL ,
-       price INT NOT NULL                                                                               
+       price INT NOT NULL ,
+       status BOOLEAN DEFAULT true                                                                          
     )";
         if($conn->query($sql) === FALSE)
         {
@@ -61,5 +62,4 @@ $sql="CREATE TABLE IF NOT EXISTS flight(
                     echo "Error creating table: $error";
             }*/
        
-            
 ?>
