@@ -29,7 +29,7 @@
         </div>
 
     <div class="options-container">
-       <form class="flight-options-form">
+       <form action="search_flight.php" method="post" class="flight-options-form">
 
             <!-- Round Trip Selection -->
             <div class="option">
@@ -92,12 +92,7 @@
             </div>
         </div>
     </div>
-    <Button>Search Flight</Button> 
-    <div class="result">
-        <?php
-        require_once('connect.php');
-        
-    </div>
-    </main>
+    <button>Search Flight</button>
+</main>
 </body>
 </html>
