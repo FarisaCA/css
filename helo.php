@@ -1,3 +1,62 @@
+<?php
+// Start the session
+
+session_start();
+require_once('connect.php');
+
+// Check if the form has been submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect and sanitize input data
+    $tripType = isset($_POST['trip-type']) ? htmlspecialchars($_POST['trip-type']) : '';
+    $classType = isset($_POST['class-type']) ? htmlspecialchars($_POST['class-type']) : '';
+    $travelers = isset($_POST['travelers']) ? (int)$_POST['travelers'] : 1;
+    $from = isset($_POST['from']) ? htmlspecialchars($_POST['from']) : '';
+    $to = isset($_POST['to']) ? htmlspecialchars($_POST['to']) : '';
+    $departureDate = isset($_POST['departure']) ? htmlspecialchars($_POST['departure']) : '';
+    $arrivalDate = isset($_POST['arrival']) ? htmlspecialchars($_POST['arrival']) : '';
+
+    // Validate the inputs
+    if (empty($from) || empty($to) || empty($departureDate) || empty($travelers)) {
+        echo "Please fill in all required fields.";
+    } else {
+        // Prepare SQL query
+        $sql = "SELECT * FROM flights WHERE 
+                departure = ? AND 
+                arrival = ? "; 
+                
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssss", $from, $to, $departureDate, $classType);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Check if there are any results
+        if ($result->num_rows > 0) {
+            // Output data of each row
+            echo "<h2>Available Flights:</h2>";
+            while ($row = $result->fetch_assoc()) {
+                echo "<p>Flight ID: " . $row["id"] . " - From: " . $row["from_location"] .
+                     " To: " . $row["to_location"] . " Departure: " . $row["departure_date"] .
+                     " Arrival: " . $row["arrival_date"] . " Class: " . $row["class"] .
+                     " Price: $" . $row["price"] . "</p>";
+            }
+        } else {
+            echo "No flights found.";
+        }
+
+        // Close statement and connection
+        $stmt->close();
+    }
+} else {
+    // Redirect back to the search form if accessed directly
+   // header("Location: index.php"); // Change index.php to your HTML file name
+   // exit();
+}
+
+// Close the connection
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,11 +116,7 @@
                 <option value="3">3 Travelers</option>
                 <option value="4">4 Travelers</option>
                </select>
-             </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> d52c2b161b0b936c305ecbbddf290fc8b773e23f
+            </div>
     </form>
     </div>
      <div class="option1-container">
@@ -99,6 +154,9 @@
     </div>
     <Button>Search Flight</Button> 
     </main>
+
+    
+
    
 </body>
 </html>
