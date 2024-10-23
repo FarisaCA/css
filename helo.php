@@ -1,7 +1,5 @@
 <?php
 // Start the session
-
-session_start();
 require_once('connect.php');
 
 // Check if the form has been submitted
@@ -151,16 +149,7 @@ $conn->close();
             </div>
         </div>
     </div>
-<<<<<<< HEAD:helo.html
     <button>Search Flight</button>
 </main>
-=======
-    <Button>Search Flight</Button> 
-    </main>
-
-    
-
-   
->>>>>>> c685088ea3db5ac13cbdd29b62cd488ee1b0155b:helo.php
 </body>
 </html>
