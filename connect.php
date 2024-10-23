@@ -1,3 +1,4 @@
+
 <?php
 $servername="localhost";
 $username="root";
@@ -5,7 +6,7 @@ $password="";
 $dbname="airline";
 
 $conn=new mysqli($servername, $username, $password);
-
+session_start();
 if($conn->connect_error){
     die("connection failed: " .$conn->connect_error);
 
