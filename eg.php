@@ -2,6 +2,10 @@
 // Start the session and connect to the database
 require_once('connect.php');
 
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collect and sanitize input data
@@ -19,19 +23,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Prepare SQL query
         $sql = "SELECT flight_no, departure, d_date, d_time, arrival, a_date, a_time, price 
-                FROM flight 
+                FROM `flight`
                 WHERE departure = ? AND arrival = ? ";
         
-        //Prepare the statement and bind parameters
+        // Prepare the statement and bind parameters
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+            exit;
+        }
+
         $stmt->bind_param("ss", $from, $to);
         $stmt->execute();
         $result = $stmt->get_result();
 
         // Check if there are any results
         if ($result->num_rows > 0) {
-            // Output data in a table format
-            echo "<h2>Available Flights:</h2>";
+            echo "<h4>Available Flights:</h4>";
             echo "<table border='1'>
                     <tr>
                         <th>Flight No</th>
@@ -43,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>Arrival Time</th>
                         <th>Price</th>
                     </tr>";
-
             // Fetch rows and output the details
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>
@@ -66,13 +73,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 } else {
-    // If accessed directly, redirect back to the search form or display a message
+    // If accessed directly, prompt for form submission
     echo "Please submit the form to search for flights.";
 }
 
 // Close the connection
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,18 +142,19 @@ $conn->close();
                 <div class="option1-container">
                     <div class="option1">
                         <label for="from">From</label>
-                        <select id="from" name="from">
-                            <option value="agra">Agra Civil Airport</option>
-                            <option value="Ahmedabad">Ahmedabad Airport</option>
-                            <option value="bahrain">Bahrain Airport</option>
-                            <option value="mumbai">Mumbai Airport</option>
+                        <select id="from" name="from" required>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Agra civil Airport,kheria">Agra Civil Airport</option>
+                            <!-- Add other departure options -->
                         </select>
                     </div>
 
                     <div class="option1">
                         <label for="to">To</label>
-                        <select id="to" name="to">
-                            <option value="cochin">Cochin International Airport</option>
+                        <select id="to" name="to" required>
+                            <option value="Kozhikode">Kozhikode</option>
+                            <option value="Cochin International Airport">Cochin International Airport</option>
+                            <!-- Add other arrival options -->
                         </select>
                     </div>
 
