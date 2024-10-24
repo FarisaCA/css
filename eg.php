@@ -1,6 +1,5 @@
 <?php
-// Start the session
-session_start();
+// Start the session and connect to the database
 require_once('connect.php');
 
 // Check if the form has been submitted
@@ -20,11 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Prepare SQL query
         $sql = "SELECT flight_no, departure, d_date, d_time, arrival, a_date, a_time, price 
-                FROM flights 
-                WHERE departure = ? AND arrival = ? AND d_date = ?";
+                FROM flight 
+                WHERE departure = ? AND arrival = ? ";
         
+        //Prepare the statement and bind parameters
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sss", $from, $to, $departureDate);
+        $stmt->bind_param("ss", $from, $to);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>Price</th>
                     </tr>";
 
+            // Fetch rows and output the details
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>
                         <td>" . $row["flight_no"] . "</td>
@@ -65,8 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 } else {
-    // Redirect back to the search form if accessed directly
-  
+    // If accessed directly, redirect back to the search form or display a message
+    echo "Please submit the form to search for flights.";
 }
 
 // Close the connection
@@ -102,7 +103,7 @@ $conn->close();
         </div>
 
         <div class="options-container">
-            <form class="flight-options-form" method="POST" action="search_flights.php">
+            <form class="flight-options-form" method="POST">
                 <div class="option">
                     <label for="trip-type">Round Trip</label>
                     <select id="trip-type" name="trip-type">
