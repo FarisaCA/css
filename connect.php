@@ -52,11 +52,13 @@ $sql = "CREATE TABLE IF NOT EXISTS flight (
     price DECIMAL(10, 2) NOT NULL,
     status BOOLEAN DEFAULT true
 )";
+
 if ($conn->query($sql) === FALSE) {
     die("Error creating table: " . $conn->error);
 }
 
-        /*$sql= "CREATE TABLE IF NOT EXISTS admins(
+
+        $sql= "CREATE TABLE IF NOT EXISTS admins(
         admin_id INT(3) AUTO_INCREMENT PRIMARY KEY,
         Name VARCHAR(50) NOT NULL,
         email VARCHAR(100) UNIQUE NOT NULL,
@@ -67,5 +69,5 @@ if ($conn->query($sql) === FALSE) {
         if (!$conn->query($sql)) {
            $error = $conn->error;
                     echo "Error creating table: $error";
-            }*/
+            }
 ?>     

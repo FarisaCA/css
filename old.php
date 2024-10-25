@@ -1,86 +1,3 @@
-<?php
-// Start the session and connect to the database
-require_once('connect.php');
-
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Check if the form has been submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect and sanitize input data
-    $tripType = isset($_POST['trip-type']) ? htmlspecialchars($_POST['trip-type']) : '';
-    $classType = isset($_POST['class-type']) ? htmlspecialchars($_POST['class-type']) : '';
-    $travelers = isset($_POST['travelers']) ? (int)$_POST['travelers'] : 1;
-    $from = isset($_POST['from']) ? htmlspecialchars($_POST['from']) : '';
-    $to = isset($_POST['to']) ? htmlspecialchars($_POST['to']) : '';
-    $departureDate = isset($_POST['departure']) ? htmlspecialchars($_POST['departure']) : '';
-    $arrivalDate = isset($_POST['arrival']) ? htmlspecialchars($_POST['arrival']) : '';
-
-    // Validate the inputs
-    if (empty($from) || empty($to) || empty($departureDate) || empty($travelers)) {
-        echo "Please fill in all required fields.";
-    } else {
-        // Prepare SQL query
-        $sql = "SELECT flight_no, departure, d_date, d_time, arrival, a_date, a_time, price 
-                FROM `flight`
-                WHERE departure = ? AND arrival = ? ";
-        
-        // Prepare the statement and bind parameters
-        $stmt = $conn->prepare($sql);
-        if (!$stmt) {
-            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
-            exit;
-        }
-
-        $stmt->bind_param("ss", $from, $to);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        // Check if there are any results
-        if ($result->num_rows > 0) {
-            echo "<h4>Available Flights:</h4>";
-            echo "<table border='1'>
-                    <tr>
-                        <th>Flight No</th>
-                        <th>Departure</th>
-                        <th>Departure Date</th>
-                        <th>Departure Time</th>
-                        <th>Arrival</th>
-                        <th>Arrival Date</th>
-                        <th>Arrival Time</th>
-                        <th>Price</th>
-                    </tr>";
-            // Fetch rows and output the details
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <td>" . $row["flight_no"] . "</td>
-                        <td>" . $row["departure"] . "</td>
-                        <td>" . $row["d_date"] . "</td>
-                        <td>" . $row["d_time"] . "</td>
-                        <td>" . $row["arrival"] . "</td>
-                        <td>" . $row["a_date"] . "</td>
-                        <td>" . $row["a_time"] . "</td>
-                        <td>$" . $row["price"] . "</td>
-                      </tr>";
-            }
-            echo "</table>";
-        } else {
-            echo "No flights found.";
-        }
-
-        // Close statement
-        $stmt->close();
-    }
-} else {
-    // If accessed directly, prompt for form submission
-    echo "Please submit the form to search for flights.";
-}
-
-// Close the connection
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,12 +55,14 @@ $conn->close();
                         <option value="4">4 Travelers</option>
                     </select>
                 </div>
-
+</form>
                 <div class="option1-container">
+                <form class="option1-form" method="POST">
                     <div class="option1">
                         <label for="from">From</label>
                         <select id="from" name="from" required>
                             <option value="Delhi">Delhi</option>
+                            <option value="Delhi">Doha</option>
                             <option value="Agra civil Airport,kheria">Agra Civil Airport</option>
                             <!-- Add other departure options -->
                         </select>
@@ -167,10 +86,100 @@ $conn->close();
                         <label for="arrival">Arrival</label>
                         <input type="date" id="arrival" name="arrival" required>
                     </div>
-                </div>
-                <button type="submit">Search Flight</button>
+                    
             </form>
+          
+                </div>
+               
         </div>
+        <div class="button-container">
+        <button type="submit">Search Flight</button>
+   </div>
     </main>
 </body>
 </html>
+<?php
+// Start the session and connect to the database
+require_once('connect.php');
+
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Check if the form has been submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect and sanitize input data
+    $tripType = isset($_POST['trip-type']) ? htmlspecialchars($_POST['trip-type']) : '';
+    $classType = isset($_POST['class-type']) ? htmlspecialchars($_POST['class-type']) : '';
+    $travelers = isset($_POST['travelers']) ? (int)$_POST['travelers'] : 1;
+    $from = isset($_POST['from']) ? htmlspecialchars($_POST['from']) : '';
+    $to = isset($_POST['to']) ? htmlspecialchars($_POST['to']) : '';
+    $departureDate = isset($_POST['departure']) ? htmlspecialchars($_POST['departure']) : '';
+    $arrivalDate = isset($_POST['arrival']) ? htmlspecialchars($_POST['arrival']) : '';
+
+    // Validate the inputs
+    if (empty($from) || empty($to) || empty($departureDate) || empty($travelers)) {
+        echo "Please fill in all required fields.";
+    } else {
+        // Prepare SQL query
+        $sql = "SELECT flight_no, departure, d_date, d_time, arrival, a_date, a_time, price 
+                FROM `flight`
+                WHERE departure = ? AND arrival = ? ";
+        
+        // Prepare the statement and bind parameters
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+            exit;
+        }
+
+        $stmt->bind_param("ss", $from, $to);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Check if there are any results
+        if ($result->num_rows > 0) {
+            echo "<h4>Available Flights:</h4>";
+            echo "<table border='1'>
+                    <tr>
+                        <th>Flight No</th>
+                        <th>Departure</th>
+                        <th>Departure Date</th>
+                        <th>Departure Time</th>
+                        <th>Arrival</th>
+                        <th>Arrival Date</th>
+                        <th>Arrival Time</th>
+                        <th>Price</th>
+                        
+                    </tr>";
+            // Fetch rows and output the details
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>
+                        <td>" . $row["flight_no"] . "</td>
+                        <td>" . $row["departure"] . "</td>
+                        <td>" . $row["d_date"] . "</td>
+                        <td>" . $row["d_time"] . "</td>
+                        <td>" . $row["arrival"] . "</td>
+                        <td>" . $row["a_date"] . "</td>
+                        <td>" . $row["a_time"] . "</td>
+                        <td>$" . $row["price"] . "</td>
+                        <td><button type=submit name=submit>View Details</button>
+                      </tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "No flights found.";
+        }
+
+        // Close statement
+        $stmt->close();
+    }
+} else {
+    // If accessed directly, prompt for form submission
+    echo "Please submit the form to search for flights.";
+}
+
+// Close the connection
+$conn->close();
+?>
+

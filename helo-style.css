@@ -22,7 +22,7 @@ body {
 }
 
 nav ul {
-    list-style-type:none;
+    list-style-type: none;
 }
 
 nav ul li {
@@ -47,16 +47,15 @@ nav ul li a {
     flex-wrap: wrap;
     justify-content: center;
     border-radius: 8px;
-
-
 }
 
 .form-group {
     margin: 10px;
-    color:   #0358a8; 
+    color: #0358a8;
 }
 
-.form-group input[type="text"], .form-group input[type="date"] {
+.form-group input[type="text"],
+.form-group input[type="date"] {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -95,54 +94,47 @@ footer {
     bottom: 0;
 }
 
-.options-container {
+.options-container,
+.option1-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 0px;
+    margin-top: 15px;
     padding: 15px;
     background-color: #ffffff;
     border-radius: 8px;
-}
-.option1-container{
-    display: flex;
-    justify-content: space-around;
-    margin-top: 0px;
-    padding: 10px;
-    background-color: #ffffff;
-    border-radius: 8px; 
+    flex-wrap: wrap;  /* Added to allow wrapping */
 }
 
-.flight-options-form {
+.options-container {
+    margin-bottom: 50px;  /* Space between rows */
+}
+
+.flight-options-form,
+.option1-form {
     display: flex;
     gap: 20px;
 }
-.option1-form{
-    display: flex;
-    gap: 30px; 
-    }
-.option {
+
+.option,
+.option1 {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.option1{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-}
-.option label {
+
+.option label,
+.option1 label {
     font-size: 16px;
     margin-bottom: 8px;
     color: #005bac;
 }
 
 .option1 label {
-    font-size: 16px;
-    margin-bottom: 8px;
     color: #00196d;
 }
 
-select {
+select,
+input {
     padding: 10px;
     font-size: 16px;
     width: 150px;
@@ -155,23 +147,17 @@ select:hover {
     cursor: pointer;
 }
 
-input{
-    padding: 9px;
-    padding: 10px;
-    font-size: 16px;
-    width: 150px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
+button {
+    color: white;
+    padding: 10px 20px; /* Adjust padding for better spacing */
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(58, 153, 3);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-button{
-         color: white;
-         padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer; 
-        background-color: rgb(58, 153, 3);
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-        margin-left: 950px;
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Moves the button to the right */
+    width: 93%; /* Ensures the button container takes full width */
 }
-        

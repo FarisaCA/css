@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airline Reservation System</title>
-    <link rel="stylesheet" href="./helo-style.css"> 
+    <link rel="stylesheet" href="helo-style.css"> 
 </head>
 <body>
     <header>
@@ -144,7 +144,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>Arrival Date</th>
                         <th>Arrival Time</th>
                         <th>Price</th>
-                        
                     </tr>";
             // Fetch rows and output the details
             while ($row = $result->fetch_assoc()) {
@@ -157,7 +156,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <td>" . $row["a_date"] . "</td>
                         <td>" . $row["a_time"] . "</td>
                         <td>$" . $row["price"] . "</td>
-                        <td><button type=submit name=submit>View Details</button>
                       </tr>";
             }
             echo "</table>";

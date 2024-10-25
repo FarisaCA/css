@@ -2,7 +2,6 @@
 <?php 
 // Start session
 require_once('connect.php');
-session_start();
 /*$sql="SELECT * FROM `admins`";
 // Check if user is logged in (this is just an example check)
 if (!isset($_SESSION['admin_logged_in'])) {
