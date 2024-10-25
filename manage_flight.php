@@ -70,7 +70,7 @@
             while ($row = mysqli_fetch_assoc($data)) {
                 echo "<form action='' method='post'>";
                 echo "<tr>";
-                echo "<td><input class='input2' type='text' name='fno' value=" . $row['flight_no'] ." readonly required></td>";
+                echo "<td><input class='input2' type='text' name='fno' value=" . $row['flight_no'] ." required></td>";
                 echo "<td><input class='input2' type='text' name='from'value=". $row['departure'] ." required></td>";
                 echo "<td><input class='input2' type='date' name='d_date' value=" . $row['d_date'] . " required></td>";
                 echo "<td><input class='input2' type='time' name='d_time' value=".$row['d_time'] ." required></td>";

@@ -42,7 +42,7 @@ if ($conn->query($sql) === FALSE) {
 
 // Create the flight table if it doesn't exist
 $sql = "CREATE TABLE IF NOT EXISTS flight (
-    flight_no VARCHAR(6) PRIMARY KEY, 
+    flight_no VARCHAR(6), 
     departure VARCHAR(50) NOT NULL,
     d_date DATE NOT NULL,
     d_time TIME NOT NULL,
@@ -56,7 +56,6 @@ $sql = "CREATE TABLE IF NOT EXISTS flight (
 if ($conn->query($sql) === FALSE) {
     die("Error creating table: " . $conn->error);
 }
-
 
         $sql= "CREATE TABLE IF NOT EXISTS admins(
         admin_id INT(3) AUTO_INCREMENT PRIMARY KEY,
