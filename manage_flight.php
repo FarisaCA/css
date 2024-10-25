@@ -69,6 +69,7 @@
             echo "</tr>";
             while ($row = mysqli_fetch_assoc($data)) {
                 echo "<form action='' method='post'>";
+                echo"<input type='hidden'name='flight_id' value=" . $row['flight_id'] .">";
                 echo "<tr>";
                 echo "<td><input class='input2' type='text' name='fno' value=" . $row['flight_no'] ." required></td>";
                 echo "<td><input class='input2' type='text' name='from'value=". $row['departure'] ." required></td>";
@@ -87,6 +88,7 @@
         }
         if (isset($_POST['update'])) 
         { 
+            $flight_id=$_POST['filght_id'];
             $f_no = $_POST['fno'];
             $from = $_POST['from'];
             $d_date = $_POST['d_date'];
@@ -95,9 +97,9 @@
             $a_date=$_POST['a_date'];
             $a_time=$_POST['a_time'];
             $price=$_POST['price'];
-            $sql="UPDATE `flight` SET `departure`='$from',
+            $sql="UPDATE `flight` SET `flight_no`='$f_no',`departure`='$from',
             `d_date`='$d_date',`d_time`='$d_time',`arrival`='$to',`a_date`='$a_date'
-            ,`a_time`='$a_time',`price`='$price' WHERE  `flight_no`='$f_no'";
+            ,`a_time`='$a_time',`price`='$price' WHERE  `flight_id`='$flight_id'";
             
               if($conn->query($sql)==FALSE){
                 die("error updating value:".$conn->error);

@@ -69,4 +69,6 @@ if ($conn->query($sql) === FALSE) {
            $error = $conn->error;
                     echo "Error creating table: $error";
             }
+
+       
 ?>     

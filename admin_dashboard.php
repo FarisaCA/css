@@ -25,6 +25,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
                 <li><a href="manage_flight.php">Manage Flights</a></li>
                 <li><a href="#users">Manage Users</a></li>
                 <li><a href="#bookings">Manage Bookings</a></li>
+                <li><a href="#bookings">Manage Seat</a></li>
                 <li><a href="logout.php" class="logout-button">Logout</a></li>
                 
             </ul>
