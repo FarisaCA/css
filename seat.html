@@ -31,10 +31,10 @@
         /*.content {
             text-align: center;
             padding: 50px;
-        }
-        .content h2 {
-            color: #333;
         }*/
+        .content h2 {
+            color: #0843b1;
+        }
         .content p {
             color: #555;
             font-size: 18px;
@@ -66,7 +66,7 @@
                     border-radius: 5px;
                 }
                 h2 {
-                    color: #4bc9e9;
+                    color:  #ffffff;
                 }
                 .features, .seating-plan {
                     margin-top: 15px;
@@ -78,16 +78,50 @@
                 .active {
                     display: block;
                 }
+                /* styles.css */
+
+.table-style {
+    width: 70%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.table-style th, .table-style td {
+    padding: 12px;
+    text-align: center;
+    border: 2px solid #333;
+}
+
+.table-style th {
+    background-color: #005bac;
+    color: white;
+}
+
+.table-style tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-style tr:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.table-style td {
+    color: #333;
+}
+
 
     </style>
      <header>
         <h1>FIFA AIRLINES</h1>
         <h2>SELECT YOUR SEAT</h2>
+       
     </header>
    
     </head>
         <body>
-          
+            
             <!-- Navbar -->
             <div class="navbar">
                 <a href="#" onclick="showContent('atr')">ATR</a>
@@ -108,10 +142,62 @@
                         <li>Non-reclining Seat</li>
                         <li>Emergency Exit & Non-reclining Seat with Extra Legroom</li>
                     </ul>
-                    <table border="3" class="table-style">
+                    <table class="table-style">
+                        <tr>
                         <th>Row No</th>
                         <th>Seat Type</th>
                         <th>Rates</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Window</td>
+                            <td>2000</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Middle</td>
+                            <td>1500</td>
+                        </tr>
+                        <tr>
+                            <td>2,3</td>
+                            <td>All</td>
+                            <td>900</td>
+                        </tr>
+                        <tr>
+                            <td>4,5</td>
+                            <td>All</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>6-15</td>
+                            <td>All</td>
+                            <td>350</td>
+                        </tr>
+                        <tr>
+                            <td>16-20</td>
+                            <td>Window</td>
+                            <td>400</td>
+                        </tr>
+                        <tr>
+                            <td>16-20</td>
+                            <td>Middle</td>
+                            <td>350</td>
+                        </tr>
+                        <tr>
+                            <td>16-20</td>
+                            <td>All</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>1-5</td>
+                            <td>Window/Business</td>
+                            <td>3000</td>
+                        </tr>
+                        <tr>
+                            <td>1-5</td>
+                            <td>All(Business)</td>
+                            <td>2500</td>
+                        </tr>
                     </table>
                 </div>
         
@@ -137,6 +223,63 @@
                         <li>Extra Legroom Seats in Rows 1 and 2</li>
                     </ul>
                 </div>
+                <table class="table-style">
+                    <tr>
+                    <th>Row No</th>
+                    <th>Seat Type</th>
+                    <th>Rates</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Window</td>
+                        <td>2000</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Middle</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr>
+                        <td>2,3</td>
+                        <td>All</td>
+                        <td>900</td>
+                    </tr>
+                    <tr>
+                        <td>4,5</td>
+                        <td>All</td>
+                        <td>800</td>
+                    </tr>
+                    <tr>
+                        <td>6-15</td>
+                        <td>All</td>
+                        <td>350</td>
+                    </tr>
+                   <tr>
+                        <td>16-20</td>
+                        <td>Window</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td>16-20</td>
+                        <td>Middle</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td>16-20</td>
+                        <td>All</td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <td>1-5</td>
+                        <td>Window/Business</td>
+                        <td>3000</td>
+                    </tr>
+                    <tr>
+                        <td>1-5</td>
+                        <td>All(Business)</td>
+                        <td>2500</td>
+                    </tr>
+                </table>
         
                 <div class="seating-plan">
                     <p><strong>Seating Plan:</strong></p>
@@ -160,6 +303,63 @@
                         <li>Extra Legroom Seats in Rows 1, 2, and near the emergency exits</li>
                     </ul>
                 </div>
+                <table class="table-style">
+                    <tr>
+                    <th>Row No</th>
+                    <th>Seat Type</th>
+                    <th>Rates</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Window</td>
+                        <td>2000</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Middle</td>
+                        <td>1500</td>
+                    </tr>
+                    <tr>
+                        <td>2,3</td>
+                        <td>All</td>
+                        <td>900</td>
+                    </tr>
+                    <tr>
+                        <td>4,5</td>
+                        <td>All</td>
+                        <td>800</td>
+                    </tr>
+                    <tr>
+                        <td>6-15</td>
+                        <td>All</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td>16-20</td>
+                        <td>Window</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td>16-20</td>
+                        <td>Middle</td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td>16-20</td>
+                        <td>All</td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <td>1-5</td>
+                        <td>Window/Business</td>
+                        <td>3000</td>
+                    </tr>
+                    <tr>
+                        <td>1-5</td>
+                        <td>All(Business)</td>
+                        <td>2500</td>
+                    </tr>
+                </table>
         
                 <div class="seating-plan">
                     <p><strong>Seating Plan:</strong></p>
