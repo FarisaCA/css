@@ -42,6 +42,7 @@ if ($conn->query($sql) === FALSE) {
 
 // Create the flight table if it doesn't exist
 $sql = "CREATE TABLE IF NOT EXISTS flight (
+    flight_id INT PRIMARY KEY AUTO_INCREMENT,
     flight_no VARCHAR(6), 
     departure VARCHAR(50) NOT NULL,
     d_date DATE NOT NULL,
@@ -50,8 +51,9 @@ $sql = "CREATE TABLE IF NOT EXISTS flight (
     a_date DATE NOT NULL,
     a_time TIME NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    status BOOLEAN DEFAULT true
+    st_atus BOOLEAN DEFAULT true
 )";
+
 
 if ($conn->query($sql) === FALSE) {
     die("Error creating table: " . $conn->error);

@@ -53,7 +53,7 @@
             }
 
         // Fetch and display books
-        $sql = "SELECT * FROM flight where `status`=true ";
+        $sql = "SELECT * FROM flight where `st_atus`=true ";
         $data = mysqli_query($conn, $sql);
         if (mysqli_num_rows($data) > 0) {  
             echo "<table border='5'>";
