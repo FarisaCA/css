@@ -134,6 +134,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Check if there are any results
         if ($result->num_rows > 0) {
             echo "<h4>Available Flights:</h4>";
+            echo "<style>
+            table {
+                display :flex;
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+            }
+
+            table, th, td {
+                border: 1px solid #ddd;
+            }
+
+            th, td {
+                padding: 12px;
+                text-align: left;
+            }
+
+            th {
+                background-color:#005bac ;
+                color: white;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            tr:hover {
+                background-color: #ddd;
+            }
+
+            button {
+                padding: 6px 12px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                cursor: pointer;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+
+            button:hover {
+                background-color: #45a049;
+            }
+          </style>";
             echo "<table border='1'>
                     <tr>
                         <th>Flight No</th>
@@ -144,6 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>Arrival Date</th>
                         <th>Arrival Time</th>
                         <th>Price</th>
+                        <th></th>
                     </tr>";
             // Fetch rows and output the details
             while ($row = $result->fetch_assoc()) {
@@ -155,8 +202,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <td>" . $row["arrival"] . "</td>
                         <td>" . $row["a_date"] . "</td>
                         <td>" . $row["a_time"] . "</td>
-                        <td>$" . $row["price"] . "</td>
+                        <td>" . $row["price"] . "</td>
+                        <td><button>View Details</button></td>
                       </tr>";
+                
             }
             echo "</table>";
         } else {
