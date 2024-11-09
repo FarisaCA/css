@@ -51,7 +51,7 @@ $sql = "CREATE TABLE IF NOT EXISTS flight (
     a_date DATE NOT NULL,
     a_time TIME NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    st_atus BOOLEAN DEFAULT true
+    `status` BOOLEAN DEFAULT true
 )";
 
 

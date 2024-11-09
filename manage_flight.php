@@ -32,28 +32,39 @@
         <?php
         require_once('connect.php');
         // Handle form submission
-        if (isset($_POST['submit'])) { 
+        if (isset($_POST['update'])) { 
+            $flight_id = $_POST['flight_id'];  // Get flight_id from the hidden input field
             $f_no = $_POST['fno'];
             $from = $_POST['from'];
             $d_date = $_POST['d_date'];
             $d_time = $_POST['d_time'];
             $to = $_POST['to'];
-            $a_date=$_POST['a_date'];
-            $a_time=$_POST['a_time'];
-            $price=$_POST['price'];
-
-                $sql = "INSERT INTO `flight` (`flight_no`, `departure`, `d_date`, `d_time`, `arrival`, `a_date`, `a_time`, `price`) 
-                VALUES ('$f_no', '$from', '$d_date', '$d_time', '$to', '$a_date', '$a_time', '$price')";        
-                $data = mysqli_query($conn, $sql);
-                if ($data) {
-                    echo "<script>alert('Record added');</script>";
-                } else {
-                    echo "<script>alert('Record invalid');</script>";
-                }
+            $a_date = $_POST['a_date'];
+            $a_time = $_POST['a_time'];
+            $price = $_POST['price'];
+            
+            // Update the flight record with the specified flight_id
+            $sql = "UPDATE `flight` SET 
+                    `flight_no` = '$f_no',
+                    `departure` = '$from',
+                    `d_date` = '$d_date',
+                    `d_time` = '$d_time',
+                    `arrival` = '$to',
+                    `a_date` = '$a_date',
+                    `a_time` = '$a_time',
+                    `price` = '$price' 
+                    WHERE `flight_id` = '$flight_id'";
+            
+            if ($conn->query($sql) === FALSE) {
+                die("Error updating value: " . $conn->error);
+            } else {
+                echo "<script>alert('Record updated successfully');</script>";
             }
+        }
+        
 
         // Fetch and display books
-        $sql = "SELECT * FROM flight where `st_atus`=true ";
+        $sql = "SELECT * FROM flight where `status`=true ";
         $data = mysqli_query($conn, $sql);
         if (mysqli_num_rows($data) > 0) {  
             echo "<table border='5'>";
@@ -88,7 +99,7 @@
         }
         if (isset($_POST['update'])) 
         { 
-            $flight_id=$_POST['filght_id'];
+            //$flight_id=$_POST['filght_id'];
             $f_no = $_POST['fno'];
             $from = $_POST['from'];
             $d_date = $_POST['d_date'];
