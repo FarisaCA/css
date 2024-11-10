@@ -217,7 +217,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     // If accessed directly, prompt for form submission
-    echo "Please submit the form to search for flights.";
+    echo "Please submit the form to search for flights";
 }
 
 // Close the connection

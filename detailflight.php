@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Flight Details Popup</title>
+    <title>Flight Details</title>
     <style>
         /* Basic styling */
         .popup {
@@ -48,7 +48,7 @@
 <body>
     <table border="1">
         <tr>
-            <th>Flight</th>
+            <th>Flight No</th>
             <th>Details</th>
         </tr>
         <tr>
