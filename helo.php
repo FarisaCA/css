@@ -33,8 +33,9 @@
                 <div class="option">
                     <label for="trip-type">Round Trip</label>
                     <select id="trip-type" onchange="toggleReturnDate()">
+                        <option default value="one-way">One Way</option>
                         <option value="round-trip">Round Trip</option>
-                        <option value="one-way">One Way</option>
+                        
                     </select>
                 </div>
 
