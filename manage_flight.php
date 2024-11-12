@@ -17,7 +17,7 @@
     
     <div class="div1">
         <h1>Add Flight</h1>
-        <form class="form1" action="" method="post" enctype="multipart/form-data">
+        <form class="form1" action="" method="post">
             <input class="input1" type="text" name="fno" placeholder="Flight No" required>
             <input class="input1" type="text" name="from" placeholder="From" required>
             <input class="input1" type="date" name="d_date" placeholder="Departure Date" required>
@@ -31,6 +31,29 @@
 
         <?php
         require_once('connect.php');
+        // Handle form submission for adding a new flight
+       if (isset($_POST['submit'])) {
+    $f_no = $_POST['fno'];
+    $from = $_POST['from'];
+    $d_date = $_POST['d_date'];
+    $d_time = $_POST['d_time'];
+    $to = $_POST['to'];
+    $a_date = $_POST['a_date'];
+    $a_time = $_POST['a_time'];
+    $price = $_POST['price'];
+    
+    // Insert new flight record
+    $sql = "INSERT INTO `flight` (`flight_no`, `departure`, `d_date`, `d_time`, `arrival`, `a_date`, `a_time`, `price`, `status`) 
+            VALUES ('$f_no', '$from', '$d_date', '$d_time', '$to', '$a_date', '$a_time', '$price', true)";
+    
+    if ($conn->query($sql) === FALSE) {
+        die("Error inserting new flight: " . $conn->error);
+    } else {
+        echo "<script>alert('New flight added successfully');</script>";
+    }
+}
+
+
         // Handle form submission
         if (isset($_POST['update'])) { 
             $flight_id = $_POST['flight_id'];  // Get flight_id from the hidden input field
@@ -83,7 +106,7 @@
                 echo"<input type='hidden'name='flight_id' value=" . $row['flight_id'] .">";
                 echo "<tr>";
                 echo "<td><input class='input2' type='text' name='fno' value=" . $row['flight_no'] ." required></td>";
-                echo "<td><input class='input2' type='text' name='from'value=". $row['departure'] ." required></td>";
+                echo "<td><input class='input2' type='string' name='from'value=". $row['departure'] ." required></td>";
                 echo "<td><input class='input2' type='date' name='d_date' value=" . $row['d_date'] . " required></td>";
                 echo "<td><input class='input2' type='time' name='d_time' value=".$row['d_time'] ." required></td>";
                 echo "<td><input class='input2' type='text' name='to' value=". $row['arrival'] . " required></td>";

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +32,7 @@
             <form class="flight-options-form" method="POST">
                 <div class="option">
                     <label for="trip-type">Round Trip</label>
-                    <select id="trip-type" name="trip-type">
+                    <select id="trip-type" onchange="toggleReturnDate()">
                         <option value="round-trip">Round Trip</option>
                         <option value="one-way">One Way</option>
                     </select>
@@ -42,17 +43,15 @@
                     <select id="class-type" name="class-type">
                         <option value="economy">Economy</option>
                         <option value="business">Business</option>
-                        <option value="first-class">First Class</option>
                     </select>
                 </div>
 
                 <div class="option">
-                    <label for="travelers">Traveler</label>
+                    <label for="travelers">Traveller</label>
                     <select id="travelers" name="travelers">
-                        <option value="1">1 Traveler</option>
-                        <option value="2">2 Travelers</option>
-                        <option value="3">3 Travelers</option>
-                        <option value="4">4 Travelers</option>
+                        <option value="1">1 Traveller</option>
+                        <option value="2">2 Travellers</option>
+                        <option value="3">3 Travellers</option>
                     </select>
                 </div>
 
@@ -60,8 +59,14 @@
                     <div class="option1">
                         <label for="from">From</label>
                         <select id="from" name="from" required>
-                            <option value="Delhi">Delhi</option>
-                            <option value="Agra civil Airport,kheria">Agra Civil Airport</option>
+                            <option value="Delhi">Delhi,Indiragandhi International Airport </option>
+                            <option value="Agra civil Airport,kheria">Agra,Agra Civil Airport,kheria</option>
+                            <option value="kochi">Kochi,kochi International Airport</option>
+                            <option value="pune">Pune,pune International Airport</option>
+                            <option value="bhubaneswar">Bhubaneswar,Biju Patnaik Airport</option>
+                            <option value="Agra civil Airport,kheria">Ahmedabad,Sardar vallabhbhai patel International Airport</option>
+                            <option value="chennai">Chennai,Chennai International Airport</option>
+                            <option value="Kozhikode">Kozhikode,Calicut International Airport</option>
                             <!-- Add other departure options -->
                         </select>
                     </div>
@@ -69,8 +74,14 @@
                     <div class="option1">
                         <label for="to">To</label>
                         <select id="to" name="to" required>
-                            <option value="Kozhikode">Kozhikode</option>
-                            <option value="Cochin International Airport">Cochin International Airport</option>
+                            <option value="bhubaneswar">Bhubaneswar,Biju Patnaik Airport</option>
+                            <option value="Agra civil Airport,kheria">Ahmedabad,Sardar vallabhbhai patel International Airport</option>
+                            <option value="chennai">Chennai,Chennai International Airport</option>
+                            <option value="Kozhikode">Kozhikode,Calicut International Airport</option>
+                            <option value="Delhi">Delhi,Indiragandhi International Airport</option>
+                            <option value="Agra civil Airport,kheria">Agra,Agra Civil Airport,kheria</option>
+                            <option value="kochi">kochi,kochi International Airport</option>
+                            <option value="pune">Pune,Pune International Airport</option>
                             <!-- Add other arrival options -->
                         </select>
                     </div>
@@ -81,15 +92,31 @@
                     </div>
 
                     <div class="option1">
-                        <label for="arrival">Arrival</label>
-                        <input type="date" id="arrival" name="arrival" required>
+                        <label for="return">Return</label>
+                        <input type="date" id="arrival" name="return" disabled>
+
+        <script>
+              function toggleReturnDate() {
+                var tripType = document.getElementById("trip-type").value;
+                var returnDate = document.getElementById("arrival");
+            
+                 // Enable return date input if "Round Trip" is selected, disable otherwise
+               if (tripType === "Round Trip") {
+                  returnDate.disabled = false;
+                } else {
+                   arrival.disabled = true;
+                   arrival.value = ''; // Clear return date when disabled
+               }
+               }
+        </script>
+
                     </div>
                 </div>
                 <button type="submit">Search Flight</button>
             </form>
         </div>
     </main>
-</body>
+    </body>
 </html>
 
 <?php
@@ -102,7 +129,7 @@ ini_set('display_errors', 1);
 
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect and sanitize input data
+   
     $tripType = isset($_POST['trip-type']) ? htmlspecialchars($_POST['trip-type']) : '';
     $classType = isset($_POST['class-type']) ? htmlspecialchars($_POST['class-type']) : '';
     $travelers = isset($_POST['travelers']) ? (int)$_POST['travelers'] : 1;
@@ -110,30 +137,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $to = isset($_POST['to']) ? htmlspecialchars($_POST['to']) : '';
     $departureDate = isset($_POST['departure']) ? htmlspecialchars($_POST['departure']) : '';
     $arrivalDate = isset($_POST['arrival']) ? htmlspecialchars($_POST['arrival']) : '';
-
+    
+   
     // Validate the inputs
     if (empty($from) || empty($to) || empty($departureDate) || empty($travelers)) {
         echo "Please fill in all required fields.";
     } else {
-        // Prepare SQL query
-        $sql = "SELECT flight_no, departure, d_date, d_time, arrival, a_date, a_time, price 
-                FROM `flight`
-                WHERE departure = ? AND arrival = ? ";
-        
-        // Prepare the statement and bind parameters
+        $sql = "SELECT * FROM `flight`
+        WHERE departure LIKE ? AND arrival LIKE ? AND d_date LIKE ?";
+          $from = "%$from%";
+          $to = "%$to%";
+          $departureDate="$departureDate";
+          $stmt = $conn->prepare($sql);
+          $stmt->bind_param("sss", $from, $to,$departureDate);
+          $stmt->execute();
+         $result = $stmt->get_result();
+
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
             echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
             exit;
         }
 
-        $stmt->bind_param("ss", $from, $to);
-        $stmt->execute();
-        $result = $stmt->get_result();
+      if ($result === false) {
+        echo "Error executing query: " . $stmt->error;
+      exit;
+      } else {
+       echo "Query executed successfully. Rows found: " . $result->num_rows;
+      }
 
+      
         // Check if there are any results
         if ($result->num_rows > 0) {
-            echo "<h4>Available Flights:</h4>";
+            echo "<h4>Available Flights :</h4>";
             echo "<style>
             table {
                 display :flex;
@@ -186,9 +222,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>Departure</th>
                         <th>Departure Date</th>
                         <th>Departure Time</th>
-                        <th>Arrival</th>
-                        <th>Arrival Date</th>
-                        <th>Arrival Time</th>
+                        <th>Return</th>
+                        <th>Return Date</th>
+                        <th>Return Time</th>
                         <th>Price</th>
                         <th></th>
                     </tr>";
@@ -216,11 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 } else {
-    // If accessed directly, prompt for form submission
+    
     echo "Please submit the form to search for flights";
 }
-
-// Close the connection
-$conn->close();
 ?>
-
