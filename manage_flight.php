@@ -23,8 +23,8 @@
             <input class="input1" type="date" name="d_date" placeholder="Departure Date" required>
             <input class="input1" type="time" name="d_time" placeholder="Departure time" required>
             <input class="input1" type="text" name="to" placeholder="To" required>
-            <input class="input1" type="date" name="a_date" placeholder="Arrival Date"required>
-            <input class="input1" type="time" name="a_time" placeholder="Arrival Time" required>
+            <input class="input1" type="date" name="a_date" placeholder="Return Date" required>
+            <input class="input1" type="time" name="a_time" placeholder="Return Time" required>
             <input class="input1" type="number" name="price" placeholder="Price" required>
             <input class="sub2" type="submit" name="submit" value="Submit">
         </form>
@@ -96,9 +96,9 @@
             echo "<th>Departure</th>";
             echo "<th>Departure Date</th>";
             echo "<th>Departure Time</th>";
-            echo "<th>Arrival</th>";
-            echo "<th>Arrival Date</th>";
-            echo "<th>Arrival Time</th>";
+            echo "<th>Return</th>";
+            echo "<th>Return Date</th>";
+            echo "<th>Return Time</th>";
             echo "<th>Price</th>";
             echo "</tr>";
             while ($row = mysqli_fetch_assoc($data)) {

@@ -32,8 +32,8 @@
             <form class="flight-options-form" method="POST">
                 <div class="option">
                     <label for="trip-type">Round Trip</label>
-                    <select id="trip-type" onchange="toggleReturnDate()">
-                        <option default value="one-way">One Way</option>
+                    <select id="trip-type">
+                        <option value="one-way">One Way</option>
                         <option value="round-trip">Round Trip</option>
                         
                     </select>
@@ -94,23 +94,7 @@
 
                     <div class="option1">
                         <label for="return">Return</label>
-                        <input type="date" id="arrival" name="return" disabled>
-
-        <script>
-              function toggleReturnDate() {
-                var tripType = document.getElementById("trip-type").value;
-                var returnDate = document.getElementById("arrival");
-            
-                 // Enable return date input if "Round Trip" is selected, disable otherwise
-               if (tripType === "Round Trip") {
-                  returnDate.disabled = false;
-                } else {
-                   arrival.disabled = true;
-                   arrival.value = ''; // Clear return date when disabled
-               }
-               }
-        </script>
-
+                        <input type="date" id="arrival" name="return" >
                     </div>
                 </div>
                 <button type="submit">Search Flight</button>

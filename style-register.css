@@ -8,12 +8,12 @@ body {
 }
 
 h3 {
-    text-align:right;
+    text-align:left;
     margin-bottom: 7px;
 }
 
 form {
-    text-align: right;
+    text-align: left;
     max-width: 355px;
     margin: auto;
     background: white;
@@ -31,7 +31,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"] {
-    width: 93%;
+    width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -56,6 +56,7 @@ button {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 button[type="submit"]:hover {

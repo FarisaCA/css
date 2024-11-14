@@ -1,8 +1,61 @@
+<?php
+
+@include './connect.php';
+
+session_start();
+
+if(isset($_POST['submit'])){
+
+   $email = $_POST['email'];
+   $pword = $_POST['pword'];
+
+   $select_man = " SELECT * FROM manager_reg WHERE email = '$email'";
+
+   $result = mysqli_query($conn, $select_man);
+
+   if(mysqli_num_rows($result) > 0){
+
+      $row = mysqli_fetch_array($result);
+
+   $select = " SELECT * FROM login WHERE email = '$email' && password = '$pword'";
+
+   $result = mysqli_query($conn, $select);
+
+   if(mysqli_num_rows($result) > 0){
+
+      $row = mysqli_fetch_array($result);
+
+      $_SESSION['email'] = $row['email'];
+      
+     if($row['user_type'] == 'admin'){
+
+         $_SESSION['admin_name'] = $row['name'];
+         header('location:./admin.php');
+
+      }else if($row['user_type'] == 'fmanager'){
+
+         $_SESSION['manager_name'] = $row['name'];
+         header('location:../Dashboard/M_dashboard/manager_dashboard.php');
+
+      }else if($row['user_type'] == 'user'){
+
+         $_SESSION['user_name'] = $row['name'];
+         header('location:../Dashboard/Stu_dashboard/stu_dashboard.php');
+
+      }
+   }
+   }else{
+      $error[] = 'incorrect email or password!';
+   }
+   
+};
+?>
+
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body{
@@ -26,43 +79,9 @@
         <label>password: </label><br>
         <input type="password" name="pword" placeholder="Enter your password" required ><br>
         <button type="submit" name="submit">LOGIN</button>
-        <p>Not Registered Yet? <a href="register.html">Register</a><p><br>
+        <p>Not Registered Yet? <a href="user_register.php">Register</a><p><br>
 </form>
     </div>
     </body>
 </html>
-<?php
-require_once("connect.php");
-if(isset($_POST['submit'])) 
-{
-$email=$_POST['email'];
-$password=$_POST['pword'];
-if($email=="farisa123@gmail.com" && $password == "683547"){
-    header('Location:admin_dashboard.php');
-    exit();
-}
-else{
-$sql="SELECT * FROM `user` WHERE uemail = '$email' AND  `password` = '$password' ";
-$data=mysqli_query($conn,$sql);
-    $users=[];
-    while($row=mysqli_fetch_array($data))
-    {
-        if(($email==$row['uemail'])&&($password==$row['password']))
-        {
-            $users=$row;
-        }
-    }
-    if(!$users)
-    {
-        echo "<script>alert('invalid user.check the email and password you entered .if you are not registered,please register.')</script>";
-    }
-    else
-    {
-        $user_id=$users['user_id'];
-        $_SESSION['user_id']=$user_id;
-        header('Location:dashboard_user.html');
-        exit();
-    }}
-}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-?>
+

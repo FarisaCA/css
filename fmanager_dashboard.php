@@ -1,30 +1,28 @@
 
-<?php 
-// Start session
-require_once('connect.php');
-/*$sql="SELECT * FROM `admins`";
-// Check if user is logged in (this is just an example check)
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: admin_dashboard.php"); // Redirect to login page
-    exit();
-}*/
+<?php
+ 
+ session_start();
+ 
+ if(isset($_SESSION['manager_name'])){
+    header('location:./login.php');
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Airline Reservation System</title>
+    <title>FLIGHT MANAGER Dashboard - Airline Reservation System</title>
     <link rel="stylesheet" href="admin_style.css">
 </head>
 <body>
     <header>
-        <h1>Admin Dashboard</h1>
+        <h1>Flight Manager Dashboard</h1>
         <nav>
             <ul>
                 <li><a href="manage_flight.php">Manage Flights</a></li>
-                <li><a href="#users">Manage Users</a></li>
-                <li><a href="#bookings">Manage Bookings</a></li>
+                <!-- <li><a href="#users">Manage Users</a></li> -->
+                <li><a href="#bookings">Manage Booking</a></li>
                 <!--li><a href="#bookings">Manage Seat</a></li-->
                 <li><a href="logout.php" class="logout-button">Logout</a></li>
                 
@@ -47,11 +45,11 @@ if (!isset($_SESSION['admin_logged_in'])) {
                     </tr>
                 </thead-->
                 <tbody>
-                    <!--?php
+                    <!-- ?php
                     // Include database connection
                     include 'admin_script.php';
                     loadFlights();
-                    ?-->
+                    ? -->
                 </tbody>
             </table>
         </section>
