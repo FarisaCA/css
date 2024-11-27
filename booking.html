@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Booking</title>
+  <link rel="stylesheet" href="./css/booking.css">
+  <style>
+     .right-vertical-aligned {
+      position: absolute;
+            right: 100px;               /* Moves the image to the right side */
+            top: 94%;               /* Vertically centers the image */
+            transform: translateY(-50%); /* Adjusts position to be exactly centered */
+            max-width: 50%;         /* Adjusts width as needed */
+            height: auto;
+            border-radius: 64px;
+        }
+        span.brand{
+          text-size-adjust: 40px;
+        }
+  </style>
+</head>
+<body>
+
+  <div class="top">
+    <h1 class="brand">FIFA AIRLINES</h1>
+    <a href="#">Home</a>
+    <a href="#">Login</a>
+    <button class="login-button">Login</button>
+   
+  </div>
+   
+  
+  <img src="airplane-flight.png" alt="Seat" class="right-vertical-aligned">
+
+  <div class="form-container">
+    <h2>Book Your Flight</h2>
+    <form>
+      <div class="input">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="radio-group">
+                 <label class="radio-container">Male
+                     <input type="radio" name="gender" value="male" checked>
+                     <span class="checkmark"></span>
+                 </label>
+                 <label class="radio-container">Female
+                    <input type="radio" name="gender" value="female">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">Other
+                     <input type="radio" name="gender" value="other" >
+                     <span class="checkmark"></span>
+                 </label>
+            </div>
+
+      <div class="input">
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" required>
+      </div>
+       
+      <div class="input">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="input">
+      <label for="seat">Seat:</label>
+      <a href="seat.html"><button>Select</button></a>
+      </div>
+
+      <div class="input">
+      <label for="price">Price:</label>
+      <input type="number" id="price" name="price" required>
+      </div>
+
+      <button type="submit">Book</button>
+    </form>
+  </div>
+</body>
+</html>
