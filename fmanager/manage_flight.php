@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>  
-    <link rel="stylesheet" href="./css/manageflight.css">
+    <link rel="stylesheet" href="../css/manageflight.css">
     <title>Manage Flight</title>
     <style>
         h1{
             color:white;
             /* padding:5px; */
-            margin-left:-1080px;
+            /* margin-left:-1080px; */
             font-size:190%;
+        }
+        li{
+            align-items:right;
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <!-- <div class="navbar"> -->
             <h1>FIFA AIRLINES</h1>
-            <!-- <div class="link"> -->
-            <!-- <a href="admin_dashboard.php">Home</a> -->
-            <!-- </div> -->
-        <!-- </div> -->
+            <a>Home</a>
     </nav>
     
     <div class="div1">
         <h2>Add Flight</h2>
         <form class="form1" action="" method="post">
             <input class="input1" type="text" name="fno" placeholder="Flight No" required>
-            <input class="input1" type="text" name="from" placeholder="From" required>
+            <input class="input1" type="textarea" name="from" placeholder="From" required>
             <input class="input1" type="datetime-local" name="d_datetime" placeholder="departure(date&time)" required>
             <!-- <input class="input1" type="date" name="d_date" placeholder="Departure Date" required>
             <input class="input1" type="time" name="d_time" placeholder="Departure time" required> -->
-            <input class="input1" type="text" name="to" placeholder="To" required>
+            <input class="input1" type="textarea" name="to" placeholder="To" required>
             <input class="input1" type="datetime-local" name="r_datetime" placeholder="arrival(date&time)" required>
             <!-- <input class="input1" type="date" name="a_date" placeholder="Return Date" required>
             <input class="input1" type="time" name="a_time" placeholder="Return Time" required> -->
@@ -38,8 +37,7 @@
             <input class="input1" type="number" name="price" placeholder="Price" required>
             <input class="sub2" type="submit" name="submit" value="Submit">
         </form>
-
-        <?php
+    <?php
         require_once('connect.php');
         // Handle form submission for adding a new flight
        if (isset($_POST['submit'])) {
@@ -130,7 +128,7 @@
                 echo"<input type='hidden'name='flight_id' value=" . $row['flight_id'] .">";
                 echo "<tr>";
                 echo "<td><input class='input2' type='text' name='fno' value=" . htmlspecialchars($row['flight_no'], ENT_QUOTES) ." required></td>";
-                echo "<td><input class='input2' type='string' name='from'value=". htmlspecialchars($row['departure'], ENT_QUOTES) ." required></td>";
+                echo "<td style='width: 15%;'><input class='input2' type='textarea' name='from' value=" . htmlspecialchars($row['departure'], ENT_QUOTES) . "' required></td>";
 
                 $d_datetime = new DateTime($row['d_datetime']);
                 $d_datetime_formatted = $d_datetime->format('Y-m-d\TH:i');
@@ -138,7 +136,7 @@
 
                 // echo "<td><input class='input2' type='date' name='d_date' value=" . $row['d_date'] . " required></td>";
                 // echo "<td><input class='input2' type='time' name='d_time' value=".$row['d_time'] ." required></td>";
-                echo "<td><input class='input2' type='text' name='to' value=". htmlspecialchars($row['arrival'], ENT_QUOTES) . " required></td>";
+                echo "<td style='width: 15%;'><input class='input2' type='textarea' name='to' value='" . htmlspecialchars($row['arrival'], ENT_QUOTES) . "' required></td>";
 
                 $r_datetime = new DateTime($row['r_datetime']);
                 $r_datetime_formatted = $r_datetime->format('Y-m-d\TH:i');
@@ -189,8 +187,7 @@
           header("Location: " . $_SERVER['PHP_SELF']);
     exit();
     }
-
-        ?>
+ ?>
     </div>
 </body>
 </html>

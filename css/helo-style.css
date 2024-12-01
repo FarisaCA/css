@@ -8,6 +8,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #fff;
     background-image: url('/airline/air.jpeg');
+    background-size: cover;
 }
 
 .header-container {
@@ -155,7 +156,6 @@ select:hover {
 
 button {
     font-size: 16px;              /* Set the font size */
-  
     color: white;
     padding: 17px 29px; /* Adjust padding for better spacing */
     border-radius: 5px;

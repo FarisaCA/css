@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,7 +112,6 @@
     </main>
     </body>
 </html>
-
 <?php
 // Start the session and connect to the database
 require_once('connect.php');
@@ -245,6 +243,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     
-    echo "Please submit the form to search for flights";
+    echo " Search & Book Flights !";
 }
 ?>

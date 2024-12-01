@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FLIGHT MANAGER Dashboard - Airline Reservation System</title>
-    <link rel="stylesheet" href="admin_style.css">
+    <link rel="stylesheet" href="../css/fmanager_style.css">
 </head>
 <body>
     <header>
@@ -23,7 +23,7 @@
                 <li><a href="manage_flight.php">Manage Flights</a></li>
                 <!-- <li><a href="#users">Manage Users</a></li> -->
                 <li><a href="#bookings">Manage Booking</a></li>
-                <!--li><a href="#bookings">Manage Seat</a></li-->
+                <li><a href="#bookings">Manage Users</a></li>
                 <li><a href="logout.php" class="logout-button">Logout</a></li>
                 
             </ul>
