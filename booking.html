@@ -5,29 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flight Booking</title>
   <link rel="stylesheet" href="./css/booking.css">
+
   <style>
      .right-vertical-aligned {
-      position: absolute;
-            right: 100px;               /* Moves the image to the right side */
-            top: 94%;               /* Vertically centers the image */
-            transform: translateY(-50%); /* Adjusts position to be exactly centered */
-            max-width: 50%;         /* Adjusts width as needed */
+            position: absolute;
+            right: 100px;               
+            top: 104%;               
+            transform: translateY(-50%); 
+            max-width: 50%;        
             height: auto;
             border-radius: 64px;
         }
         span.brand{
           text-size-adjust: 40px;
         }
+      select 
+      {
+           padding: 5px;
+           font-size: 14px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+           outline: none;
+           min-width: 60px;
+           background-color: white;
+      }
+      h1{
+        font-size:190%;
+        color:white;
+        margin-left: 10px;
+      }
   </style>
+
 </head>
 <body>
 
   <div class="top">
     <h1 class="brand">FIFA AIRLINES</h1>
-    <a href="#">Home</a>
-    <a href="#">Login</a>
-    <button class="login-button">Login</button>
-   
+    <!-- <a href="#">Home</a> -->
+    <!-- <button class="login-button">Login</button> -->
   </div>
    
   
@@ -41,7 +56,7 @@
       <input type="text" id="name" name="name" required>
       </div>
 
-      <div class="radio-group">
+      <!-- <div class="radio-group">
                  <label class="radio-container">Male
                      <input type="radio" name="gender" value="male" checked>
                      <span class="checkmark"></span>
@@ -54,29 +69,69 @@
                      <input type="radio" name="gender" value="other" >
                      <span class="checkmark"></span>
                  </label>
-            </div>
-
-      <div class="input">
-      <label for="dob">Date of Birth:</label>
-      <input type="date" id="dob" name="dob" required>
-      </div>
+            </div> -->
        
       <div class="input">
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
       </div>
+
+      <div class="input">
+        <label for="flight">Flight:</label>
+        <input type="text" id="flight" name="flight" required>
+        </div>
       
+        <div class="input">
+          <label for="class">Class:</label>
+          <select class="select">
+              <option value="economy">Economy</option>
+              <option value="business">Business</option>
+          </select>
+      </div>  
+
       <div class="input">
-      <label for="seat">Seat:</label>
-      <a href="seat.html"><button>Select</button></a>
+        <label for="letters">Seat:</label>
+        <!-- Dropdown for alphabets -->
+        <select  name="letters">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+        </select>
+
+        <!-- Dropdown for numbers -->
+        <select  name="numbers">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+        </select>
       </div>
 
       <div class="input">
-      <label for="price">Price:</label>
-      <input type="number" id="price" name="price" required>
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
       </div>
 
-      <button type="submit">Book</button>
+      <button type="submit">Next</button>
     </form>
   </div>
 </body>

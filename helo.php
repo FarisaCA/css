@@ -5,7 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airline Reservation System</title>
-    <link rel="stylesheet" href="/css/helo-style.css"> 
+    <link rel="stylesheet" href="css/helo-style.css"> 
+    <style>
+        .options-container{
+            border: 2px solid #005eb8;
+            background-color: rgba(0, 0, 0, 0.07);
+        }
+        h1{
+            color:white;
+        }
+        </style>
 </head>
 <body>
     <header>
@@ -30,16 +39,15 @@
 
         <div class="options-container">
             <form class="flight-options-form" method="POST">
-                <div class="option">
+               <!-- <div class="option">
                     <label for="trip-type">Round Trip</label>
                     <select id="trip-type">
                         <option value="one-way">One Way</option>
                         <option value="round-trip">Round Trip</option>
-                        
                     </select>
-                </div>
+                </div> -->
 
-                <div class="option">
+                <!-- <div class="option">
                     <label for="class-type">Class</label>
                     <select id="class-type" name="class-type">
                         <option value="economy">Economy</option>
@@ -54,7 +62,7 @@
                         <option value="2">2 Travellers</option>
                         <option value="3">3 Travellers</option>
                     </select>
-                </div>
+                </div> -->
 
                 <div class="option1-container">
                     <div class="option1">
@@ -92,14 +100,16 @@
                         <input type="date" id="departure" name="departure" required>
                     </div>
 
-                    <div class="option1">
+                    <!--<div class="option1">
                         <label for="return">Return</label>
                         <input type="date" id="arrival" name="return" >
-                    </div>
+                    </div> -->
                 </div>
-                <button type="submit">Search Flight</button>
+               
             </form>
+           
         </div>
+        <button>Search Flight</button>
     </main>
     </body>
 </html>
@@ -202,17 +212,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
           </style>";
             echo "<table border='1'>
-                    <tr>
-                        <th>Flight No</th>
-                        <th>Departure</th>
-                        <th>Departure Date</th>
-                        <th>Departure Time</th>
-                        <th>Return</th>
-                        <th>Return Date</th>
-                        <th>Return Time</th>
-                        <th>Price</th>
-                        <th></th>
-                    </tr>";
+            <tr>
+               <th>Departure</th>
+               <th>Destination</th>
+               <th>Departure (Date & Time)</th>
+               <th>Baggage Details</th>
+               <th>Price</th>
+               <th></th>
+           </tr>";
             // Fetch rows and output the details
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>

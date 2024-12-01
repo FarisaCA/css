@@ -6,6 +6,13 @@
     <title>User-Dashboard</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        h1{
+            color:white;
+        }
+        a {
+            color: inherit; /* Inherit color from parent element */
+            text-decoration: none; /* Remove underline */
+        }
         body {
             background-image:url('./airdash.jpg');
             background-size: cover;
@@ -51,8 +58,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #fff;
+            background-color:rgba(0,0,0,0.3);
             padding: 10px 20px;
+            margin-right: -20px;
+            margin-top:-6px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
     </style>
@@ -64,7 +73,7 @@
         <ul>
             <li><a href="http://localhost/farisa/css/helo.html"><i class="fa fa-home"></i>Home</a></li>
             <li><i class="fas fa-user"></i> My Profile</li>
-            <li><i class="fas fa-plane"></i> Book Tickets</li>
+            <li><a href="booking.html"><i class="fas fa-plane"></i> Book Tickets</a></li>
             <li><i class="fas fa-book"></i> My Bookings</li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
@@ -72,7 +81,7 @@
 
      <div class="content">
         <div class="header">
-            <h1>Airline Reservation System</h1>
+            <h1>FIFA AIRLINES</h1>
             <!--<input type="text" placeholder="Search...">-->
         </div>
         <!--
