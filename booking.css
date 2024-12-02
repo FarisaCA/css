@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-image: url('./flight.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 0px;
+}
+
+form{
+    display: grid;
+    row-gap: 15px; /* Space between rows */
+    column-gap: 10px; /* Space between labels and inputs */
+    grid-template-columns: auto 1frs;
+}
+
+.form-container {
+    max-width: 355px;                                                                   
+    margin-left: 150px;
+    background-color: #ffffff;
+    opacity: 0.8;
+    padding: 20px;
+    margin-top:73px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.seat_img{
+    position: absolute;
+    right: 100px;
+    width: 670px;
+    top: 700px;
+    border-radius: 50px;
+}
+
+.navbar{
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(0, 143, 209, 0.447);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: auto;
+    align-items: left;
+}
+
+.home_btn{
+    color: rgb(255, 255, 255);
+    font-weight: 800;
+    text-decoration: none;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.4);
+    margin: 13px;
+    margin-left: 40px;
+}
+.home_btn:hover{
+    color: rgb(0, 200, 255);
+}
+
+.brand_logo{
+    margin: 0;
+    font-size: 40px;
+}
+
+h2 {
+    text-align: center;
+   
+}
+
+.profile-section, .loyalty-section, .booking-section {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+select 
+      {
+           padding: 5px;
+           font-size: 14px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+           outline: none;
+           min-width: 60px;
+           background-color: white;
+      }
+    
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="number"],
+input[type="class"]
+{
+    width: 97%;
+    padding: 12px 11px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+button {
+    padding: 10px 15px;
+    background-color: #16b423;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* button {
+    background-color: #2ba50d;
+    margin-left: 10px;
+} */
+
+.cancel-btn:hover {
+    background-color: #c82333;
+}
+.radio-group label{
+    display: inline-block;
+    margin-right: 15px
+}
+
