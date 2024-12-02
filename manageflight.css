@@ -1,8 +1,33 @@
-*{
+body{
     height: min-content;
-    margin:0;
-    padding:0;
+    background-image: url('./bg.jpg');
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* margin:0; */
 }
+h2{
+    color:#007bc7;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 8px;
+    word-wrap: break-word;
+}
+
+.input2 {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+
 
 .nanbar{
     width: 100%;
@@ -13,16 +38,26 @@
     align-items: center;
 
 }
-.navbar{
-    
-    height: 80px;
-    background-color:rgb(132, 189, 236);
+.navbar {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center;
-
+    justify-content: space-between; /* Push elements to opposite sides */
+    align-items: center; /* Vertically align items */
+    padding: 20px 40px; /* Add some padding for spacing */
+    background-color: #007bc7; /* Optional: background color */
+    margin:-8px;
 }
+
+.navbar h1 {
+    margin: 0; /* Remove default margin */
+}
+
+.navbar a {
+    text-decoration: none; /* Remove underline from link */
+    color: #ffffff; /* Text color */
+    font-size: 1.2rem; /* Adjust font size */
+    font-weight: bold;
+}
+
 .link{
     width: 40%;
     height: 80px;
@@ -31,18 +66,20 @@
     align-items: center;
     text-align: center;
 }
-.link a{
+/* a{
     text-decoration: none;
     font-family: bold;
-    color: rgb(20, 8, 86);
-    font-size: 20px;
-}
-a{
+    color: rgb(255, 255, 255);
+    font-size:20px;
+    margin-right:20px;
+} */
+/* a{
     text-decoration: none;
-    font-family: bold;
-    color: rgb(45, 4, 68);
-    font-size: 30px;
-}
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    /* font-size: 30px; 
+}*/
 .form1{
     /* background-color: rgb(125, 183, 183); */
     width: 400px;
@@ -66,81 +103,33 @@ a{
     background-size: contain;
     height: min-content;
 }
-.input1{
-    
+.input1 {
+    width: 100%;  /* Ensure it takes up full width */
     height: 40px;
-    width: 600px;
     padding-left: 2px;
     margin: 5px;
     outline: none;
-    color:black;
- 
+    color: black;
+    box-sizing: border-box; /* Include padding within width */
 }
+
 /* .input2{
     background-color: rgb(27, 125, 182);
 } */
-.sub2{
+.sub2 {
     margin: 20px;
-    height:40px ;
-    width: 400px;
+    height: 40px;
+    width: 100%;
     background-color: rgb(55, 174, 207);
-
 }
+
 .sub2:hover{
     color: rgb(166, 0, 255);
     background-color: aqua;
     border: none;
 }
-*{
-    margin: 0;
-    padding: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;/
-}
-.ViewCandidatesNav{
-    height: 70px;
-    background-color: rgb(10, 108, 153);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    padding-left: 10px;
-}
-.ViewCandidatesNav h1{
-    color: white;
-}
-.ViewCandidatesNavContainer{
-    width: 80%;
-    height: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    flex-direction: row;
-    padding-right: 10px;
-}
-.ViewCandidatesNavContainer a{
-    color: white;
-    margin-left: 15px;
-    text-decoration: none;
-    font-size: 22px;
-}
-.ViewCandidatesNavContainer a:hover{
-    text-decoration: underline;
-}
-.ViewCandidatesBodyContainer{
-    background-size: 100%;
-    width: 70%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    /* justify-content: center; */
-    color: white;
-}
-.ViewCandidatesBodyContainer h1{
-    font-size: 45px;
-    text-decoration: underline;
-}
-th {
+
+/* th {
     width: 50px;  
     height: 35px;
     color: white;
@@ -157,16 +146,23 @@ td {
 }
 
 table {
-    width: 100%; 
+    width: 101%; 
     height: auto;
     margin-top: 30px;
     background-color: rgb(27, 125, 182);
     border-color: white;
     border-collapse: collapse;
-}
+    table-layout: auto; 
+    overflow: auto; 
+} */
 
-td {
-    padding: 5px; 
+/* td .input2 {
+    width: 100%;  
+    height: 100%; 
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    box-sizing: border-box; 
 }
 
 .input2 {
@@ -175,8 +171,13 @@ td {
     border: none; 
     background-color: transparent; 
     color: inherit; 
-    box-sizing: border-box; /* Ensures padding is included within the width */
-    /*overflow: hidden;*/ 
+    box-sizing: border-box; 
+    /*overflow: hidden;
+} */
+
+textarea.input2 {
+    resize: vertical; /* Allow resizing vertically */
+    min-height: 80px; /* Ensure textarea has a minimum height */
 }
 
 td button {
@@ -191,22 +192,21 @@ td button:hover {
     color: rgb(6, 220, 220);
     background-color: white;
 }
+/* table {
+    overflow-x: auto;
+} */
 
-.NavHomeImage{
-    width: 40px;
-    height: 20px;
-    margin-bottom: -3px;
-    margin-right: 3px;
-}
-.NavAddCanImage{
-    width: 23px;
-    height: 23px;
-    margin-bottom: -4px;
-    margin-right: 3px;
-}
-.NavViewCanImage{
-    width: 23px;
-    height: 23px;
-    margin-bottom: -4px;
-    margin-right: 3px;
+/* Add some space inside the table cells */
+/* td {
+    padding: 10px;
+} */
+
+td input, td textarea {
+    width: 100%;  /* Ensure input takes up the full width of the cell */
+    height: 100%; /* Ensure input takes up the full height of the cell */
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    box-sizing: border-box; /* Include padding within the width and height */
+    padding: 5px;
 }

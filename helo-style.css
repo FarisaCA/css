@@ -7,6 +7,8 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #fff;
+    background-image: url('/airline/air.jpeg');
+    background-size: cover;
 }
 
 .header-container {
@@ -27,7 +29,9 @@ nav ul {
 
 nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin-left:1035px;
+    font-weight: bold;
+    font-size: larger;
 }
 
 nav ul li a {
@@ -37,8 +41,12 @@ nav ul li a {
 
 .search-container {
     background-color: #007bc7;
-    padding: 30px;
+    padding: 20px;
     text-align: center;
+}
+
+.search-container h1{
+    font-size:x-large;
 }
 
 .search-form {
@@ -96,18 +104,22 @@ footer {
 
 .options-container,
 .option1-container {
+    /* border: 2px solid #4CAF50; */
+    background-color: rgba(0, 0, 0, 0);
     display: flex;
+    /* margin: 2px 2px 2px 2px; */
     justify-content: space-around;
-    margin-top: 15px;
-    padding: 15px;
-    background-color: #ffffff;
+    margin-top: 12px;
+    padding: 14px 0px 24px ;
+    margin-left:90px;
+    margin-right: 90px;
+    /* background-color: #ffffff; */
     border-radius: 8px;
     flex-wrap: wrap;  /* Added to allow wrapping */
+    gap:196px;
+    margin-bottom: 50px; 
 }
 
-.options-container {
-    margin-bottom: 50px;  /* Space between rows */
-}
 
 .flight-options-form,
 .option1-form {
@@ -135,10 +147,11 @@ footer {
 
 select,
 input {
-    padding: 10px;
+    margin: 12px;      
+    padding: 15px 15px 15px 15px;
     font-size: 16px;
     width: 150px;
-    border: 1px solid #ccc;
+    border: 1px solid #383838;
     border-radius: 4px;
     background-color: #f9f9f9;
 }
@@ -148,13 +161,17 @@ select:hover {
 }
 
 button {
+    font-size: 16px;              /* Set the font size */
     color: white;
-    padding: 10px 20px; /* Adjust padding for better spacing */
+    padding: 11px 17px; /* Adjust padding for better spacing */
     border-radius: 5px;
     border: none;
     cursor: pointer;
     background-color: rgb(58, 153, 3);
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: absolute;
+    right: 150px;
+    top:380px;
 }
 .button-container {
     display: flex;

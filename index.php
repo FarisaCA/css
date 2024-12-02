@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airline Reservation System</title>
     <link rel="stylesheet" href="helo-style.css"> 
+    <style>
+        .options-container{
+            border: 2px solid #005eb8;
+            background-color: rgba(0, 0, 0, 0.07);
+        }
+        h1{
+            color:white;
+        }
+        </style>
 </head>
 <body>
     <header>
@@ -13,10 +21,7 @@
             <h1>FIFA AIRLINES</h1>
             <nav>
                 <ul>
-                    <li><a href="#">Flights</a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
+                    <!-- <li><a href="">Flights</a></li> -->
                     <li><a href="login.php">Login</a></li>
                 </ul>
             </nav>
@@ -30,16 +35,15 @@
 
         <div class="options-container">
             <form class="flight-options-form" method="POST">
-                <div class="option">
+               <!-- <div class="option">
                     <label for="trip-type">Round Trip</label>
                     <select id="trip-type">
                         <option value="one-way">One Way</option>
                         <option value="round-trip">Round Trip</option>
-                        
                     </select>
-                </div>
+                </div> -->
 
-                <div class="option">
+                <!-- <div class="option">
                     <label for="class-type">Class</label>
                     <select id="class-type" name="class-type">
                         <option value="economy">Economy</option>
@@ -54,7 +58,7 @@
                         <option value="2">2 Travellers</option>
                         <option value="3">3 Travellers</option>
                     </select>
-                </div>
+                </div> -->
 
                 <div class="option1-container">
                     <div class="option1">
@@ -92,18 +96,17 @@
                         <input type="date" id="departure" name="departure" required>
                     </div>
 
-                    <div class="option1">
+                    <!--<div class="option1">
                         <label for="return">Return</label>
                         <input type="date" id="arrival" name="return" >
-                    </div>
+                    </div> -->
                 </div>
-                <button type="submit">Search Flight</button>
+                <button>Search Flight</button>
             </form>
         </div>
     </main>
     </body>
 </html>
-
 <?php
 // Start the session and connect to the database
 require_once('connect.php');
@@ -115,24 +118,25 @@ ini_set('display_errors', 1);
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
-    $tripType = isset($_POST['trip-type']) ? htmlspecialchars($_POST['trip-type']) : '';
-    $classType = isset($_POST['class-type']) ? htmlspecialchars($_POST['class-type']) : '';
-    $travelers = isset($_POST['travelers']) ? (int)$_POST['travelers'] : 1;
+    // $tripType = isset($_POST['trip-type']) ? htmlspecialchars($_POST['trip-type']) : '';
+    // $classType = isset($_POST['class-type']) ? htmlspecialchars($_POST['class-type']) : '';
+    // $travelers = isset($_POST['travelers']) ? (int)$_POST['travelers'] : 1;
     $from = isset($_POST['from']) ? htmlspecialchars($_POST['from']) : '';
     $to = isset($_POST['to']) ? htmlspecialchars($_POST['to']) : '';
     $departureDate = isset($_POST['departure']) ? htmlspecialchars($_POST['departure']) : '';
-    $arrivalDate = isset($_POST['arrival']) ? htmlspecialchars($_POST['arrival']) : '';
+    // $arrivalDate = isset($_POST['arrival']) ? htmlspecialchars($_POST['arrival']) : '';
     
    
     // Validate the inputs
-    if (empty($from) || empty($to) || empty($departureDate) || empty($travelers)) {
+    if (empty($from) || empty($to) || empty($departureDate)) {
         echo "Please fill in all required fields.";
     } else {
-        $sql = "SELECT * FROM `flight`
-        WHERE departure LIKE ? AND arrival LIKE ? AND d_date LIKE ?";
+        $sql = "SELECT flight_no, departure, d_datetime, arrival, baggage, price
+        FROM `flight`
+        WHERE departure LIKE ? AND arrival LIKE ? AND d_datetime LIKE ?";
           $from = "%$from%";
           $to = "%$to%";
-          $departureDate="$departureDate";
+          $departureDate="%$departureDate%";
           $stmt = $conn->prepare($sql);
           $stmt->bind_param("sss", $from, $to,$departureDate);
           $stmt->execute();
@@ -144,12 +148,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
 
-      if ($result === false) {
-        echo "Error executing query: " . $stmt->error;
-      exit;
-      } else {
-       echo "Query executed successfully. Rows found: " . $result->num_rows;
-      }
+    //   if ($result === false) {
+    //     echo "Error executing query: " . $stmt->error;
+    //   exit;
+    //   } else {
+    //    echo "Query executed successfully. Rows found: " . $result->num_rows;
+    //   }
 
       
         // Check if there are any results
@@ -157,7 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<h4>Available Flights :</h4>";
             echo "<style>
             table {
-                display :flex;
+                
                 width: 100%;
                 border-collapse: collapse;
                 margin: 20px 0;
@@ -202,31 +206,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
           </style>";
             echo "<table border='1'>
-                    <tr>
-                        <th>Flight No</th>
-                        <th>Departure</th>
-                        <th>Departure Date</th>
-                        <th>Departure Time</th>
-                        <th>Return</th>
-                        <th>Return Date</th>
-                        <th>Return Time</th>
-                        <th>Price</th>
-                        <th></th>
-                    </tr>";
+            <tr>
+               <th>Flight No</th>
+               <th>Departure</th>
+               <th>Departure (Date & Time)</th>
+               <th>Destination</th>
+               <th>Baggage Details</th>
+               <th>Price</th>
+               <th></th>
+           </tr>";
             // Fetch rows and output the details
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>
                         <td>" . $row["flight_no"] . "</td>
                         <td>" . $row["departure"] . "</td>
-                        <td>" . $row["d_date"] . "</td>
-                        <td>" . $row["d_time"] . "</td>
+                        <td>" . $row["d_datetime"] . "</td>
                         <td>" . $row["arrival"] . "</td>
-                        <td>" . $row["a_date"] . "</td>
-                        <td>" . $row["a_time"] . "</td>
+                        <td>" . $row["baggage"] . "</td>
                         <td>" . $row["price"] . "</td>
-                        <td><button>View Details</button></td>
-                      </tr>";
-                
+                        <td><a href='login.php'>Login to continue</a></td>
+                        <tr>";
             }
             echo "</table>";
         } else {
@@ -238,6 +237,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     
-    echo "Please submit the form to search for flights";
+    echo "Search & Book Flights !";
 }
 ?>
