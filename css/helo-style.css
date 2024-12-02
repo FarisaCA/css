@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #fff;
 }
 
 .header-container {
@@ -47,16 +47,15 @@ nav ul li a {
     flex-wrap: wrap;
     justify-content: center;
     border-radius: 8px;
-
-
 }
 
 .form-group {
     margin: 10px;
-    color:   #0358a8; 
+    color: #0358a8;
 }
 
-.form-group input[type="text"], .form-group input[type="date"] {
+.form-group input[type="text"],
+.form-group input[type="date"] {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -71,15 +70,6 @@ nav ul li a {
 
 .checkbox-group input {
     margin-right: 5px;
-}
-
-.btn {
-    background-color: #d9534f;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .promo-section {
@@ -104,33 +94,47 @@ footer {
     bottom: 0;
 }
 
-.options-container {
+.options-container,
+.option1-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 15px;
+    padding: 15px;
     background-color: #ffffff;
     border-radius: 8px;
+    flex-wrap: wrap;  /* Added to allow wrapping */
 }
 
-.flight-options-form {
+.options-container {
+    margin-bottom: 50px;  /* Space between rows */
+}
+
+.flight-options-form,
+.option1-form {
     display: flex;
     gap: 20px;
 }
 
-.option {
+.option,
+.option1 {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.option label {
+.option label,
+.option1 label {
     font-size: 16px;
     margin-bottom: 8px;
     color: #005bac;
 }
 
-select {
+.option1 label {
+    color: #00196d;
+}
+
+select,
+input {
     padding: 10px;
     font-size: 16px;
     width: 150px;
@@ -142,4 +146,20 @@ select {
 select:hover {
     cursor: pointer;
 }
+
+button {
+    color: white;
+    padding: 10px 20px; /* Adjust padding for better spacing */
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(58, 153, 3);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Moves the button to the right */
+    width: 93%; /* Ensures the button container takes full width */
+}
+
 

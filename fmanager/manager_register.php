@@ -1,15 +1,14 @@
 <?php
 
-@include './connect.php';
+@include 'connect.php';
 
 $name = '';
 $email = '';
 $pword = '';
 $cpword = '';
 $phone = '';
-$address = '';
-$gender = '';
-$user_type = 'user';
+$address= '';
+$user_type = 'fmanager';
 $error = [];
 $success = [];
 
@@ -21,7 +20,7 @@ if(isset($_POST['submit']))
     $cpword=$_POST['cpword'];
     $phone=trim(mysqli_real_escape_string($conn, $_POST['phone']));
     $address=$_POST['address'];
-    $gender=$_POST['gender'];
+   
    
 // Validate inputs
 if (empty($name) || !preg_match("/^[a-zA-Z\s]+$/", $name)) {
@@ -34,7 +33,7 @@ if (empty($email)) {
 
 } else {
     // Check if email exists in the database
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM user_reg WHERE email = ?");
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM manager_reg WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->bind_result($count);
@@ -74,14 +73,14 @@ if (empty($pword) || empty($cpword)) {
 
    if (empty($error)) {
 
-         $insert="INSERT INTO user_reg(name, email, number, address, gender, user_type) VALUES('$name','$email','$phone','$address','$gender','$user_type')";
+         $insert="INSERT INTO manager_reg(name, email, number, address, user_type) VALUES('$name','$email','$phone','$address','$user_type')";
          mysqli_query($conn, $insert);
 
          $insert_login = "INSERT INTO login (email, password, user_type) VALUES ('$email','$pword','$user_type')";
          mysqli_query($conn, $insert_login);
 
          $success[] = "Registration successful!";
-         header('Refresh: 2; URL=login.php');  // Redirects after 2 seconds
+         header('Refresh: 2; URL=admin.php');  // Redirects after 2 seconds
         
       }
    
@@ -94,7 +93,7 @@ if (empty($pword) || empty($cpword)) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="style-register.css">
+        <link rel="stylesheet" href="../css/style-register.css">
         <style>
            .invalid-feedback {
             color: #ff0000;
@@ -109,26 +108,18 @@ if (empty($pword) || empty($cpword)) {
             padding: 10px;
             margin-top: 8px;
             box-sizing: border-box;
-            
         }
-        .radio-group{
-                margin-top:  18px;
-            }
-            .radio-container{
-                margin: 20px;
-            }
-            .ltext{
-            font-size: 25px;
+        .ltext{
+            font-size: 21px;
             color: #230000;     
-            padding-inline:40px            
+            padding-inline:0px;            
             }
             </style>
-        
+       
     </head>
     <body>
-        <form action=""  method="post">
-            <h3 class="ltext">USER REGISTRATION</h3>
-            <!-- <img src="./logo.png"> -->
+        <form action="" onsubmit="return validate()" method="post">
+        <h3 class="ltext">FLIGHT MANAGER REGISTRATION</h3>
             <input class="input" type="hidden" name="usertype" value="fmanager">
 
             <div class="form-group">
@@ -184,22 +175,6 @@ if (empty($pword) || empty($cpword)) {
                                 </div>
                              <?php endif; ?>
                              </div>
-
-                             <div class="radio-group">
-                 <label class="radio-container">Male
-                     <input type="radio" name="gender" value="male" checked>
-                     <span class="checkmark"></span>
-                 </label>
-                 <label class="radio-container">Female
-                    <input type="radio" name="gender" value="female">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">Other
-                     <input type="radio" name="gender" value="other" >
-                     <span class="checkmark"></span>
-                 </label>
-            </div>
-
 
         <button type="submit" name="submit" >REGISTER</button>
         </form>
