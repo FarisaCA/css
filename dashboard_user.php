@@ -29,7 +29,7 @@ $user_details = mysqli_fetch_assoc($sql_pro);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            background-image: url('./airdash.jpg');
+            background-image: url('airdash.jpg');
             background-size: cover;
             font-family: Arial, sans-serif;
             margin: 0;

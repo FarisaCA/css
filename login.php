@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
             exit;
         } elseif ($row['user_type'] == 'fmanager') {
             $_SESSION['manager_name'] = $row['name'];
-            header('Location: ./fmanager_dashboard.php');
+            header('Location: fmanager_dashboard.php');
             exit;
         } elseif ($row['user_type'] == 'user') {
             $_SESSION['user_name'] = $row['name'];
