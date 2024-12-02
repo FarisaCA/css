@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin-right: auto;
+    padding: 20px;
+    background-image: url('./bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+form{
+    display: grid;
+    row-gap: 15px; /* Space between rows */
+    column-gap: 10px; /* Space between labels and inputs */
+    grid-template-columns: auto 1frs;
+}
+
+.form-container {
+    max-width: 355px;                                                                   
+    margin: 85px;
+    background-color: #ffffff;
+    opacity: 0.8;
+    padding: 20px;
+    margin-top:73px;
+    border-radius: 5px;
+    box-shadow:0 7px 18px rgba(142, 202, 236, 0.87);
+}
+
+.top{
+    width: 103%;
+    padding: 5px;
+    background-color:#007bc7;
+    margin-top: -29px;
+    margin-left: -29px;
+    display: flex;
+}
+
+h2 {
+    text-align: center;
+   
+}
+
+.profile-section, .loyalty-section, .booking-section {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="number"]
+{
+    width: 94%;
+    padding: 12px 11px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+button {
+    padding: 10px 15px;
+    background-color: #16b423;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* button {
+    background-color: #2ba50d;
+    margin-left: 10px;
+} */
+
+.cancel-btn:hover {
+    background-color: #c82333;
+}
+.radio-group label{
+    display: inline-block;
+    margin-right: 15px
+}
+
+/* Container for the login button */
+.login-container {
+    text-align: right;
+    padding: 20px;
+    background-color: #f5f8ff; /* Light blue background */
+  }
+  
+  
+  /* .login-button {
+    display:flex;
+    background-color: #003d99; 
+    color: #ffffff;
+    border: none;
+    border-radius: 50px; 
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left:auto;
+  } */
+  
+  /* Hover effect */
+  .login-button:hover {
+    background-color: #002f7a; /* Darker shade of blue */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow */
+  }
+  

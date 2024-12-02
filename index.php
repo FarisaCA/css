@@ -103,7 +103,9 @@
                 </div>
                 <button>Search Flight</button>
             </form>
+           
         </div>
+        <button>Search Flight</button>
     </main>
     </body>
 </html>
