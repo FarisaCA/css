@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2024 at 09:44 AM
+-- Generation Time: Dec 03, 2024 at 04:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `booking` (
   `name` varchar(50) NOT NULL,
-  `booking_id` int(8) NOT NULL,
   `email` int(50) NOT NULL,
   `flight` varchar(5) NOT NULL,
   `seat` int(5) NOT NULL,
@@ -37,6 +36,13 @@ CREATE TABLE `booking` (
   `type` int(15) NOT NULL,
   `date` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`name`, `email`, `flight`, `seat`, `price`, `type`, `date`) VALUES
+('Nihal Sidheek', 0, '', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -51,7 +57,7 @@ CREATE TABLE `flight` (
   `d_datetime` datetime NOT NULL,
   `arrival` varchar(150) NOT NULL,
   `r_datetime` datetime NOT NULL,
-  `baggage` text NOT NULL,
+  `baggage` varchar(10) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `status` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -62,7 +68,8 @@ CREATE TABLE `flight` (
 
 INSERT INTO `flight` (`flight_id`, `flight_no`, `departure`, `d_datetime`, `arrival`, `r_datetime`, `baggage`, `price`, `status`) VALUES
 (1, 'ATR', 'Pune, Pune International Airport', '2024-11-13 00:00:00', 'Kochi, Kochi International Airport', '2024-11-13 00:00:00', '07:08:00', 1234.00, 1),
-(2, 'A320', 'Chennai, Chennai International Airport', '2024-11-14 00:00:00', 'Delhi, Indiragandhi International Airport', '0000-00-00 00:00:00', '05:06:00', 1000.00, 0);
+(2, 'A320', 'Chennai, Chennai International Airport', '2024-11-14 00:00:00', 'Delhi, Indiragandhi International Airport', '0000-00-00 00:00:00', '05:06:00', 1000.00, 0),
+(9, 'A320', 'kochi', '2024-12-20 02:05:00', 'Agra civil Airport,kheria', '2024-12-21 05:06:00', 'Cabin:2kg,', 1500.00, 1);
 
 -- --------------------------------------------------------
 
@@ -136,8 +143,7 @@ INSERT INTO `user_reg` (`name`, `email`, `number`, `address`, `user_type`, `gend
 -- Indexes for table `booking`
 --
 ALTER TABLE `booking`
-  ADD PRIMARY KEY (`email`),
-  ADD UNIQUE KEY `booking_id` (`booking_id`);
+  ADD PRIMARY KEY (`email`);
 
 --
 -- Indexes for table `flight`
@@ -173,7 +179,7 @@ ALTER TABLE `user_reg`
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `flight_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `flight_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -103,7 +103,7 @@ table th, table td {
     background-size: contain;
     height: min-content;
 }
-.input1 {
+.input1,label {
     width: 100%;  /* Ensure it takes up full width */
     height: 40px;
     padding-left: 2px;

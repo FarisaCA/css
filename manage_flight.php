@@ -25,14 +25,36 @@
         <h2>Add Flight</h2>
         <form class="form1" action="" method="post">
             <input class="input1" type="text" name="fno" placeholder="Flight No" required>
-            <input class="input1" type="textarea" name="from" placeholder="From" required>
+            <div class="input1">
+                        <label for="from">From</label>
+                        <select id="input1" name="from" required>
+                            <option value="Delhi">Delhi,Indiragandhi International Airport </option>
+                            <option value="Agra civil Airport,kheria">Agra,Agra Civil Airport,kheria</option>
+                            <option value="kochi">Kochi,kochi International Airport</option>
+                            <option value="pune">Pune,pune International Airport</option>
+                            <option value="bhubaneswar">Bhubaneswar,Biju Patnaik Airport</option>
+                            <option value="Agra civil Airport,kheria">Ahmedabad,Sardar vallabhbhai patel International Airport</option>
+                            <option value="chennai">Chennai,Chennai International Airport</option>
+                            <option value="Kozhikode">Kozhikode,Calicut International Airport</option>
+                            <!-- Add other departure options -->
+                        </select>
+                    </div>
             <input class="input1" type="datetime-local" name="d_datetime" placeholder="departure(date&time)" required>
-            <!-- <input class="input1" type="date" name="d_date" placeholder="Departure Date" required>
-            <input class="input1" type="time" name="d_time" placeholder="Departure time" required> -->
-            <input class="input1" type="textarea" name="to" placeholder="To" required>
+            <div class="input1">
+                        <label for="to">To</label><br>
+                        <select id="to" name="to" required>
+                            <option value="bhubaneswar">Bhubaneswar,Biju Patnaik Airport</option>
+                            <option value="Agra civil Airport,kheria">Ahmedabad,Sardar vallabhbhai patel International Airport</option>
+                            <option value="chennai">Chennai,Chennai International Airport</option>
+                            <option value="Kozhikode">Kozhikode,Calicut International Airport</option>
+                            <option value="Delhi">Delhi,Indiragandhi International Airport</option>
+                            <option value="Agra civil Airport,kheria">Agra,Agra Civil Airport,kheria</option>
+                            <option value="kochi">kochi,kochi International Airport</option>
+                            <option value="pune">Pune,Pune International Airport</option>
+                            <!-- Add other arrival options -->
+                        </select>
+                    </div>
             <input class="input1" type="datetime-local" name="r_datetime" placeholder="arrival(date&time)" required>
-            <!-- <input class="input1" type="date" name="a_date" placeholder="Return Date" required>
-            <input class="input1" type="time" name="a_time" placeholder="Return Time" required> -->
             <textarea class="input1" name="baggage" placeholder="Enter baggage details (e.g., Cabin: 7kg, Check-in: 20kg)" rows="3"></textarea>
             <input class="input1" type="number" name="price" placeholder="Price" required>
             <input class="sub2" type="submit" name="submit" value="Submit">
@@ -44,12 +66,8 @@
     $f_no = $_POST['fno'];
     $from = $_POST['from'];
     $d_datetime = $_POST['d_datetime'];
-    // $d_date = $_POST['d_date'];
-    // $d_time = $_POST['d_time'];
     $to = $_POST['to'];
     $r_datetime = $_POST['r_datetime'];
-    // $a_date = $_POST['a_date'];
-    // $a_time = $_POST['a_time'];
     $baggage = $_POST['baggage'];
     $price = $_POST['price'];
     
