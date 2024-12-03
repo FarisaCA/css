@@ -108,6 +108,7 @@
 </html>
 <?php
 // Start the session and connect to the database
+
 require_once('connect.php');
 
 // Enable error reporting for debugging
@@ -217,6 +218,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            </tr>";
             // Fetch rows and output the details
             while ($row = $result->fetch_assoc()) {
+               
                 echo "<tr>
                         <td>" . $row["flight_no"] . "</td>
                         <td>" . $row["departure"] . "</td>
