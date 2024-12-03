@@ -1,69 +1,5 @@
-<?php
 
-@include './connect.php';
 
-session_start();
-
-// Initialize variables
-$name = '';
-$gender = '';
-$dob = '';
-$email = '';
-$flight_no = '';
-$price = '';
-$type = '';
-$seat = '';
-$error = [];
-$success = [];
-
-// Retrieve flight details from session
-if (isset($_SESSION['flight_no']) && isset($_SESSION['price'])) {
-    $flight_no = $_SESSION['flight_no'];
-    $price = $_SESSION['price'];
-}
-
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Collect form data
-    $name = htmlspecialchars($_POST['name']);
-    $gender = htmlspecialchars($_POST['gender']);
-    $dob = htmlspecialchars($_POST['dob']);
-    $email = htmlspecialchars($_POST['email']);
-    $type = htmlspecialchars($_POST['class']);
-    $seat_letter = htmlspecialchars($_POST['letters']);
-    $seat_number = htmlspecialchars($_POST['numbers']);
-    $seat = $seat_letter . $seat_number;
-
-    // Validate inputs
-    if (empty($name) || empty($gender) || empty($dob) || empty($email) || empty($type) || empty($seat)) {
-        $error[] = 'Please fill in all the required fields.';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error[] = 'Invalid email format.';
-    }
-
-    // Check for seat availability
-    if (empty($error)) {
-        $seat_check_query = $conn->prepare("SELECT * FROM booking WHERE flight = ? AND seat = ?");
-        $seat_check_query->bind_param("ss", $flight_no, $seat);
-        $seat_check_query->execute();
-        $seat_check_result = $seat_check_query->get_result();
-        if ($seat_check_result->num_rows > 0) {
-            $error[] = 'The selected seat is already booked. Please choose a different seat.';
-        }
-    }
-
-    // Insert booking into the database
-    if (empty($error)) {
-        $insert_query = $conn->prepare("INSERT INTO booking (name, gender, dob, email, flight_no, price, type,date) VALUES (?, ?, ?, ?, ?, ?)");
-        $insert_query->bind_param("ssssss", $name, $gender, $dob, $email, $flight_no, $price, $type, $date);
-        if ($insert_query->execute()) {
-            $success[] = 'Booking successful!';
-        } else {
-            $error[] = 'Booking failed. Please try again.';
-        }
-    }
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,14 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Display error messages -->
     <?php if (!empty($error)): ?>
         <div class="error">
-            <?php foreach ($error as $err) echo "<p>$err</p>"; ?>
+            <?php foreach ($error as $err): ?>
+                <p><?= htmlspecialchars($err) ?></p>
+            <?php endforeach; ?>
         </div>
     <?php endif; ?>
 
     <!-- Display success messages -->
     <?php if (!empty($success)): ?>
         <div class="success">
-            <?php foreach ($success as $msg) echo "<p>$msg</p>"; ?>
+            <?php foreach ($success as $msg): ?>
+                <p><?= htmlspecialchars($msg) ?></p>
+            <?php endforeach; ?>
         </div>
     <?php endif; ?>
 
@@ -105,13 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <div class="radio-group">
         <label class="radio-container">Male
-            <input type="radio" name="gender" value="male" <?= $gender === 'male' ? 'checked' : '' ?>>
+            <input type="radio" name="gender" value="male" <?= $gender === 'male' ? 'checked' : '' ?> required>
         </label>
         <label class="radio-container">Female
-            <input type="radio" name="gender" value="female" <?= $gender === 'female' ? 'checked' : '' ?>>
+            <input type="radio" name="gender" value="female" <?= $gender === 'female' ? 'checked' : '' ?> required>
         </label>
         <label class="radio-container">Other
-            <input type="radio" name="gender" value="other" <?= $gender === 'other' ? 'checked' : '' ?>>
+            <input type="radio" name="gender" value="other" <?= $gender === 'other' ? 'checked' : '' ?> required>
         </label>
       </div>
 
@@ -127,64 +67,115 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <div class="input">
         <label for="flight">Flight:</label>
-        <input type="text" id="flight" class="disabled-input" value="<?= htmlspecialchars($flight_no) ?>" disabled>
+        <input type="text" id="flight" class="disabled-input" disabled>
       </div>
 
       <div class="input">
         <label for="price">Price:</label>
-        <input type="text" id="price" class="disabled-input" value="₹<?= htmlspecialchars($price) ?>" disabled>
+        <input type="text" id="price" class="disabled-input" disabled>
       </div>
 
       <div class="input">
         <label for="class">Class:</label>
-        <select name="class" class="select">
-            <option value="economy" <?= $type === 'economy' ? 'selected' : '' ?>>Economy</option>
-            <option value="business" <?= $type === 'business' ? 'selected' : '' ?>>Business</option>
+        <select name="class" class="select" required>
+            <option value="economy" <?= $class === 'economy' ? 'selected' : '' ?>>Economy</option>
+            <option value="business" <?= $class === 'business' ? 'selected' : '' ?>>Business</option>
         </select>
       </div>  
 
       <div class="input">
         <label for="letters">Seat:</label>
-        <select name="letters">
-            <option value="A" <?= substr($seat, 0, 1) === 'A' ? 'selected' : '' ?>>A</option>
-            <option value="B" <?= substr($seat, 0, 1) === 'B' ? 'selected' : '' ?>>B</option>
-            <option value="C" <?= substr($seat, 0, 1) === 'C' ? 'selected' : '' ?>>C</option>
-            <option value="D" <?= substr($seat, 0, 1) === 'D' ? 'selected' : '' ?>>D</option>
-            <option value="E" <?= substr($seat, 0, 1) === 'E' ? 'selected' : '' ?>>E</option>
-            <option value="F" <?= substr($seat, 0, 1) === 'F' ? 'selected' : '' ?>>F</option>
+        <select name="letters" required>
+            <option value="A" <?= $letters === 'A' ? 'selected' : '' ?>>A</option>
+            <option value="B" <?= $letters === 'B' ? 'selected' : '' ?>>B</option>
+            <option value="C" <?= $letters === 'C' ? 'selected' : '' ?>>C</option>
+            <option value="D" <?= $letters === 'D' ? 'selected' : '' ?>>D</option>
+            <option value="E" <?= $letters === 'E' ? 'selected' : '' ?>>E</option>
+            <option value="F" <?= $letters === 'F ' ? 'selected' : '' ?>>F</option>
         </select>
-        <select name="numbers">
-            <option value="1" <?= substr($seat, 1) === '1' ? 'selected' : '' ?>>1</option>
-            <option value="2" <?= substr($seat, 1) === '2' ? 'selected' : '' ?>>2</option>
-            <option value="3" <?= substr($seat, 1) === '3' ? 'selected' : '' ?>>3</option>
-            <option value="3" <?= substr($seat, 1) === '4' ? 'selected' : '' ?>>4</option>
-            <option value="3" <?= substr($seat, 1) === '5' ? 'selected' : '' ?>>5</option>
-            <option value="3" <?= substr($seat, 1) === '6' ? 'selected' : '' ?>>6</option>
-            <option value="3" <?= substr($seat, 1) === '7' ? 'selected' : '' ?>>7</option>
-            <option value="3" <?= substr($seat, 1) === '8' ? 'selected' : '' ?>>8</option>
-            <option value="3" <?= substr($seat, 1) === '9' ? 'selected' : '' ?>>9</option>
-            <option value="3" <?= substr($seat, 1) === '10' ? 'selected' : '' ?>>10</option>
-            <option value="3" <?= substr($seat, 1) === '11' ? 'selected' : '' ?>>11</option>
-            <option value="3" <?= substr($seat, 1) === '12' ? 'selected' : '' ?>>12</option>
-            <option value="3" <?= substr($seat, 1) === '13' ? 'selected' : '' ?>>13</option>
-            <option value="3" <?= substr($seat, 1) === '14' ? 'selected' : '' ?>>14</option>
-            <option value="3" <?= substr($seat, 1) === '15' ? 'selected' : '' ?>>15</option>
-            <option value="3" <?= substr($seat, 1) === '16' ? 'selected' : '' ?>>16</option>
-            <option value="3" <?= substr($seat, 1) === '17' ? 'selected' : '' ?>>17</option>
-            <option value="3" <?= substr($seat, 1) === '18' ? 'selected' : '' ?>>18</option>
-            <option value="3" <?= substr($seat, 1) === '19' ? 'selected' : '' ?>>19</option>
-            <option value="3" <?= substr($seat, 1) === '20' ? 'selected' : '' ?>>20</option>
-            <!-- Add more options as needed -->
+        <select name="numbers" required>
+            <?php for ($i = 1; $i <= 20; $i++): ?>
+                <option value="<?= $i ?>" <?= (int)$numbers === $i ? 'selected' : '' ?>><?= $i ?></option>
+            <?php endfor; ?>
         </select>
       </div>
 
-      <button type="submit">Book</button>
+      <button type="submit" name="submit">Book</button>
     </form>
   </div>
 
-  <div>
-    <img src="airplane-flight.png" alt="A beautiful landscape" class="seat_img">
-  </div>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    document.getElementById('flight').value = urlParams.get('flight_no') || '';
+    document.getElementById('price').value = urlParams.get('price') || '';
+  </script>
 
 </body>
 </html>
+ <!-- Retrieve flight details from session
+if (isset($_SESSION['flight_no']) && isset($_SESSION['price'])) {
+    $flight_no = $_SESSION['flight_no'];
+    $price = $_SESSION['price'];
+} -->
+<?php
+@include './connect.php';  // Include your database connection
+
+session_start();
+
+// Initialize form values
+$name = $gender = $dob = $email = $class = $letters = $numbers = '';
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// Ensure database connection is successful
+if ($conn) {
+    echo"connected";
+}
+
+if (isset($_POST['submit'])) {
+  
+
+    // Collect form data
+    $name = $_POST['name'];
+    $gender = $_POST['gender'];
+    $dob = $_POST['dob'];
+    $email = $_POST['email'];
+    $class = $_POST['class'];
+    $letters = $_POST['letters'];
+    $numbers = $_POST['numbers'];
+
+    // Check if flight_id is set in session
+    if (!isset($_SESSION['flight_id'])) {
+        echo "Flight ID is not set.";
+        exit;
+    }
+
+    $flight_id = $_SESSION['flight_id'];
+
+    // Insert query
+    $insertQuery = "INSERT INTO `booking`( `flight_id`, `name`, `gender`, `dob`, `email`, `class`, `letters`, `numbers`) 
+    VALUES ('$flight_id', '$name', '$gender', '$dob', '$email', '$class', '$letters', '$numbers')";
+
+    if ($conn->query($insertQuery) === TRUE) {
+        echo "One row inserted";
+
+        // Get the most recent booking to retrieve the booking ID
+        $sql = "SELECT * FROM `booking` WHERE flight_id = $flight_id ORDER BY book_id DESC LIMIT 1";
+        $data = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($data);
+
+        $event_id = $row['book_id'];
+        $_SESSION['book_id'] = $event_id; // Save the booking ID in session
+
+        // Optionally redirect after successful booking
+        // header("Location: decor.php");
+        exit;
+    } else {
+        echo "Error: " . $insertQuery . "<br>" . $conn->error;
+    }
+}
+
+// Close the database connection
+$conn->close();
+?>

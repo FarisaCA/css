@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airline Reservation System</title>
-    <link rel="stylesheet" href="../helo-style.css"> 
+    <link rel="stylesheet" href="helo-style.css"> 
     <style>
         .options-container{
             border: 2px solid #005eb8;
@@ -103,9 +103,6 @@
                 </div>
                 <button>Search Flight</button>
             </form>
-           
-        </div>
-        <button>Search Flight</button>
     </main>
     </body>
 </html>
@@ -159,6 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       
         // Check if there are any results
+        
         if ($result->num_rows > 0) {
             echo "<h4>Available Flights :</h4>";
             echo "<style>

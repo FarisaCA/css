@@ -60,7 +60,9 @@
             <input class="sub2" type="submit" name="submit" value="Submit">
         </form>
     <?php
+    
         require_once('connect.php');
+        
         // Handle form submission for adding a new flight
        if (isset($_POST['submit'])) {
     $f_no = $_POST['fno'];
