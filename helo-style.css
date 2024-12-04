@@ -7,7 +7,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #fff;
-    background-image: url('/airline/air.jpeg');
+    background-image: url('air.jpeg');
     background-size: cover;
 }
 
@@ -161,13 +161,13 @@ select:hover {
 }
 
 button {
-    font-size: 16px;              /* Set the font size */
+    font-size: 16px;     
     color: white;
-    padding: 11px 17px; /* Adjust padding for better spacing */
+    padding: 12px 20px; 
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    background-color: rgb(58, 153, 3);
+    background-color: rgb(72, 167, 17);
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     position: absolute;
     right: 150px;

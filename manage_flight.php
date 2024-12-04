@@ -26,15 +26,15 @@
             <input class="input1" type="text" name="fno" placeholder="Flight No" required>
             <div class="input1">
                         <label for="from">From</label>
-                        <select id="input1" name="from" required>
-                            <option value="Delhi">Delhi,Indiragandhi International Airport </option>
+                        <select id="input1" name="from"required>
+                            <option value="Delhi,Indiragandhi International Airport">Delhi,Indiragandhi International Airport </option>
                             <option value="Agra civil Airport,kheria">Agra,Agra Civil Airport,kheria</option>
-                            <option value="kochi">Kochi,kochi International Airport</option>
-                            <option value="pune">Pune,pune International Airport</option>
-                            <option value="bhubaneswar">Bhubaneswar,Biju Patnaik Airport</option>
-                            <option value="Agra civil Airport,kheria">Ahmedabad,Sardar vallabhbhai patel International Airport</option>
-                            <option value="chennai">Chennai,Chennai International Airport</option>
-                            <option value="Kozhikode">Kozhikode,Calicut International Airport</option>
+                            <option value="Kochi,kochi International Airport">Kochi,kochi International Airport</option>
+                            <option value="Pune,pune International Airport">Pune,pune International Airport</option>
+                            <option value="Bhubaneswar,Biju Patnaik Airport">Bhubaneswar,Biju Patnaik Airport</option>
+                            <option value="Ahmedabad,Sardar vallabhbhai patel International Airport">Ahmedabad,Sardar vallabhbhai patel International Airport</option>
+                            <option value="Chennai,Chennai International Airport">Chennai,Chennai International Airport</option>
+                            <option value="Kozhikode,Calicut International Airport">Kozhikode,Calicut International Airport</option>
                             <!-- Add other departure options -->
                         </select>
                 </div>
@@ -43,14 +43,14 @@
             <div class="input1">
                         <label for="to">To</label><br>
                         <select id="to" name="to" required>
-                            <option value="bhubaneswar">Bhubaneswar,Biju Patnaik Airport</option>
-                            <option value="Agra civil Airport,kheria">Ahmedabad,Sardar vallabhbhai patel International Airport</option>
-                            <option value="chennai">Chennai,Chennai International Airport</option>
-                            <option value="Kozhikode">Kozhikode,Calicut International Airport</option>
-                            <option value="Delhi">Delhi,Indiragandhi International Airport</option>
+                            <option value="Bhubaneswar,Biju Patnaik Airport">Bhubaneswar,Biju Patnaik Airport</option>
+                            <option value="Ahmedabad,Sardar vallabhbhai patel International Airport">Ahmedabad,Sardar vallabhbhai patel International Airport</option>
+                            <option value="Chennai,Chennai International Airport">Chennai,Chennai International Airport</option>
+                            <option value="Kozhikode,Calicut International Airport">Kozhikode,Calicut International Airport</option>
+                            <option value="Delhi,Indiragandhi International Airport">Delhi,Indiragandhi International Airport</option>
                             <option value="Agra civil Airport,kheria">Agra,Agra Civil Airport,kheria</option>
-                            <option value="kochi">kochi,kochi International Airport</option>
-                            <option value="pune">Pune,Pune International Airport</option>
+                            <option value="kochi,kochi International Airport">kochi,kochi International Airport</option>
+                            <option value="Pune,Pune International Airport">Pune,Pune International Airport</option>
                             <!-- Add other arrival options -->
                         </select>
                     </div>
@@ -157,7 +157,7 @@
                 echo"<input type='hidden'name='flight_id' value=" . $row['flight_id'] .">";
                 echo "<tr>";
                 echo "<td><input class='input2' type='text' name='fno' value=" . htmlspecialchars($row['flight_no'], ENT_QUOTES) ." required></td>";
-                echo "<td style='width: 15%;'><input class='input2' type='textarea' name='from' value=" . htmlspecialchars($row['departure'], ENT_QUOTES) . "' required></td>";
+                echo "<td style='width: 15%;'><input class='input2' type='textarea' name='from' value='" . htmlspecialchars($row['departure'], ENT_QUOTES) . "' required></td>";
                 
                 //change th format in table to th:i format
                 $d_datetime = new DateTime($row['d_datetime']);
