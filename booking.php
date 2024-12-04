@@ -342,7 +342,7 @@ $conn->close();
             <?php endfor; ?>
         </select>
       </div>
-
+       
       <button type="submit" name="submit">Book</button>
     </form>
   </div>
@@ -354,6 +354,7 @@ $conn->close();
   </script>
 
 </body>
+<img class="seat_image" src="seat.png" alt="this is seat image">
 </html>
  <!-- Retrieve flight details from session
 if (isset($_SESSION['flight_no']) && isset($_SESSION['price'])) {
