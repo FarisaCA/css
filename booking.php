@@ -181,7 +181,6 @@ if (isset($_SESSION['flight_no']) && isset($_SESSION['price'])) {
 <?php
 @include './connect.php';  // Include your database connection
 
-session_start();
 
 // Initialize form values
 $name = $gender = $dob = $email = $class = $letters = $numbers = '';
@@ -190,9 +189,9 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Ensure database connection is successful
-if ($conn) {
-    echo"connected";
-}
+// if ($conn) {
+//     echo"connected";
+// }
 
 if (isset($_POST['submit'])) {
   
@@ -206,7 +205,8 @@ if (isset($_POST['submit'])) {
     $class = $_POST['class'];
     $letters = $_POST['letters'];
     $numbers = $_POST['numbers'];
-   // $flight_id = $_SESSION['flight_id'];
+    $seat = $letters . $numbers;
+
 
 
     //Check if flight_id is set in session
@@ -217,8 +217,8 @@ if (isset($_POST['submit'])) {
   // }
    
     // Insert query
-    $insertQuery = "INSERT INTO booking(  name,flight_id, gender, dob, email, class, letters, numbers) 
-    VALUES ( '$name','$flight_id','$gender', '$dob', '$email', '$class', '$letters', '$numbers')";
+    $insertQuery = "INSERT INTO booking(  flight_id,name, gender, dob, email, class, seat) 
+    VALUES ( '$flight_id','$name','$gender', '$dob', '$email', '$class', '$seat')";
 
     if ($conn->query($insertQuery) === TRUE) {
         echo "One row inserted";
@@ -281,6 +281,7 @@ $conn->close();
 
     <form method="POST">
     <?php $flight_id = isset($_GET['flight_id']) ? htmlspecialchars($_GET['flight_id']) : '';?>
+    <?php $flight_no = isset($_GET['flight_no']) ? htmlspecialchars($_GET['flight_no']) : '';?>
       <div class="input">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<?= htmlspecialchars($name) ?>" required>
@@ -310,7 +311,7 @@ $conn->close();
 
       <div class="input">
         <label for="flight">Flight:</label>
-        <input type="text" id="flight" class="disabled-input" disabled>
+        <input type="text" name="flight_no" value="<?= $flight_no ?>" readonly>
       </div>
 
       <div class="input">
@@ -349,7 +350,7 @@ $conn->close();
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    document.getElementById('flight').value = urlParams.get('flight_no') || '';
+   // document.getElementById('flight').value= urlParams.get('flight_no') || '';
     document.getElementById('price').value = urlParams.get('price') || '';
   </script>
 

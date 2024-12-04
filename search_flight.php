@@ -284,7 +284,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <td>" . $row["r_datetime"] . "</td>
                         <td>" . $row["baggage"] . "</td>
                         <td>" . $row["price"] . "</td>
-                        <td><a href='booking.php?flight_id=".urlencode($row["flight_id"]) ."flight_no=" .urlencode($row["flight_no"]) . "&price=₹" . urlencode($row["price"]) . "'>BOOK</a></td>
+                        <td><a href='booking.php?flight_id=".urlencode($row["flight_id"]) ."&flight_no=" .urlencode($row["flight_no"]) . "&price=₹" . urlencode($row["price"]) . "'>BOOK</a></td>
                       </tr>";
             }
             

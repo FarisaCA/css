@@ -91,37 +91,51 @@
     }
 
     // Handle form submission
-        if (isset($_POST['update'])) 
-        { 
-            $flight_id = $_POST['flight_id'];  // Get flight_id from the hidden input field
-            $f_no = $_POST['fno'];
-            $from = $_POST['from'];
-            $d_datetime = $_POST['d_datetime'];
-            $to = $_POST['to'];
-            $r_datetime = $_POST['r_datetime'];
-            $baggage = $_POST['baggage'];
-            $price = $_POST['price'];
-            
-            // Update the flight record with the specified flight_id
-            $sql = "UPDATE `flight` SET 
-                            `flight_no` = '$f_no',
-                            `departure` = '$from',
-                            `d_datetime` = '$d_datetime',
-                            `arrival` = '$to',
-                            `r_datetime` = '$r_datetime',
-                            `baggage` = '$baggage',
-                            `price` = '$price' 
-                            WHERE `flight_id` = '$flight_id'";
-                    
-                if ($conn->query($sql) === FALSE) {
-                    die("Error updating value: " . $conn->error);
-                } else {
-                    echo "<script>alert('Record updated successfully');</script>";
-                }
-                    header("Location: " . $_SERVER['PHP_SELF']);
-                    exit();
-        }
+    if (isset($_POST['update'])) { 
+        // Get values from POST
+        $flight_id = $_POST['flight_id'];  
+        $f_no = $_POST['fno'];
+        $from = $_POST['from'];
+        $d_datetime = $_POST['d_datetime'];
+        $to = $_POST['to'];
+        $r_datetime = $_POST['r_datetime'];
+        $baggage = $_POST['baggage'];
+        $price = $_POST['price'];
         
+        // Prepare SQL statement (using prepared statements for security)
+        $sql = "UPDATE `flight` SET 
+                    `flight_no` = ?, 
+                    `departure` = ?, 
+                    `d_datetime` = ?, 
+                    `arrival` = ?, 
+                    `r_datetime` = ?, 
+                    `baggage` = ?, 
+                    `price` = ? 
+                WHERE `flight_id` = ?";
+        
+        // Prepare the query
+        if ($stmt = $conn->prepare($sql)) {
+            // Bind parameters
+            $stmt->bind_param('ssssssss', $f_no, $from, $d_datetime, $to, $r_datetime, $baggage, $price, $flight_id);
+    
+            // Execute the query
+            if ($stmt->execute()) {
+                echo "<script>alert('Record updated successfully');</script>";
+            } else {
+                echo "<script>alert('Error updating record: " . $stmt->error . "');</script>";
+            }
+    
+            // Close the statement
+            $stmt->close();
+        } else {
+            echo "<script>alert('Error preparing statement: " . $conn->error . "');</script>";
+        }
+    
+        // Redirect to the same page after updating
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    }
+    
 
         // Fetch and display books
         $sql = "SELECT * FROM flight where `status`=true ";
@@ -166,24 +180,24 @@
             }
             echo "</table>";
         }
-        if (isset($_POST['update'])) 
-        { 
-            $f_no = $_POST['fno'];
-            $from = $_POST['from'];
-            $d_datetime = $_POST['d_datetime'];
-            $to = $_POST['to'];
-            $r_datetime = $_POST['r_datetime'];
-            $baggage = $_POST['baggage'];
-            $price=$_POST['price'];
+        // if (isset($_POST['update'])) 
+        // { 
+        //     $f_no = $_POST['fno'];
+        //     $from = $_POST['from'];
+        //     $d_datetime = $_POST['d_datetime'];
+        //     $to = $_POST['to'];
+        //     $r_datetime = $_POST['r_datetime'];
+        //     $baggage = $_POST['baggage'];
+        //     $price=$_POST['price'];
 
-            $sql="UPDATE `flight` SET `flight_no`='$f_no',`departure`='$from',
-            `d_datetime`='$d_datetime',`arrival`='$to',`r_datetime`='$r_datetime'
-            ,`baggage`='$baggage',`price`='$price' WHERE  `flight_id`='$flight_id'";
+        //     $sql="UPDATE `flight` SET `flight_no`='$f_no',`departure`='$from',
+        //     `d_datetime`='$d_datetime',`arrival`='$to',`r_datetime`='$r_datetime'
+        //     ,`baggage`='$baggage',`price`='$price' WHERE  `flight_id`='$flight_id'";
             
-              if($conn->query($sql)==FALSE){
-                die("error updating value:".$conn->error);
-              }
-        }
+        //       if($conn->query($sql)==FALSE){
+        //         die("error updating value:".$conn->error);
+        //       }
+        // }
     if (isset($_POST['delete']))
     {
         $f_no = $_POST['fno'];
