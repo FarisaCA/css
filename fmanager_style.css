@@ -47,12 +47,14 @@ section {
 
 table {
     width: 100%;
+    border-width:3px ;
     border-collapse: collapse;
     margin-top: 20px;
+    border:#022ada;
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #0072cf;
     padding: 8px;
     text-align: left;
 }

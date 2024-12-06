@@ -1,14 +1,29 @@
-
 <?php
- 
- @include './connect.php';
+@include './connect.php';
+session_start();
 
- session_start();
- 
- if(isset($_SESSION['manager_name'])){
-    header('location:./login.php');
- }
+// Redirect if not logged in as a manager
+if (isset($_SESSION['manager_name'])) { // Fix: Correct session check
+    header('location:login.php');
+}
+
+// deletion
+if (isset($_POST['delete'])) {
+    $book_id = $_POST['book_id'];
+    $sql = "UPDATE `booking` SET `status`=false WHERE `book_id`='$book_id'";
+
+    if ($conn->query($sql) === FALSE) {
+        die("Error updating value: " . $conn->error);
+    } else {
+        echo "<script>alert('Booking removed successfully');</script>";
+    }
+
+    // Redirect to refresh the table
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,36 +38,67 @@
         <nav>
             <ul>
                 <li><a href="manage_flight.php">Manage Flights</a></li>
-                <!-- <li><a href="#users">Manage Users</a></li> -->
                 <li><a href="#bookings">Manage Booking</a></li>
-                <!--li><a href="#bookings">Manage Seat</a></li-->
+                <li><a href="fschedule.php">Manage Scheduling</a></li>
                 <li><a href="logout.php" class="logout-button">Logout</a></li>
-                
             </ul>
         </nav>
     </header>
 
     <main>
-
         <section id="bookings">
-            <h2>Manage Bookings</h2>
-            <table>
+            <h2>Booking Details</h2>
+            <table border="2">
                 <thead>
                     <tr>
-                        <th>Booking ID</th>
-                        <th>User ID</th>
-                        <th>Flight Number</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total Price</th>
-                        <th>Actions</th>
+                        <th>Name</th>
+                        <th>DOB</th>
+                        <th>Email</th>
+                        <th>Flight No</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!--?php loadBookings(); ?-->
+              
+                    <?php
+
+                        // Fetch booking details with flight no
+                        $sql = "
+                                SELECT 
+                                    booking.book_id, 
+                                    booking.name, 
+                                    booking.dob, 
+                                    booking.email, 
+                                    flight.flight_no 
+                                FROM booking 
+                                JOIN flight ON booking.flight_id = flight.flight_id 
+                                WHERE booking.status = true";
+                        
+                        $result = mysqli_query($conn, $sql);
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr>
+                                        <td>{$row['name']}</td>
+                                        <td>{$row['dob']}</td>
+                                        <td>{$row['email']}</td>
+                                        <td>{$row['flight_no']}</td> <!-- Display flight number -->
+                                        <td>
+                                            <form method='post'>
+                                                <input type='hidden' name='book_id' value='{$row['book_id']}'>
+                                                <button type='submit' name='delete'>DELETE</button>
+                                            </form>
+                                        </td>
+                                    </tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='7'>No bookings found</td></tr>";
+                        }
+                    ?>
+                    
                 </tbody>
             </table>
         </section>
     </main>
 </body>
 </html>
+

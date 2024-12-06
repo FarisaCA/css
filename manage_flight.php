@@ -180,24 +180,7 @@
             }
             echo "</table>";
         }
-        // if (isset($_POST['update'])) 
-        // { 
-        //     $f_no = $_POST['fno'];
-        //     $from = $_POST['from'];
-        //     $d_datetime = $_POST['d_datetime'];
-        //     $to = $_POST['to'];
-        //     $r_datetime = $_POST['r_datetime'];
-        //     $baggage = $_POST['baggage'];
-        //     $price=$_POST['price'];
-
-        //     $sql="UPDATE `flight` SET `flight_no`='$f_no',`departure`='$from',
-        //     `d_datetime`='$d_datetime',`arrival`='$to',`r_datetime`='$r_datetime'
-        //     ,`baggage`='$baggage',`price`='$price' WHERE  `flight_id`='$flight_id'";
-            
-        //       if($conn->query($sql)==FALSE){
-        //         die("error updating value:".$conn->error);
-        //       }
-        // }
+        
     if (isset($_POST['delete']))
     {
         $f_no = $_POST['fno'];

@@ -181,7 +181,6 @@ if (isset($_SESSION['flight_no']) && isset($_SESSION['price'])) {
 <?php
 @include './connect.php';  // Include your database connection
 
-
 // Initialize form values
 $name = $gender = $dob = $email = $class = $letters = $numbers = '';
 
@@ -206,15 +205,6 @@ if (isset($_POST['submit'])) {
     $letters = $_POST['letters'];
     $numbers = $_POST['numbers'];
     $seat = $letters . $numbers;
-
-
-
-    //Check if flight_id is set in session
-  // if (!isset($_SESSION['flight_id'])) {
-      //echo "Flight ID is not set.";
-     // exit;
-    
-  // }
    
     // Insert query
     $insertQuery = "INSERT INTO booking(  flight_id,name, gender, dob, email, class, seat) 
@@ -279,7 +269,7 @@ $conn->close();
         </div>
     <?php endif; ?>
 
-    <form method="POST">
+    <form method="POST" action="payment.php">
     <?php $flight_id = isset($_GET['flight_id']) ? htmlspecialchars($_GET['flight_id']) : '';?>
     <?php $flight_no = isset($_GET['flight_no']) ? htmlspecialchars($_GET['flight_no']) : '';?>
       <div class="input">
