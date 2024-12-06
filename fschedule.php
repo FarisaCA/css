@@ -1,9 +1,36 @@
 <?php
-// db connection
+// Database connection
 @include './connect.php';
 
-// Fetch flights
-$sql = "SELECT flight_number, departure_datetime, arrival_datetime, status FROM flight";
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Handle AJAX requests
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Read POST data
+    $input = json_decode(file_get_contents('php://input'), true);
+    $flightNumber = $input['flight_no'];
+    $status = $input['f_status'];
+
+    // Update flight status
+    $sql = "UPDATE flight SET f_status = ? WHERE flight_no = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ss', $status, $flightNumber);
+    $stmt->execute();
+
+    // Update booking status
+    $updateBookings = "UPDATE booking SET status = ? WHERE flight_no = ?";
+    $stmt2 = $conn->prepare($updateBookings);
+    $stmt2->bind_param('ss', $status, $flightNumber);
+    $stmt2->execute();
+
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+// Fetch flights for display
+$sql = "SELECT flight_no, d_datetime, r_datetime, f_status FROM flight";
 $result = $conn->query($sql);
 $flights = [];
 if ($result->num_rows > 0) {
@@ -11,9 +38,7 @@ if ($result->num_rows > 0) {
         $flights[] = $row;
     }
 }
-echo json_encode($flights);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,31 +47,27 @@ echo json_encode($flights);
     <title>Manage Flights</title>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetchFlights();
-
-            async function fetchFlights() {
-                const response = await fetch('fetch_flights.php');
-                const flights = await response.json();
-                const table = document.getElementById('flightsTable');
-                
-                flights.forEach(flight => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${flight.flight_number}</td>
-                        <td>${flight.departure_datetime}</td>
-                        <td>${flight.arrival_datetime}</td>
-                        <td id="status-${flight.flight_number}">${flight.status}</td>
-                        <td>
-                            <button onclick="updateStatus('${flight.flight_number}', 'Departed')">Mark as Departed</button>
-                        </td>
-                    `;
-                    table.appendChild(row);
-                });
-            }
+            const flights = <?php echo json_encode($flights); ?>; // Embed PHP array into JavaScript
+            const table = document.getElementById('flightsTable');
+            
+            flights.forEach(flight => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${flight.flight_no}</td>
+                    <td>${flight.d_datetime}</td>
+                    <td>${flight.r_datetime}</td>
+                    <td id="status-${flight.flight_no}">${flight.f_status}</td>
+                    <td>
+                        <button onclick="updateStatus('${flight.flight_no}', 'Departed')">Mark as Departed</button>
+                        <button onclick="updateStatus('${flight.flight_no}', 'Delayed')">Mark as Delayed</button>
+                    </td>
+                `;
+                table.appendChild(row);
+            });
         });
 
         async function updateStatus(flightNumber, status) {
-            const response = await fetch('update_status.php', {
+            const response = await fetch('', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ flight_number: flightNumber, status })
@@ -54,6 +75,8 @@ echo json_encode($flights);
             const result = await response.json();
             if (result.success) {
                 document.getElementById(`status-${flightNumber}`).textContent = status;
+            } else {
+                alert('Failed to update status.');
             }
         }
     </script>
@@ -74,23 +97,3 @@ echo json_encode($flights);
     </table>
 </body>
 </html>
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $flightNumber = $_POST['flight_number'];
-    $status = $_POST['status'];
-
-    $sql = "UPDATE flight SET status = ? WHERE flight_number = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ss', $status, $flightNumber);
-    $stmt->execute();
-
-    // Update bookings
-    $updateBookings = "UPDATE booking SET status = ? WHERE flight_number = ?";
-    $stmt2 = $conn->prepare($updateBookings);
-    $stmt2->bind_param('ss', $status, $flightNumber);
-    $stmt2->execute();
-
-    echo json_encode(['success' => true]);
-}
-?>
-
