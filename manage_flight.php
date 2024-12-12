@@ -137,7 +137,7 @@
     }
     
 
-        // Fetch and display books
+        // Fetch and display bookings
         $sql = "SELECT * FROM flight where `status`=true ";
         $data = mysqli_query($conn, $sql);
         

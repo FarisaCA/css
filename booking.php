@@ -178,7 +178,10 @@ if (isset($_SESSION['flight_no']) && isset($_SESSION['price'])) {
     $flight_no = $_SESSION['flight_no'];
     $price = $_SESSION['price'];
 } -->
+
+
 <?php
+
 @include './connect.php';  // Include your database connection
 
 // Initialize form values
@@ -193,11 +196,9 @@ error_reporting(E_ALL);
 // }
 
 if (isset($_POST['submit'])) {
-  
-
     // Collect form data
     $name = $_POST['name'];
-    $flight_id=$_POST['flight_id'];
+    $flight_id = $_POST['flight_id'];
     $gender = $_POST['gender'];
     $dob = $_POST['dob'];
     $email = $_POST['email'];
@@ -205,31 +206,44 @@ if (isset($_POST['submit'])) {
     $letters = $_POST['letters'];
     $numbers = $_POST['numbers'];
     $seat = $letters . $numbers;
-   
+
+    // Check if the seat is already booked
+    $sql_check_seat = "SELECT * FROM booking WHERE seat = '$seat'";
+    $result = mysqli_query($conn, $sql_check_seat);
+
+    if (mysqli_num_rows($result) > 0) {
+        echo "<script>alert('The seat $seat is already booked. Please choose another seat.')</script>";
+        exit;
+    }
+
     // Insert query
-    $insertQuery = "INSERT INTO booking(  flight_id,name, gender, dob, email, class, seat) 
-    VALUES ( '$flight_id','$name','$gender', '$dob', '$email', '$class', '$seat')";
+    $insertQuery = "INSERT INTO booking (flight_id, name, gender, dob, email, class, seat) 
+                    VALUES ('$flight_id', '$name', '$gender', '$dob', '$email', '$class', '$seat')";
 
     if ($conn->query($insertQuery) === TRUE) {
-        echo "One row inserted";
+        echo "One row inserted<br>";
 
-        // Get the most recent booking to retrieve the booking ID
+        // Retrieve the most recent booking to get the booking ID
         $sql = "SELECT * FROM booking WHERE flight_id = $flight_id ORDER BY book_id DESC LIMIT 1";
         $data = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_array($data);
-
-        $book_id = $row['book_id'];
-        $_SESSION['book_id'] = $book_id; // Save the booking ID in session
+        
+        if ($data) {
+            $row = mysqli_fetch_array($data);
+            $book_id = $row['book_id'];
+            $_SESSION['book_id'] = $book_id; // Save the booking ID in session
+        } else {
+            echo "Error retrieving booking: " . mysqli_error($conn);
+        }
 
         // Optionally redirect after successful booking
-        // header("Location: decor.php");
+        // header("Location: payment.php"); // Uncomment to redirect after booking
         exit;
     } else {
         echo "Error: " . $insertQuery . "<br>" . $conn->error;
     }
 }
 
-// Close the database connection
+// Close the database connection after operations
 $conn->close();
 ?>
 
@@ -251,27 +265,11 @@ $conn->close();
   <div class="form-container">
     <h2>Book Your Flight</h2>
 
-    <!-- Display error messages -->
-    <?php if (!empty($error)): ?>
-        <div class="error">
-            <?php foreach ($error as $err): ?>
-                <p><?= htmlspecialchars($err) ?></p>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
-
-    <!-- Display success messages -->
-    <?php if (!empty($success)): ?>
-        <div class="success">
-            <?php foreach ($success as $msg): ?>
-                <p><?= htmlspecialchars($msg) ?></p>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
-
-    <form method="POST" action="payment.php">
-    <?php $flight_id = isset($_GET['flight_id']) ? htmlspecialchars($_GET['flight_id']) : '';?>
-    <?php $flight_no = isset($_GET['flight_no']) ? htmlspecialchars($_GET['flight_no']) : '';?>
+    <form method="POST">
+    <?php 
+        $flight_id = isset($_GET['flight_id']) ? htmlspecialchars($_GET['flight_id']) : ''; 
+        $flight_no = isset($_GET['flight_no']) ? htmlspecialchars($_GET['flight_no']) : '';
+    ?>
       <div class="input">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<?= htmlspecialchars($name) ?>" required>
@@ -325,7 +323,7 @@ $conn->close();
             <option value="C" <?= $letters === 'C' ? 'selected' : '' ?>>C</option>
             <option value="D" <?= $letters === 'D' ? 'selected' : '' ?>>D</option>
             <option value="E" <?= $letters === 'E' ? 'selected' : '' ?>>E</option>
-            <option value="F" <?= $letters === 'F ' ? 'selected' : '' ?>>F</option>
+            <option value="F" <?= $letters === 'F' ? 'selected' : '' ?>>F</option>
         </select>
         <select name="numbers" required>
             <?php for ($i = 1; $i <= 20; $i++): ?>
@@ -338,17 +336,5 @@ $conn->close();
     </form>
   </div>
 
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-   // document.getElementById('flight').value= urlParams.get('flight_no') || '';
-    document.getElementById('price').value = urlParams.get('price') || '';
-  </script>
-
 </body>
-<img class="seat_image" src="seat.png" alt="this is seat image">
 </html>
- <!-- Retrieve flight details from session
-if (isset($_SESSION['flight_no']) && isset($_SESSION['price'])) {
-    $flight_no = $_SESSION['flight_no'];
-    $price = $_SESSION['price'];
-} -->

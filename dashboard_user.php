@@ -3,21 +3,22 @@
 session_start();
 
 // Redirect if the user is not logged in
-if (!isset($_SESSION['email'])) {
-    header('location: ./login.php');
-    exit();
-}
+    if (!isset($_SESSION['email'])) {
+        header('location: ./login.php');
+        exit();
+    }
 
 // Get the email from the session
-$email = $_SESSION['email'];
+    $email = $_SESSION['email'];
 
 // Fetch user details
-$sql_pro = mysqli_query($conn, "SELECT * FROM user_reg WHERE email='$email'");
-if (!$sql_pro) {
-    die("Query failed: " . mysqli_error($conn));
-}
+    $sql_pro = mysqli_query($conn, "SELECT * FROM user_reg WHERE email='$email'");
+    if (!$sql_pro) {
+        die("Query failed: " . mysqli_error($conn));
+    }
 
 $user_details = mysqli_fetch_assoc($sql_pro);
+
 ?>
 
 <!DOCTYPE html>
@@ -262,7 +263,7 @@ $user_details = mysqli_fetch_assoc($sql_pro);
         <h2>Dashboard</h2>
         <ul>
             <li><a href="#" class="profile-nav"><i class="fas fa-user"></i> My Profile</a></li>
-            <li><a href="#" class="booking-nav"><i class="fas fa-book"></i> My Bookings</a></li>
+            <li><a href="showbook.php" class="booking-nav"><i class="fas fa-book"></i> My Bookings</a></li>
             <li><a href="search_flight.php"><i class="fas fa-plane"></i> Book Tickets</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
@@ -270,7 +271,7 @@ $user_details = mysqli_fetch_assoc($sql_pro);
 
     <div class="content">
         <div class="header">
-            <h1>Airline Reservation System</h1>
+            <h1>FIFA AIRLINES</h1>
         </div>
 
         <div class="default-section show">
@@ -299,31 +300,41 @@ $user_details = mysqli_fetch_assoc($sql_pro);
                         <th>Seat</th>
                         <th>Price</th>
                         <th>Type</th>
-                        <th>Date</th>
+                        <th>Date & Time</th>
                         <th>Ticket</th>
+                        <th>status</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Nihal Sidheek</td>
-                        <td>nihal@gmail.com</td>
-                        <td>Flight 101</td>
-                        <td>A12</td>
-                        <td>$200</td>
-                        <td>Economy</td>
-                        <td>2024-12-02</td>
-                        <td><button class="ticket-btn" onclick="openModal('Nihal Sidheek', 'nihal@gmail.com', 'Flight 101', 'A12', '$200', 'Economy', '2024-12-02')">click here</button></td>
-                    </tr>
-                    <tr>
-                        <td>Jane Smith</td>
-                        <td>jane@example.com</td>
-                        <td>Flight 202</td>
-                        <td>B15</td>
-                        <td>$350</td>
-                        <td>Business</td>
-                        <td>2024-12-05</td>
-                        <td><button class="ticket-btn" onclick="openModal('Jane Smith', 'jane@example.com', 'Flight 202', 'B15', '$350', 'Business', '2024-12-05')">click here</button></td>
-                    </tr>
+                    <tbody>
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['name']); ?></td>
+                                <td><?php echo htmlspecialchars($row['email']); ?></td>
+                                <td><?php echo htmlspecialchars($row['flight']); ?></td>
+                                <td><?php echo htmlspecialchars($row['seat']); ?></td>
+                                <td><?php echo htmlspecialchars($row['price']); ?></td>
+                                <td><?php echo htmlspecialchars($row['type']); ?></td>
+                                <td><?php echo htmlspecialchars($row['date']); ?></td>
+                                <td><?php echo $row['status'] === 'cancelled' ? 'N/A' : 'Valid'; ?></td>
+                                <td><?php echo htmlspecialchars($row['flight_status'] ?? 'Pending'); ?></td>
+                                <td>
+                                    <?php if ($row['status'] !== 'cancelled'): ?>
+                                        <form method="POST">
+                                            <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
+                                            <button type="submit" name="cancel_booking" class="btn-cancel">Cancel</button>
+                                        </form>
+                                    <?php else: ?>
+                                        Cancelled
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="10">No bookings found.</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>

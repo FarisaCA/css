@@ -1,99 +1,132 @@
 <?php
-// Database connection
-@include './connect.php';
+session_start();
 
+// Database connection
+$conn = new mysqli("localhost", "root", "", "airline");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle AJAX requests
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Read POST data
-    $input = json_decode(file_get_contents('php://input'), true);
-    $flightNumber = $input['flight_no'];
-    $status = $input['f_status'];
+// Handle 'Delay' action
+if (isset($_POST['delay_flight'])) {
+    $flight_id = $_POST['flight_id'];
 
-    // Update flight status
-    $sql = "UPDATE flight SET f_status = ? WHERE flight_no = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ss', $status, $flightNumber);
-    $stmt->execute();
-
-    // Update booking status
-    $updateBookings = "UPDATE booking SET status = ? WHERE flight_no = ?";
-    $stmt2 = $conn->prepare($updateBookings);
-    $stmt2->bind_param('ss', $status, $flightNumber);
-    $stmt2->execute();
-
-    echo json_encode(['success' => true]);
-    exit;
+    // Update flight status to 'Delayed'
+    $updateFlightQuery = "UPDATE flight SET f_status = 'Delayed' WHERE flight_id = ?";
+    $stmt = $conn->prepare($updateFlightQuery);
+    $stmt->bind_param('i', $flight_id);
+    if ($stmt->execute()) {
+        $message = "Flight marked as delayed successfully.";
+    } else {
+        $message = "Error: " . $stmt->error;
+        error_log("Error: " . $stmt->error); // Log the error to your server's error log
+    }
 }
 
-// Fetch flights for display
-$sql = "SELECT flight_no, d_datetime, r_datetime, f_status FROM flight";
+// Handle 'Departed' action
+if (isset($_POST['depart_flight'])) {
+    $flight_id = $_POST['flight_id'];
+
+    // Update flight status to 'Departed'
+    $updateFlightQuery = "UPDATE flight SET f_status = 'Departed' WHERE flight_id = ?";
+    $stmt = $conn->prepare($updateFlightQuery);
+    $stmt->bind_param('i', $flight_id);
+    if ($stmt->execute()) {
+        $message = "Flight marked as departed successfully.";
+    } else {
+        $message = "Error: " . $stmt->error;
+        error_log("Error: " . $stmt->error); // Log the error to your server's error log
+    }
+}
+
+// Fetch all flights
+$sql = "SELECT flight_id, flight_no, d_datetime, r_datetime, f_status FROM flight";
 $result = $conn->query($sql);
 $flights = [];
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $flights[] = $row;
     }
 }
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Flights</title>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const flights = <?php echo json_encode($flights); ?>; // Embed PHP array into JavaScript
-            const table = document.getElementById('flightsTable');
-            
-            flights.forEach(flight => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${flight.flight_no}</td>
-                    <td>${flight.d_datetime}</td>
-                    <td>${flight.r_datetime}</td>
-                    <td id="status-${flight.flight_no}">${flight.f_status}</td>
-                    <td>
-                        <button onclick="updateStatus('${flight.flight_no}', 'Departed')">Mark as Departed</button>
-                        <button onclick="updateStatus('${flight.flight_no}', 'Delayed')">Mark as Delayed</button>
-                    </td>
-                `;
-                table.appendChild(row);
-            });
-        });
-
-        async function updateStatus(flightNumber, status) {
-            const response = await fetch('', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ flight_number: flightNumber, status })
-            });
-            const result = await response.json();
-            if (result.success) {
-                document.getElementById(`status-${flightNumber}`).textContent = status;
-            } else {
-                alert('Failed to update status.');
-            }
+    <title>Manage Flight Scheduling</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-    </script>
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 2px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Manage Flight Scheduling</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Flight Number</th>
-                <th>Departure DateTime</th>
-                <th>Arrival DateTime</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="flightsTable"></tbody>
-    </table>
+    <main class="container">
+        <h1>Manage Flight Scheduling</h1>
+
+        <!-- Display success or error message -->
+        <?php if (isset($message)): ?>
+            <div class="message"><?php echo htmlspecialchars($message); ?></div>
+        <?php endif; ?>
+
+        <!-- Displaying all flights -->
+        <section class="booking-details">
+            <?php if (!empty($flights)): ?>
+                <table class="booking-table">
+                    <thead>
+                        <tr>
+                            <th>Flight ID</th>
+                            <th>Flight No</th>
+                            <th>Departure Time</th>
+                            <th>Arrival Time</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($flights as $flight): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($flight['flight_id']) ?></td>
+                                <td><?= htmlspecialchars($flight['flight_no']) ?></td>
+                                <td><?= htmlspecialchars($flight['d_datetime']) ?></td>
+                                <td><?= htmlspecialchars($flight['r_datetime']) ?></td>
+                                <td><?= htmlspecialchars($flight['f_status']) ?></td>
+                                <td>
+                                    <!-- Show the buttons for all flights, but disable them if the status is 'Departed' or 'Delayed' -->
+                                    <form method="POST" style="display:inline;">
+                                        <input type="hidden" name="flight_id" value="<?= $flight['flight_id'] ?>">
+                                        <button type="submit" name="depart_flight" <?= $flight['f_status'] == 'Departed' ? 'disabled' : '' ?>>Depart</button>
+                                    </form>
+                                    <form method="POST" style="display:inline;">
+                                        <input type="hidden" name="flight_id" value="<?= $flight['flight_id'] ?>">
+                                        <button type="submit" name="delay_flight" <?= $flight['f_status'] == 'Delayed' ? 'disabled' : '' ?>>Delay</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>No flights available.</p>
+            <?php endif; ?>
+        </section>
+    </main>
 </body>
 </html>

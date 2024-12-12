@@ -243,23 +243,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="navbar">
         <h2>FIFA AIRLINES</h2>
         </div>
-        <button>Back</button>
+        <button href="booking.php">Back</button>
     <h1>P A Y M E N T</h1>
 
     <div class="tabs">
         <form method="POST" style="display:inline;">
-            <input type="hidden" name="toggle_form" value="card">
+            <input type="hidden" name="toggle_form" value="card"required>
             <button type="submit" class="tab <?= $activeForm === 'card' ? 'active-tab' : '' ?>">Card Payment</button>
         </form>
         <form method="POST" style="display:inline;">
-            <input type="hidden" name="toggle_form" value="upi">
+            <input type="hidden" name="toggle_form" value="upi" required>
             <button type="submit" class="tab <?= $activeForm === 'upi' ? 'active-tab' : '' ?>">UPI Payment</button>
         </form>
     </div>
 
     <?php if ($activeForm === 'card') : ?>
         <div class="form active-form">
-            <form method="POST" action="">
+            <form method="POST" action="" required>
                 <div class="form-group">
                     <label for="card_number">Card Number</label>
                     <input type="text" id="card_number"name="card_number" required>
@@ -289,7 +289,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label>CVV</label>
                     <input type="password" id=""name="cvv" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" required>
                     <button type="submit" name="pay_with_card">Pay</button>
                 </div>
                 <?php if ($message) : ?>
