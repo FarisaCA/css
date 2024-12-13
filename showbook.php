@@ -2,13 +2,41 @@
 // Start the session
 session_start();
 
+// Check if the user is logged in, if not, redirect to login page
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
+
 // Database connection
 $conn = new mysqli("localhost", "root", "", "airline");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL Query to fetch the necessary data
+// Handle the cancel action
+if (isset($_POST['cancel'])) {
+
+    $booking_id = $_POST['book_id'];
+
+    // Update the booking status to cancelled (set the cancel flag to 1)
+    $sql = "UPDATE booking SET cancel = 1 WHERE book_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $booking_id); 
+    
+    if ($stmt->execute()) {
+        // Redirect to the same page after successful cancellation
+        header("Location: showbook.php?message=Booking%20cancelled%20successfully");
+        exit();
+    } else {
+        // Handle error if the query fails
+        $error_message = "Error cancelling booking: " . $stmt->error;
+    }
+}
+
+// Get the email from session
+$email = $_SESSION['email'];
+
 $sql = "
     SELECT 
         booking.name, 
@@ -18,20 +46,34 @@ $sql = "
         flight.price, 
         flight.d_datetime, 
         flight.flight_no, 
-        flight.f_status
+        flight.f_status,
+        booking.flight_id,
+        booking.cancel,
+        booking.book_id
     FROM 
         booking
     JOIN 
-        flight ON booking.flight_id= flight.flight_id 
+        flight ON booking.flight_id = flight.flight_id
+    WHERE
+        booking.email = ?  -- Filter by logged-in user's email
 ";
 
-$result = $conn->query($sql);
+// Prepare and execute the SQL query with the email
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('s', $email); 
+$stmt->execute();
+$result = $stmt->get_result();
 $bookings = [];
+
 if ($result && $result->num_rows > 0) {
+    // Fetch the booking details
     while ($row = $result->fetch_assoc()) {
         $bookings[] = $row;
     }
+} else {
+    $message = "No bookings found for the logged-in user.";
 }
+
 $conn->close();
 ?>
 
@@ -60,6 +102,16 @@ $conn->close();
             border: 1px solid #ddd;
             margin-bottom: 20px;
         }
+        .cancel-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .cancel-btn:hover {
+            background-color: darkred;
+        }
     </style>
 </head>
 <body>
@@ -67,8 +119,16 @@ $conn->close();
         <h1>Booking Details</h1>
 
         <!-- Display success or error message -->
+        <?php if (isset($_GET['message'])): ?>
+            <div class="message"><?php echo htmlspecialchars($_GET['message']); ?></div>
+        <?php endif; ?>
+
         <?php if (isset($message)): ?>
             <div class="message"><?php echo htmlspecialchars($message); ?></div>
+        <?php endif; ?>
+        
+        <?php if (isset($error_message)): ?>
+            <div class="message" style="background-color: #ffcccc;"><?php echo htmlspecialchars($error_message); ?></div>
         <?php endif; ?>
 
         <!-- Displaying booking details -->
@@ -79,12 +139,13 @@ $conn->close();
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Seat</th>
-                            <th>Class</th>
-                            <th>Price</th>
-                            <th>Departure Time</th>
                             <th>Flight No</th>
+                            <th>Departure D&T</th>
+                            <th>Class</th>
+                            <th>Seat</th>
+                            <th>Price</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,18 +153,28 @@ $conn->close();
                             <tr>
                                 <td><?= htmlspecialchars($booking['name']) ?></td>
                                 <td><?= htmlspecialchars($booking['email']) ?></td>
-                                <td><?= htmlspecialchars($booking['seat']) ?></td>
-                                <td><?= htmlspecialchars($booking['class']) ?></td>
-                                <td><?= htmlspecialchars($booking['price']) ?></td>
-                                <td><?= htmlspecialchars($booking['d_datetime']) ?></td>
                                 <td><?= htmlspecialchars($booking['flight_no']) ?></td>
+                                <td><?= htmlspecialchars($booking['d_datetime']) ?></td>
+                                <td><?= htmlspecialchars($booking['class']) ?></td>
+                                <td><?= htmlspecialchars($booking['seat']) ?></td>
+                                <td><?= htmlspecialchars($booking['price']) ?></td>
                                 <td><?= htmlspecialchars($booking['f_status']) ?></td>
+                                <td>
+                                    <?php if ($booking['cancel'] == 0): ?>
+                                        <form method="POST" action="showbook.php">
+                                            <input type="hidden" name="book_id" value="<?= $booking['book_id'] ?>">
+                                            <button type="submit" name="cancel" class="cancel-btn">Cancel</button>
+                                        </form>
+                                    <?php else: ?>
+                                        <span>Cancelled</span>
+                                    <?php endif; ?>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             <?php else: ?>
-                <p>No bookings available.</p>
+                <p>No bookings available for your account.</p>
             <?php endif; ?>
         </section>
     </main>

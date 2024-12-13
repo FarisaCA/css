@@ -40,7 +40,7 @@ if (isset($_POST['depart_flight'])) {
 }
 
 // Fetch all flights
-$sql = "SELECT flight_id, flight_no, d_datetime, r_datetime, f_status FROM flight";
+$sql = "SELECT flight_id, flight_no, d_datetime, r_datetime, f_status FROM flight where `status`=true";
 $result = $conn->query($sql);
 $flights = [];
 if ($result && $result->num_rows > 0) {
