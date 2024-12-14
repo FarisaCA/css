@@ -80,6 +80,8 @@ if (empty($pword) || empty($cpword)) {
          mysqli_query($conn, $insert_login);
 
          $success[] = "Registration successful!";
+         echo '<p style="color: white; font-size: 18px; font-weight: 500;">' . implode('<br>', $success) . '</p>';
+
          header('Refresh: 2; URL=admin.php');  // Redirects after 2 seconds
         
       }

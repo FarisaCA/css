@@ -1,0 +1,184 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    background-image: url('ad-img.jpg');
+    background-size: cover;
+}
+
+header {
+    background-color: #682cec9e;
+    color: white;
+    text-align: center;
+    padding: 20px ;
+    display: flex;
+    justify-content: space-between; /* Make the header items (title and links) spaced apart */
+    align-items: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    gap: 20px; /* Space between the links */
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: white;
+    padding: 10px 20px;
+    background-color: #673ed9;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #cdc2d3;
+    color: white;
+}
+
+/* Table and form styles remain unchanged from previous version */
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #673ed9;
+    color: white;
+    font-size: 1.1rem;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row colors for better readability */
+}
+
+tr:hover {
+    background-color: #e0f7fa; /* Highlight rows on hover */
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #005a87;
+}
+
+/* Style for the Edit Manager heading */
+.manager {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Style for the form fields in the Edit Manager section */
+.form-man {
+    width: 40%;
+    margin: 0 auto;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the labels in the form */
+.form-man label {
+    font-size: 16px;
+    color: #555;
+    display: block;
+    margin: 10px 0 5px;
+}
+
+/* Style for the input fields and textarea */
+.form-man input[type="text"],
+.form-man input[type="email"],
+.form-man textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* Style for the submit button */
+.form-man input[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the submit button */
+.form-man input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Style for the Edit and Delete buttons */
+ button {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 5px;
+}
+
+/* Hover effect for the Edit button */
+.form-man[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Hover effect for the Delete button */
+button[type="button"]:hover {
+    background-color: #dc3545;
+}
+
+/* Style for delete button */
+.form-man[onsubmit="return confirm('Are you sure you want to delete this manager?')"] button {
+    background-color: #dc3545;
+}
+
+/* Hover effect for the Delete button */
+.form-man[onsubmit="return confirm('Are you sure you want to delete this manager?')"] button:hover {
+    background-color: #c82333;
+}
+

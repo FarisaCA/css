@@ -163,7 +163,7 @@ $conn->close();
                                     <?php if ($booking['cancel'] == 0): ?>
                                         <form method="POST" action="showbook.php">
                                             <input type="hidden" name="book_id" value="<?= $booking['book_id'] ?>">
-                                            <button type="submit" name="cancel" class="cancel-btn">Cancel</button>
+                                            <button type="submit" name="cancel" class="cancel-btn">Cancel Flight</button>
                                         </form>
                                     <?php else: ?>
                                         <span>Cancelled</span>
