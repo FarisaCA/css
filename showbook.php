@@ -83,6 +83,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Details</title>
+    <link rel="stylesheet" href="showbook.css">
     <style>
         table {
             width: 100%;
@@ -115,8 +116,15 @@ $conn->close();
     </style>
 </head>
 <body>
+<header>
+        <nav>
+            <a href="dashboard_user.php">Back to Dashboard</a>
+        </nav>
+    </header>
+
+
     <main class="container">
-        <h1>Booking Details</h1>
+        <h1>BOOKING DETAILS</h1>
 
         <!-- Display success or error message -->
         <?php if (isset($_GET['message'])): ?>

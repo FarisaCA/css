@@ -17,7 +17,7 @@
 
     <nav class="navbar">
             <h1>FIFA AIRLINES</h1>
-            <a href="fmanager_dashboard.php">Home</a>
+            <a href="fmanager_dashboard.php">Back to Dashboard</a>
     </nav>
     
     <div class="div1">
@@ -113,12 +113,11 @@
                     `price` = ? 
                 WHERE `flight_id` = ?";
         
-        // Prepare the query
+        
         if ($stmt = $conn->prepare($sql)) {
             // Bind parameters
             $stmt->bind_param('ssssssss', $f_no, $from, $d_datetime, $to, $r_datetime, $baggage, $price, $flight_id);
     
-            // Execute the query
             if ($stmt->execute()) {
                 echo "<script>alert('Record updated successfully');</script>";
             } else {

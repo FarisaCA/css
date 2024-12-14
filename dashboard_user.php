@@ -280,7 +280,7 @@ $user_details = mysqli_fetch_assoc($sql_pro);
                 <h3 class="title-welcome"> Hope you have a great experience with us.
             </h3>
         </div>
-
+        
         <div class="profile-section">
             <h2 class="head-h2">User Details</h2>
             <p class="profile"><strong>Name:</strong> <?php echo htmlspecialchars($user_details['name']); ?></p>

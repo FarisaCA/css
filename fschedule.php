@@ -57,6 +57,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Flight Scheduling</title>
+    <link rel="stylesheet" href="fschedule.css">
     <style>
         table {
             width: 100%;
@@ -78,6 +79,12 @@ $conn->close();
     </style>
 </head>
 <body>
+<header>
+        <nav>
+            <a href="fmanager_dashboard.php">Back to Dashboard</a>
+        </nav>
+    </header>
+  
     <main class="container">
         <h1>Manage Flight Scheduling</h1>
 
