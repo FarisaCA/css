@@ -139,6 +139,11 @@ $conn->close();
             <div class="message" style="background-color: #ffcccc;"><?php echo htmlspecialchars($error_message); ?></div>
         <?php endif; ?>
 
+         <!-- Displaying a cancellation message that appears for 1 minute -->
+        <div id="cancel-message" class="message" style="background-color: #fff3cd; color: #856404;">
+            You can cancel the flight within 24 hours of booking.
+        </div>
+
         <!-- Displaying booking details -->
         <section class="booking-details">
             <?php if (!empty($bookings)): ?>
@@ -186,5 +191,11 @@ $conn->close();
             <?php endif; ?>
         </section>
     </main>
+            <script>
+        setTimeout(function() {
+            var message = document.getElementById('cancel-message');
+            message.style.display = 'none';  // Hide the message after 1 minute
+        }, 8000); // 60000 ms = 1 minute
+        </script>
 </body>
 </html>

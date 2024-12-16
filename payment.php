@@ -93,6 +93,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 margin-left:750px;
 
             }
+            .back-btn {
+                        background-color:rgb(42, 8, 145); /* Green background */
+                        color: white; /* White text */
+                        font-size: 16px; /* Font size */
+                        padding: 10px 20px; /* Padding around text */
+                        border: none; /* Remove default border */
+                        border-radius: 5px; /* Rounded corners */
+                        cursor: pointer; /* Cursor changes to pointer on hover */
+                        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for background color and transform */
+                        margin-left:1300px;
+                    }
+
+            .back-btn:hover {
+                background-color:rgb(156, 155, 229); /* Darker green on hover */
+                transform: scale(1.02); /* Slightly enlarge the button on hover */
+            }
+
+            .back-btn:focus {
+                outline: none;
+            }
 
     </style>
 </head>
@@ -101,9 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="navbar">
         <h2>FIFA AIRLINES</h2>
         </div>
-        <a href="booking.php"><button type="button">Back</button></a>
+        <a href="booking.php"><button class="back-btn" type="button">Back</button></a>
     <h1>P A Y M E N T</h1>
-
+ 
     <div class="tabs">
         <form method="POST" style="display:inline;">
             <input type="hidden" name="toggle_form" value="card"required>
