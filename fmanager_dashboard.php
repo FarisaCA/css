@@ -40,6 +40,7 @@ if (isset($_POST['delete'])) {
                 <li><a href="manage_flight.php">Manage Flights</a></li>
                 <li><a href="#bookings">Manage Booking</a></li>
                 <li><a href="fschedule.php">Manage Scheduling</a></li>
+                <li><a href="#cancelbook">Cancelled Flights</a></li>
                 <li><a href="logout.php" class="logout-button">Logout</a></li>
             </ul>
         </nav>
@@ -98,6 +99,45 @@ if (isset($_POST['delete'])) {
                 </tbody>
             </table>
         </section>
+        <section id="cancelbook">
+            <h2>Cancelled Bookings</h2>
+            <table border="2">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>DOB</th>
+                        <th>Email</th>
+                        <th>Flight No</th>
+                    </tr>
+                </thead>
+                <?php
+
+            // Cancelled booking details with flight no
+            $sql = "
+                    SELECT 
+                        booking.book_id, 
+                        booking.name, 
+                        booking.dob, 
+                        booking.email, 
+                        flight.flight_no 
+                    FROM booking 
+                    JOIN flight ON booking.flight_id = flight.flight_id 
+                    WHERE booking.cancel = true";
+
+            $result = mysqli_query($conn, $sql);
+            if ($result && mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>
+                            <td>{$row['name']}</td>
+                            <td>{$row['dob']}</td>
+                            <td>{$row['email']}</td>
+                            <td>{$row['flight_no']}</td> <!-- Display flight number -->
+                        </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='7'>No bookings found</td></tr>";
+            }
+            ?>
     </main>
 </body>
 </html>

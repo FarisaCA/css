@@ -141,7 +141,7 @@ $conn->close();
 
          <!-- Displaying a cancellation message that appears for 1 minute -->
         <div id="cancel-message" class="message" style="background-color: #fff3cd; color: #856404;">
-            You can cancel the flight within 24 hours of booking.
+             A refund of 30% will be processed after deducting cancellation fees.
         </div>
 
         <!-- Displaying booking details -->
