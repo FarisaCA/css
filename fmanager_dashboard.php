@@ -41,7 +41,7 @@ if (isset($_POST['delete'])) {
                 <li><a href="#bookings">Manage Booking</a></li>
                 <li><a href="fschedule.php">Manage Scheduling</a></li>
                 <li><a href="#cancelbook">Cancelled Bookings</a></li>
-                <li><a href="logout.php" class="logout-button">Logout</a></li>
+                <li><a href="logout.php" class="logout-button">Log out</a></li>
             </ul>
         </nav>
     </header>

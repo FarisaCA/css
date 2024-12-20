@@ -71,7 +71,7 @@
 <div class="dashboard-container">
     <h1>Admin Dashboard</h1>
     <a href="manager_register.php"><button class="button">Add Flight Manager</button></a>
-    <a href="./logout.php"><button class="button logout" >Logout</button></a>
+    <a href="./logout.php"><button class="button logout" >Log out</button></a>
     <a href="showmanager.php"><button class="button manager" >Show Managers</button></a>
 </div>
 

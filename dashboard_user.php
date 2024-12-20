@@ -265,7 +265,7 @@ $user_details = mysqli_fetch_assoc($sql_pro);
             <li><a href="#" class="profile-nav"><i class="fas fa-user"></i> My Profile</a></li>
             <li><a href="showbook.php" class="booking-nav"><i class="fas fa-book"></i> My Bookings</a></li>
             <li><a href="search_flight.php"><i class="fas fa-plane"></i> Book Tickets</a></li>
-            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
         </ul>
     </div>
 

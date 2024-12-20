@@ -44,7 +44,7 @@ if (isset($_GET['edit_id'])) {
         <h1>FIFA AIRLINES</h1>
         <nav>
             <a href="admin.php">Back to Dashboard</a>
-            <a href="index.php?logout=true">Logout</a> <!-- Logout button -->
+            <a href="index.php?logout=true">Log out</a> <!-- Logout button -->
         </nav>
     </header>
 
