@@ -1,8 +1,8 @@
 <?php
+
 @include './connect.php';
 session_start();
 
-// Redirect if not logged in as a manager
 if (isset($_SESSION['manager_name'])) { // Fix: Correct session check
     header('location:login.php');
 }
@@ -60,10 +60,8 @@ if (isset($_POST['delete'])) {
                     </tr>
                 </thead>
                 <tbody>
-              
                     <?php
-
-                        // Fetch booking details with flight no
+                        // Fetch booking details with flight no where cancel value is 0 (not cancelled)
                         $sql = "
                                 SELECT 
                                     booking.book_id, 
@@ -73,8 +71,8 @@ if (isset($_POST['delete'])) {
                                     flight.flight_no 
                                 FROM booking 
                                 JOIN flight ON booking.flight_id = flight.flight_id 
-                                WHERE booking.status = true";
-                        
+                                WHERE booking.status = true AND booking.cancel = 0";  // Only show non-cancelled bookings
+
                         $result = mysqli_query($conn, $sql);
                         if ($result && mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -95,10 +93,10 @@ if (isset($_POST['delete'])) {
                             echo "<tr><td colspan='7'>No bookings found</td></tr>";
                         }
                     ?>
-                    
                 </tbody>
             </table>
         </section>
+
         <section id="cancelbook">
             <h2>Cancelled Bookings</h2>
             <table border="2">
@@ -110,35 +108,37 @@ if (isset($_POST['delete'])) {
                         <th>Flight No</th>
                     </tr>
                 </thead>
-                <?php
+                <tbody>
+                    <?php
+                        // Cancelled booking details with flight no
+                        $sql = "
+                                SELECT 
+                                    booking.book_id, 
+                                    booking.name, 
+                                    booking.dob, 
+                                    booking.email, 
+                                    flight.flight_no 
+                                FROM booking 
+                                JOIN flight ON booking.flight_id = flight.flight_id 
+                                WHERE booking.cancel = 1";  // Show only cancelled bookings
 
-            // Cancelled booking details with flight no
-            $sql = "
-                    SELECT 
-                        booking.book_id, 
-                        booking.name, 
-                        booking.dob, 
-                        booking.email, 
-                        flight.flight_no 
-                    FROM booking 
-                    JOIN flight ON booking.flight_id = flight.flight_id 
-                    WHERE booking.cancel = true";
-
-            $result = mysqli_query($conn, $sql);
-            if ($result && mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>
-                            <td>{$row['name']}</td>
-                            <td>{$row['dob']}</td>
-                            <td>{$row['email']}</td>
-                            <td>{$row['flight_no']}</td> <!-- Display flight number -->
-                        </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='7'>No bookings found</td></tr>";
-            }
-            ?>
+                        $result = mysqli_query($conn, $sql);
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr>
+                                        <td>{$row['name']}</td>
+                                        <td>{$row['dob']}</td>
+                                        <td>{$row['email']}</td>
+                                        <td>{$row['flight_no']}</td> <!-- Display flight number -->
+                                    </tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4'>No cancelled bookings found</td></tr>";
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </section>
     </main>
 </body>
 </html>
-

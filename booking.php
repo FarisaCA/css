@@ -1,5 +1,5 @@
 <?php
-@include './connect.php'; 
+@include './connect.php';
 session_start();
 
 $name = $gender = $dob = $email = $class = $letters = $numbers = '';
@@ -14,6 +14,7 @@ error_reporting(E_ALL);
 // }
 
 if (isset($_POST['submit'])) {
+   
     $name = $_POST['name'];
     $flight_id = $_POST['flight_id'];
     $gender = $_POST['gender'];
@@ -24,32 +25,32 @@ if (isset($_POST['submit'])) {
     $numbers = $_POST['numbers'];
     $seat = $letters . $numbers;
 
-    $sql_check_seat = "SELECT * FROM booking WHERE seat = '$seat' AND flight_id = '$flight_id'";
+    $sql_check_seat = "SELECT * FROM booking WHERE seat = '$seat' AND class="$class" AND flight_id = '$flight_id'";
     $result = mysqli_query($conn, $sql_check_seat);
     
     if (mysqli_num_rows($result) > 0) {
+        //  error message without using exit() to keep the page open
         $error_message = "The seat $seat is already booked for flight $flight_id. Please choose another seat.";
-    }
-     else {
+    } 
+    else {
         $insertQuery = "INSERT INTO booking (flight_id, name, gender, dob, email, class, seat) 
                         VALUES ('$flight_id', '$name', '$gender', '$dob', '$email', '$class', '$seat')";
 
-            if ($conn->query($insertQuery) === TRUE) {
+        if ($conn->query($insertQuery) === TRUE) {
 
-                $sql = "SELECT * FROM booking WHERE flight_id = $flight_id ORDER BY book_id DESC LIMIT 1";
-                $data = mysqli_query($conn, $sql);
-                
-                if ($data) {
-                    $row = mysqli_fetch_array($data);
-                    $book_id = $row['book_id'];
-                    $_SESSION['book_id'] = $book_id;
-                } else {
-                    echo "Error retrieving booking: " . mysqli_error($conn);
-                }
-
-                $_SESSION['success_message'] = "Congratulations! Your flight booking is complete. Please proceed to the payment page to finalize your reservation.";
+            $sql = "SELECT * FROM booking WHERE flight_id = $flight_id ORDER BY book_id DESC LIMIT 1";
+            $data = mysqli_query($conn, $sql);
+            
+            if ($data) {
+                $row = mysqli_fetch_array($data);
+                $book_id = $row['book_id'];
+                $_SESSION['book_id'] = $book_id; 
+            } else {
+                echo "Error retrieving booking: " . mysqli_error($conn);
             }
-             else {
+
+            $_SESSION['success_message'] = "Congratulations! Your flight booking is complete. Please proceed to the payment page to finalize your reservation.";
+        } else {
             echo "Error: " . $insertQuery . "<br>" . $conn->error;
         }
     }
@@ -85,16 +86,17 @@ $conn->close();
         </div>
     <?php endif; ?>
 
+   
     <?php if (isset($_SESSION['success_message'])): ?>
         <div class="success-message">
             <script>
                 alert("<?php echo $_SESSION['success_message']; ?>");
                 setTimeout(function() {
-                    window.location.href = "payment.php"; 
-                }, 2000);  
+                    window.location.href = "payment.php";  // Redirect to payment page after 2 seconds
+                }, 2000);
             </script>
         </div>
-        <?php unset($_SESSION['success_message']); ?>
+        <?php unset($_SESSION['success_message']);?>
     <?php endif; ?>
 
     <form method="POST">
@@ -103,7 +105,6 @@ $conn->close();
         $flight_no = isset($_GET['flight_no']) ? htmlspecialchars($_GET['flight_no']) : '';
         $price = isset($_GET['price']) ? htmlspecialchars($_GET['price']) : '';
     ?>
-    
       <div class="input">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<?= htmlspecialchars($name) ?>" required>
