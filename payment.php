@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         border-radius: 5px; /* Rounded corners */
                         cursor: pointer; /* Cursor changes to pointer on hover */
                         transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for background color and transform */
-                        margin-left:1300px;
+                        margin-left:1200px;
                     }
 
             .back-btn:hover {

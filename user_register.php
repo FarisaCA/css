@@ -142,8 +142,8 @@ if (empty($pword) || empty($cpword)) {
                              <?php endif; ?>
                              </div>
 
-                             <div class="form-group">
-                             <input class="input  <?php echo isset($error['email']) ? 'is-invalid' : ''; ?>" type="email" name="email"  value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" placeholder="Enter your email" ><br>
+            <div class="form-group">
+                <input class="input  <?php echo isset($error['email']) ? 'is-invalid' : ''; ?>" type="email" name="email"  value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" placeholder="Enter your email" ><br>
             <?php if (isset($error['email'])): ?>
                                  <div class="invalid-feedback">
                                 <?php echo $error['email']; ?>
@@ -151,8 +151,8 @@ if (empty($pword) || empty($cpword)) {
                              <?php endif; ?>
                              </div>
 
-                             <div class="form-group">
-                             <input class="input  <?php echo isset($error['pword']) ? 'is-invalid' : ''; ?>" type="password" name="pword"  value="<?php echo isset($pword) ? htmlspecialchars($pword) : ''; ?>" placeholder="Enter password" ><br>
+            <div class="form-group">
+                <input class="input  <?php echo isset($error['pword']) ? 'is-invalid' : ''; ?>" type="password" name="pword"  value="<?php echo isset($pword) ? htmlspecialchars($pword) : ''; ?>" placeholder="Enter password" ><br>
             <?php if (isset($error['pword'])): ?>
                                  <div class="invalid-feedback">
                                 <?php echo $error['pword']; ?>
@@ -160,8 +160,8 @@ if (empty($pword) || empty($cpword)) {
                              <?php endif; ?>
                              </div>
 
-                             <div class="form-group">
-                             <input class="input  <?php echo isset($error['cpword']) ? 'is-invalid' : ''; ?>" type="password" name="cpword"  value="<?php echo isset($cpword) ? htmlspecialchars($cpword) : ''; ?>" placeholder="Confirm your password" ><br>
+            <div class="form-group">
+                <input class="input  <?php echo isset($error['cpword']) ? 'is-invalid' : ''; ?>" type="password" name="cpword"  value="<?php echo isset($cpword) ? htmlspecialchars($cpword) : ''; ?>" placeholder="Confirm your password" ><br>
             <?php if (isset($error['cpword'])): ?>
                                  <div class="invalid-feedback">
                                 <?php echo $error['cpword']; ?>
@@ -169,8 +169,8 @@ if (empty($pword) || empty($cpword)) {
                              <?php endif; ?>
                              </div>
 
-                             <div class="form-group">
-                             <input class="input  <?php echo isset($error['phone']) ? 'is-invalid' : ''; ?>" type="number" name="phone"  value="<?php echo isset($phone) ? htmlspecialchars($phone) : ''; ?>" placeholder="Enter your contact number"><br>
+            <div class="form-group">
+                <input class="input  <?php echo isset($error['phone']) ? 'is-invalid' : ''; ?>" type="number" name="phone"  value="<?php echo isset($phone) ? htmlspecialchars($phone) : ''; ?>" placeholder="Enter your contact number"><br>
             <?php if (isset($error['phone'])): ?>
                                  <div class="invalid-feedback">
                                 <?php echo $error['phone']; ?>
@@ -179,7 +179,7 @@ if (empty($pword) || empty($cpword)) {
                              </div>
 
           <div class="form-group">
-                             <input class="input  <?php echo isset($error['address']) ? 'is-invalid' : ''; ?>" type="text" name="address"  value="<?php echo isset($address) ? htmlspecialchars($address) : ''; ?>"placeholder="Enter your address" ><br>
+                <input class="input  <?php echo isset($error['address']) ? 'is-invalid' : ''; ?>" type="text" name="address"  value="<?php echo isset($address) ? htmlspecialchars($address) : ''; ?>"placeholder="Enter your address" ><br>
             <?php if (isset($error['address'])): ?>
                                  <div class="invalid-feedback">
                                 <?php echo $error['address']; ?>
@@ -187,22 +187,20 @@ if (empty($pword) || empty($cpword)) {
                              <?php endif; ?>
                              </div>
 
-                             <div class="radio-group">
-                 <label class="radio-container">Male
+          <div class="radio-group">
+                <label class="radio-container">Male
                      <input type="radio" name="gender" value="male" checked>
                      <span class="checkmark"></span>
-                 </label>
-                 <label class="radio-container">Female
+                </label>
+                <label class="radio-container">Female
                     <input type="radio" name="gender" value="female">
                     <span class="checkmark"></span>
                 </label>
                 <label class="radio-container">Other
                      <input type="radio" name="gender" value="other" >
                      <span class="checkmark"></span>
-                 </label>
-            </div>
-
-
+                </label>
+           </div>
         <button type="submit" name="submit" >REGISTER</button>
         </form>
     </body>
