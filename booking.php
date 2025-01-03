@@ -1,9 +1,9 @@
 <?php
-@include './connect.php';  // Include your database connection
+@include './connect.php'; 
+session_start();
 
-// Initialize form values
 $name = $gender = $dob = $email = $class = $letters = $numbers = '';
-$error_message = '';  // Variable to store error message
+$error_message = ''; 
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -14,7 +14,6 @@ error_reporting(E_ALL);
 // }
 
 if (isset($_POST['submit'])) {
-    // Collect form data
     $name = $_POST['name'];
     $flight_id = $_POST['flight_id'];
     $gender = $_POST['gender'];
@@ -25,42 +24,37 @@ if (isset($_POST['submit'])) {
     $numbers = $_POST['numbers'];
     $seat = $letters . $numbers;
 
-    // Check if the seat is already booked
     $sql_check_seat = "SELECT * FROM booking WHERE seat = '$seat' AND flight_id = '$flight_id'";
     $result = mysqli_query($conn, $sql_check_seat);
     
     if (mysqli_num_rows($result) > 0) {
-        // Set error message without using exit() to keep the page open
         $error_message = "The seat $seat is already booked for flight $flight_id. Please choose another seat.";
-    } else {
-        // Proceed with insertion if seat is not booked
+    }
+     else {
         $insertQuery = "INSERT INTO booking (flight_id, name, gender, dob, email, class, seat) 
                         VALUES ('$flight_id', '$name', '$gender', '$dob', '$email', '$class', '$seat')";
 
-        if ($conn->query($insertQuery) === TRUE) {
-            echo "One row inserted<br>";
+            if ($conn->query($insertQuery) === TRUE) {
 
-            // Retrieve the most recent booking to get the booking ID
-            $sql = "SELECT * FROM booking WHERE flight_id = $flight_id ORDER BY book_id DESC LIMIT 1";
-            $data = mysqli_query($conn, $sql);
-            
-            if ($data) {
-                $row = mysqli_fetch_array($data);
-                $book_id = $row['book_id'];
-                $_SESSION['book_id'] = $book_id; // Save the booking ID in session
-            } else {
-                echo "Error retrieving booking: " . mysqli_error($conn);
+                $sql = "SELECT * FROM booking WHERE flight_id = $flight_id ORDER BY book_id DESC LIMIT 1";
+                $data = mysqli_query($conn, $sql);
+                
+                if ($data) {
+                    $row = mysqli_fetch_array($data);
+                    $book_id = $row['book_id'];
+                    $_SESSION['book_id'] = $book_id;
+                } else {
+                    echo "Error retrieving booking: " . mysqli_error($conn);
+                }
+
+                $_SESSION['success_message'] = "Congratulations! Your flight booking is complete. Please proceed to the payment page to finalize your reservation.";
             }
-          // Redirect to the payment page after successful booking
-            header("Location: payment.php");
-            exit;  // Make sure to exit after the redirect
-        } else {
+             else {
             echo "Error: " . $insertQuery . "<br>" . $conn->error;
         }
     }
 }
 
-// Close the database connection after operations
 $conn->close();
 ?>
 
@@ -82,7 +76,7 @@ $conn->close();
   <div class="form-container">
     <h2>Book Your Flight</h2>
 
-    <!-- Show the error message if there was an issue with booking -->
+
     <?php if ($error_message): ?>
         <div class="error-message">
             <script>
@@ -91,12 +85,25 @@ $conn->close();
         </div>
     <?php endif; ?>
 
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="success-message">
+            <script>
+                alert("<?php echo $_SESSION['success_message']; ?>");
+                setTimeout(function() {
+                    window.location.href = "payment.php"; 
+                }, 2000);  
+            </script>
+        </div>
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
+
     <form method="POST">
     <?php 
         $flight_id = isset($_GET['flight_id']) ? htmlspecialchars($_GET['flight_id']) : ''; 
         $flight_no = isset($_GET['flight_no']) ? htmlspecialchars($_GET['flight_no']) : '';
         $price = isset($_GET['price']) ? htmlspecialchars($_GET['price']) : '';
     ?>
+    
       <div class="input">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<?= htmlspecialchars($name) ?>" required>
