@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST" action="" required>
                 <div class="form-group">
                     <label for="card_number">Card Number</label>
-                    <input type="text" id="card_number"name="card_number" required>
+                    <input type="text" id="card_number" placeholder="Enter 16 Digit Card Number" name="card_number" required>
                 </div>
                 <div class="form-group">
                     <label>Expiry</label>
@@ -159,8 +159,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <option value="12">12</option>
                     </select>
                     <select name="expiry_year" required>
-                        <option value="2024">2024</option>
                         <option value="2025">2025</option>
+                        <option value="2026">2026</option>
                     </select>
                 </div>
                 <div class="form-group">

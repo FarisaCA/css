@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     $numbers = $_POST['numbers'];
     $seat = $letters . $numbers;
 
-    $sql_check_seat = "SELECT * FROM booking WHERE seat = '$seat' AND class="$class" AND flight_id = '$flight_id'";
+    $sql_check_seat = "SELECT * FROM booking WHERE seat = '$seat' AND class='$class' AND flight_id = '$flight_id'";
     $result = mysqli_query($conn, $sql_check_seat);
     
     if (mysqli_num_rows($result) > 0) {
