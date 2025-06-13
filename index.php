@@ -21,7 +21,6 @@
             <h1>FIFA AIRLINES</h1>
             <nav>
                 <ul>
-                    <!-- <li><a href="">Flights</a></li> -->
                     <li><a href="login.php">Login</a></li>
                 </ul>
             </nav>
@@ -72,7 +71,6 @@
                             <option value="Agra civil Airport,kheria">Ahmedabad,Sardar vallabhbhai patel International Airport</option>
                             <option value="chennai">Chennai,Chennai International Airport</option>
                             <option value="Kozhikode">Kozhikode,Calicut International Airport</option>
-                            <!-- Add other departure options -->
                         </select>
                     </div>
 
@@ -87,7 +85,6 @@
                             <option value="Agra civil Airport,kheria">Agra,Agra Civil Airport,kheria</option>
                             <option value="kochi">kochi,kochi International Airport</option>
                             <option value="pune">Pune,Pune International Airport</option>
-                            <!-- Add other arrival options -->
                         </select>
                     </div>
 
@@ -96,10 +93,6 @@
                         <input type="date" id="departure" name="departure" required>
                     </div>
 
-                    <!--<div class="option1">
-                        <label for="return">Return</label>
-                        <input type="date" id="arrival" name="return" >
-                    </div> -->
                 </div>
                 <button>Search Flight</button>
             </form>
@@ -107,7 +100,6 @@
     </body>
 </html>
 <?php
-// Start the session and connect to the database
 
 require_once('connect.php');
 
