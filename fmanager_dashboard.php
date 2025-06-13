@@ -47,6 +47,72 @@ if (isset($_POST['delete'])) {
     </header>
 
     <main>
+
+       <section id="search">
+         <form method="POST">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="flight_no">Flight No</label>
+            <input type="text" id="flight_no" name="flight_no" required>
+
+            <button type="submit" name="search_flight">Search Flight</button>
+         </form>
+        </section>
+
+    <?php
+            if (isset($_POST['search_flight'])) {
+                $search_date = $_POST['date'];
+                $search_flight_no = $_POST['flight_no'];
+
+                // Fetch booking details for that flight number and date
+                $sql = "
+                    SELECT 
+                        b.name, 
+                        f.flight_no, 
+                        b.seat, 
+                        b.class, 
+                        b.email 
+                    FROM booking b
+                    JOIN flight f ON b.flight_id = f.flight_id
+                    WHERE f.flight_no = '$search_flight_no' 
+                    AND f.d_datetime = '$search_date'
+                    AND b.status = true 
+                    AND b.cancel = 0";
+
+                $result = mysqli_query($conn, $sql);
+
+                echo "<section id='search-results'>";
+                echo "<h2>Search Results for Flight $search_flight_no on $search_date</h2>";
+
+                if ($result && mysqli_num_rows($result) > 0) {
+                    echo "<table border='2'>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Seat</th>
+                                    <th>Class</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>";
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>
+                                <td>{$row['name']}</td>
+                                <td>{$row['seat']}</td>
+                                <td>{$row['class']}</td>
+                                <td>{$row['email']}</td>
+                            </tr>";
+                    }
+                    echo "</tbody></table>";
+                } else {
+                    echo "<p>No passengers found for this flight on this date.</p>";
+                }
+                echo "</section>";
+            }
+    ?>
+
+
         <section id="bookings">
             <h2>Booking Details</h2>
             <table border="2">
